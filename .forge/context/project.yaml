@@ -1,0 +1,50 @@
+# FORGE project context schema.
+# This file is initialized and maintained by the agent for the project using FORGE.
+# Unknown values should remain explicit rather than being invented.
+
+project:
+  name:
+  status: discovery
+  owner:
+
+a product:
+  problem:
+  users: []
+  value_proposition:
+  goals: []
+  non_goals: []
+
+market:
+  geography:
+  segment:
+  competitors: []
+  differentiation:
+  evidence: []
+
+experience:
+  platforms: []
+  ux_priorities: []
+  ui_direction:
+  accessibility_requirements: []
+
+technical:
+  architecture:
+  stack: []
+  integrations: []
+  constraints: []
+
+security:
+  risk_level: medium
+  sensitive_data: []
+  compliance_requirements: []
+
+operations:
+  deployment_target:
+  environments: []
+  observability_requirements: []
+
+forge:
+  active_modules: []
+  open_questions: []
+  material_risks: []
+  last_updated:
