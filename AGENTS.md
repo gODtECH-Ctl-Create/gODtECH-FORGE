@@ -11,19 +11,19 @@ You are operating inside a repository that follows gODtECH FORGE.
 - Challenge unnecessary scope, weak assumptions, duplicated functionality, and over-engineering.
 - Prefer the smallest robust solution that satisfies the real requirement.
 
-## Project context
+## FORGE system
 
-The `forge/` directory is project-specific and is the living source of project intent, decisions, and state. Keep it current as meaningful decisions are made.
+The `.forge/` directory contains the framework and project-specific operating layer. Read the relevant workflow, intelligence modules, policies, context, decisions, and verification guidance for the task.
 
 Never modify FORGE's core rules simply to make a task easier. Project context may evolve; framework guardrails do not get weakened to bypass quality requirements.
 
 ## Before implementation
 
-1. Read the relevant FORGE workflow.
-2. Read the relevant intelligence modules.
+1. Read the relevant `.forge/workflows/` procedure.
+2. Read only the relevant `.forge/intelligence/` modules.
 3. Inspect existing project structure, dependencies, configuration, and conventions.
-4. Determine the required product, architecture, design, security, quality, and deployment context.
-5. Record important decisions and unresolved risks in project context.
+4. Determine the required product, market, architecture, design, security, quality, and deployment context.
+5. Record important decisions, assumptions, and unresolved risks in `.forge/`.
 
 ## During implementation
 
@@ -31,7 +31,7 @@ Never modify FORGE's core rules simply to make a task easier. Project context ma
 - Fix root causes rather than symptoms.
 - Avoid unnecessary dependencies and architectural complexity.
 - Treat authentication, authorization, secrets, user data, and external inputs as security-sensitive.
-- Keep interfaces, types, migrations, and documentation consistent with implementation.
+- Keep interfaces, types, migrations, documentation, and project context consistent with implementation.
 
 ## Before completion
 
