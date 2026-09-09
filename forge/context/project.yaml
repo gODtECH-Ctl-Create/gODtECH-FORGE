@@ -1,0 +1,54 @@
+# Project-specific context.
+# This file is intentionally initialized with structure rather than fake values.
+# The AI agent should populate and maintain it from user input, repository inspection,
+# and validated research. Do not invent facts.
+
+product:
+  name: null
+  problem: null
+  users: []
+  value_proposition: null
+  goals: []
+  non_goals: []
+
+market:
+  target_market: null
+  target_geography: []
+  competitors: []
+  differentiation: []
+  constraints: []
+
+experience:
+  primary_platforms: []
+  accessibility_requirements: []
+  brand_direction: null
+  ux_priorities: []
+
+technical:
+  application_type: null
+  stack: []
+  architecture: null
+  integrations: []
+  data_sources: []
+  deployment_target: null
+  performance_requirements: []
+
+security:
+  risk_level: null
+  sensitive_data: []
+  authentication: null
+  authorization: null
+  compliance_requirements: []
+
+operations:
+  environments: []
+  observability_requirements: []
+  backup_requirements: []
+  rollback_strategy: null
+
+status:
+  phase: discovery
+  known_unknowns: []
+  assumptions: []
+  blockers: []
+  last_reviewed: null
