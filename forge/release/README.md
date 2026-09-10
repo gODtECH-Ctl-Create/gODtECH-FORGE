@@ -73,6 +73,23 @@ Invoke-WebRequest https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/d
 forge --version
 ```
 
+If Windows reports that running scripts is disabled, use a process-scoped bypass for the current PowerShell session only:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\install.ps1 -Version 0.6.0
+forge --version
+```
+
+Or invoke the installer in a one-off PowerShell process:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -Version 0.6.0
+forge --version
+```
+
+Only run `install.ps1` after downloading it from the canonical signed FORGE GitHub Release. Do not use a permanent machine-wide execution-policy bypass for FORGE installation.
+
 Both installers download `forge-<version>.tgz` and `SHA256SUMS.txt` from the same canonical GitHub Release. They compute the package digest locally and stop before `npm install --global` if the checksum entry is missing, malformed, or does not match.
 
 ## Verify provenance independently
