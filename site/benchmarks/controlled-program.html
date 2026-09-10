@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="FORGE controlled benchmark program for multi-task AI-assisted development evidence." />
+  <meta name="theme-color" content="#08090d" />
+  <title>Controlled Benchmarks — FORGE Evidence Lab</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <header class="nav-shell"><nav class="nav container"><a class="brand" href="../index.html"><span class="brand-mark">FG</span><span>FORGE</span></a><div class="nav-links"><a href="../index.html#install">Install</a><a href="../index.html#evidence">Evidence Lab</a><a href="https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE">GitHub</a></div></nav></header>
+  <main class="benchmark-page container">
+    <a class="back-link" href="../index.html#evidence">← Evidence Lab</a>
+    <div class="benchmark-page-head"><span class="status-pill">MILESTONE 2</span><h1>Controlled multi-task benchmarking</h1><p>The next FORGE evidence milestone compares plain AI and FORGE-assisted AI across security, database, CI/CD and infrastructure tasks from the same application baseline.</p></div>
+
+    <section class="card prose-card">
+      <h2>Why this exists</h2>
+      <p>DG-BM-001 proved FORGE works on an external project, but it was a pilot. Controlled benchmarking tightens the method: same base commit, same task brief, same acceptance criteria, same verification commands and visible limitations.</p>
+      <div class="evidence-note"><strong>Claim boundary:</strong> FORGE can report estimated context reduction and observed workflow differences. It will not claim provider-token or credit savings unless direct provider billing telemetry is captured.</div>
+    </section>
+
+    <section class="benchmark-table-wrap card">
+      <h2>Planned benchmark matrix</h2>
+      <div class="table-scroll"><table>
+        <thead><tr><th>ID</th><th>Area</th><th>Goal</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>DG-BM-002</td><td>Authentication / security</td><td>Protect mutating API behavior and verify rejected/allowed paths.</td><td>Planned</td></tr>
+          <tr><td>DG-BM-003</td><td>Database migration</td><td>Add schema-changing behavior with migration evidence.</td><td>Planned</td></tr>
+          <tr><td>DG-BM-004</td><td>GitHub Actions CI/CD</td><td>Add pull-request checks for install, type-check, test and build.</td><td>Planned</td></tr>
+          <tr><td>DG-BM-005</td><td>Kubernetes / runtime probes</td><td>Add deployment assets with liveness/readiness verification.</td><td>Planned</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="card prose-card">
+      <h2>Protocol</h2>
+      <ul>
+        <li>Both branches start from the same application commit.</li>
+        <li>The control branch does not receive FORGE-generated files unless the benchmark says so.</li>
+        <li>Every inspected file, edited file, retry and failed command is counted.</li>
+        <li>Verification commands are identical across both branches where the task allows it.</li>
+        <li>FORGE-only metrics are published as internal estimates, not billing data.</li>
+      </ul>
+    </section>
+
+    <section class="card prose-card">
+      <h2>Result format</h2>
+      <p>Benchmark results are recorded in a JSON shape under <code>forge/evidence/results/</code> and validated against the public schema in <code>forge/evidence/result.schema.json</code>. The schema keeps measured run data, FORGE estimates and provider billing data in separate fields.</p>
+    </section>
+
+    <div class="benchmark-page-cta"><a class="button" href="../index.html#install">Install FORGE</a><a class="button button-secondary" href="deployguard-001.html">Read DG-BM-001</a></div>
+  </main>
+  <footer><div class="container footer-row"><div><strong>FORGE Evidence Lab</strong><p>Measured claims, visible limitations.</p></div><div><a href="../index.html">Home</a><a href="https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE">GitHub</a></div></div></footer>
+</body>
+</html>
