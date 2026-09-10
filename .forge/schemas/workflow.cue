@@ -29,4 +29,6 @@ package forge
 	extensions?: [string]: _
 }
 
-workflow: #WorkflowContract
+#WorkflowDocument: {
+	workflow: #WorkflowContract
+}

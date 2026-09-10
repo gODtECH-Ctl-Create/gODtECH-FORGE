@@ -22,4 +22,6 @@ package forge
 	extensions?: [string]: _
 }
 
-verification: #VerificationResult
+#VerificationDocument: {
+	verification: #VerificationResult
+}

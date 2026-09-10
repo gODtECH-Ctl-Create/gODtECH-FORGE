@@ -11,12 +11,12 @@ package forge
 }
 
 #Decision: {
-	id:          string & =~"^decision-[a-z0-9][a-z0-9-]*$"
-	title:       string & != ""
-	status:      #DecisionStatus
-	risk:        #RiskLevel
-	context:     string & != ""
-	decision:    string & != ""
+	id:       string & =~"^decision-[a-z0-9][a-z0-9-]*$"
+	title:    string & != ""
+	status:   #DecisionStatus
+	risk:     #RiskLevel
+	context:  string & != ""
+	decision: string & != ""
 	alternatives: [...{
 		option: string & != ""
 		reason: string & != ""
@@ -28,5 +28,7 @@ package forge
 	extensions?: [string]: _
 }
 
-evidence?: #Evidence
-decision?: #Decision
+#DecisionRecord: {
+	evidence: #Evidence
+	decision: #Decision
+}

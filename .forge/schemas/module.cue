@@ -1,12 +1,12 @@
 package forge
 
 #ModuleContract: {
-	id:          string & =~"^[a-z][a-z0-9-]*$"
-	name:        string & != ""
-	version:     string & =~"^[0-9]+\\.[0-9]+\\.[0-9]+$"
-	status:      #ModuleStatus
-	capability:  #Capability
-	purpose:     string & != ""
+	id:         string & =~"^[a-z][a-z0-9-]*$"
+	name:       string & != ""
+	version:    string & =~"^[0-9]+\\.[0-9]+\\.[0-9]+$"
+	status:     #ModuleStatus
+	capability: #Capability
+	purpose:    string & != ""
 	scope: {
 		included: [...string]
 		excluded: [...string]
@@ -29,12 +29,14 @@ package forge
 		name:        string & =~"^[a-z][a-z0-9_]*$"
 		description: string & != ""
 	}]
-	exit_conditions:        [...string]
-	failure_modes:          [...string]
-	efficiency_notes:       [...string]
+	exit_conditions:         [...string]
+	failure_modes:           [...string]
+	efficiency_notes:        [...string]
 	security_considerations: [...string]
-	dependencies:           [...string]
+	dependencies:            [...string]
 	extensions?: [string]: _
 }
 
-module: #ModuleContract
+#ModuleDocument: {
+	module: #ModuleContract
+}
