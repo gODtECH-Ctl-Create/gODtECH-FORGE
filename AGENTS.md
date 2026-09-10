@@ -10,21 +10,40 @@ You are operating inside a repository that follows gODtECH FORGE.
 - Identify missing information, but do not ask for information that can be safely inferred, inspected, or researched.
 - Challenge unnecessary scope, weak assumptions, duplicated functionality, and over-engineering.
 - Prefer the smallest robust solution that satisfies the real requirement.
+- Use model reasoning for judgment; use deterministic tooling for facts, validation, and repeatable checks.
 
 ## FORGE system
 
-The `.forge/` directory contains the framework and project-specific operating layer. Read the relevant workflow, intelligence modules, policies, context, decisions, and verification guidance for the task.
+The `.forge/` directory contains the framework and project-specific operating layer. Read only the relevant workflow, intelligence modules, policies, context, decisions, and verification guidance for the task.
 
 Never modify FORGE's core rules simply to make a task easier. Project context may evolve; framework guardrails do not get weakened to bypass quality requirements.
 
 ## Before implementation
 
 1. Read the relevant `.forge/workflows/` procedure.
-2. Read only the relevant `.forge/intelligence/` modules.
-3. Inspect existing project structure, dependencies, configuration, and conventions.
-4. Determine the required product, market, architecture, design, security, quality, deployment, and documentation context.
-5. If the project is entering planning or architecture and the README does not yet exist, initialize it using `.forge/workflows/README-GENERATION.md` and the appropriate `.forge/templates/readme/` template.
-6. Record important decisions, assumptions, and unresolved risks in `.forge/`.
+2. Read only the `.forge/intelligence/` modules needed for the task.
+3. Read applicable `.forge/policies/`, especially Git/delivery, AI efficiency, and provenance rules.
+4. Inspect existing project structure, dependencies, configuration, and conventions.
+5. Determine the required product, market, architecture, design, security, quality, deployment, and documentation context.
+6. If the project is entering planning or architecture and the README does not yet exist, initialize it using `.forge/workflows/README-GENERATION.md` and the appropriate `.forge/templates/readme/` template.
+7. Record material decisions, assumptions, and unresolved risks in `.forge/`.
+
+## Git and delivery
+
+- Treat `main` and other protected branches as non-direct-write branches.
+- Meaningful work must follow `.forge/workflows/GIT.md`.
+- Create or link an issue when the work is material.
+- Use a dedicated branch for implementation.
+- Do not force-push shared history or bypass repository safeguards.
+- Verify before opening a pull request and follow the repository's normal review and merge process.
+
+## AI efficiency
+
+- Follow `.forge/policies/AI-EFFICIENCY.md`.
+- Reuse verified project context and prior decisions.
+- Prefer deterministic tools, local inspection, and executable checks before model reasoning.
+- Load modules selectively and avoid repeating unchanged analysis.
+- Do not save credits by weakening material quality, security, or verification requirements.
 
 ## Product README rule
 
@@ -45,7 +64,7 @@ The agent must:
 - Fix root causes rather than symptoms.
 - Avoid unnecessary dependencies and architectural complexity.
 - Treat authentication, authorization, secrets, user data, and external inputs as security-sensitive.
-- Keep interfaces, types, migrations, documentation, README, and project context consistent with implementation.
+- Keep interfaces, types, migrations, documentation, README, project context, and provenance consistent with implementation.
 
 ## Before completion
 
@@ -64,4 +83,4 @@ If a required check cannot run, state that explicitly and identify why.
 
 ## Communication
 
-Be direct. Report what changed, what was verified, what remains uncertain, and any material trade-offs. Do not hide failures behind confident wording.
+Be direct. Report what changed, what was verified, what remains uncertain, material trade-offs, and any blocked checks. Do not hide failures behind confident wording.
