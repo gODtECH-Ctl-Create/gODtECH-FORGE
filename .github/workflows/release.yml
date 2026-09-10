@@ -1,0 +1,163 @@
+name: Release FORGE
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+  artifact-metadata: write
+
+concurrency:
+  group: forge-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Verify, attest, and release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out signed tag
+        uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Verify release metadata
+        run: node forge/release/release-preflight.mjs --tag "${GITHUB_REF_NAME}"
+
+      - name: Verify signed annotated tag and main ancestry
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ref_json="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}")"
+          object_type="$(jq -r '.object.type' <<<"$ref_json")"
+          tag_object_sha="$(jq -r '.object.sha' <<<"$ref_json")"
+
+          if [[ "$object_type" != "tag" ]]; then
+            echo "Release tags must be annotated and signed; lightweight tags are rejected." >&2
+            exit 1
+          fi
+
+          tag_json="$(gh api "repos/${GITHUB_REPOSITORY}/git/tags/${tag_object_sha}")"
+          verified="$(jq -r '.verification.verified' <<<"$tag_json")"
+          verification_reason="$(jq -r '.verification.reason' <<<"$tag_json")"
+          target_type="$(jq -r '.object.type' <<<"$tag_json")"
+          target_commit="$(jq -r '.object.sha' <<<"$tag_json")"
+
+          if [[ "$verified" != "true" ]]; then
+            echo "GitHub did not verify the tag signature: ${verification_reason}." >&2
+            exit 1
+          fi
+
+          if [[ "$target_type" != "commit" ]]; then
+            echo "The signed release tag must point directly to a commit." >&2
+            exit 1
+          fi
+
+          resolved_commit="$(git rev-list -n 1 "$TAG")"
+          if [[ "$resolved_commit" != "$target_commit" ]]; then
+            echo "Git tag resolution does not match the verified GitHub tag object." >&2
+            exit 1
+          fi
+
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          if ! git merge-base --is-ancestor "$target_commit" origin/main; then
+            echo "The tagged commit is not part of main; release publication is blocked." >&2
+            exit 1
+          fi
+
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; refusing to mutate an existing release." >&2
+            exit 1
+          fi
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type-check
+        run: npm run check
+
+      - name: Build and test
+        run: npm test
+
+      - name: Build release assets and checksums
+        id: package
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(node -e 'const fs=require("node:fs"); console.log(JSON.parse(fs.readFileSync("package.json", "utf8")).version)')"
+          asset="forge-${version}.tgz"
+          mkdir -p forge-release
+
+          npm pack --pack-destination forge-release
+          mapfile -t packages < <(find forge-release -maxdepth 1 -type f -name '*.tgz' -print)
+          if [[ "${#packages[@]}" -ne 1 ]]; then
+            echo "Expected exactly one npm package, found ${#packages[@]}." >&2
+            exit 1
+          fi
+
+          mv "${packages[0]}" "forge-release/${asset}"
+          cp forge/release/install.sh forge-release/install.sh
+          cp forge/release/install.ps1 forge-release/install.ps1
+          chmod +x forge-release/install.sh
+
+          (
+            cd forge-release
+            sha256sum "$asset" install.sh install.ps1 > SHA256SUMS.txt
+          )
+
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "asset=$asset" >> "$GITHUB_OUTPUT"
+
+      - name: Install and execute the packed CLI
+        env:
+          VERSION: ${{ steps.package.outputs.version }}
+          ASSET: ${{ steps.package.outputs.asset }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          prefix="${RUNNER_TEMP}/forge-release-install"
+          npm install --global --prefix "$prefix" "./forge-release/$ASSET"
+          installed="$($prefix/bin/forge --version)"
+          if [[ "$installed" != "$VERSION" ]]; then
+            echo "Packed CLI reports $installed; expected $VERSION." >&2
+            exit 1
+          fi
+
+      - name: Verify generated checksums
+        run: cd forge-release && sha256sum --check SHA256SUMS.txt
+
+      - name: Generate Sigstore-backed build provenance
+        uses: actions/attest@v4
+        with:
+          subject-path: |
+            forge-release/forge-*.tgz
+            forge-release/install.sh
+            forge-release/install.ps1
+            forge-release/SHA256SUMS.txt
+
+      - name: Publish verified GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+          VERSION: ${{ steps.package.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release create "$TAG" forge-release/* \
+            --title "FORGE $VERSION" \
+            --generate-notes \
+            --verify-tag
