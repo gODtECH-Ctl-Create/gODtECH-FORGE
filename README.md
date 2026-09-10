@@ -103,6 +103,23 @@ Invoke-WebRequest https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/d
 forge --version
 ```
 
+If Windows reports that running scripts is disabled, use a **process-scoped** bypass for the current PowerShell session only, then run the downloaded installer:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\install.ps1 -Version 0.6.0
+forge --version
+```
+
+Alternatively, invoke the installer in a one-off PowerShell process without changing the current session policy:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -Version 0.6.0
+forge --version
+```
+
+Only run `install.ps1` after downloading it from the canonical signed FORGE GitHub Release shown above. Do not use a permanent machine-wide execution-policy bypass for FORGE installation.
+
 The npm registry is a separate publication channel and is **not yet published**. Contributors can still install from source:
 
 ```bash
