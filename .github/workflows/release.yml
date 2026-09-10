@@ -34,6 +34,18 @@ jobs:
       - name: Verify release metadata
         run: node forge/release/release-preflight.mjs --tag "${GITHUB_REF_NAME}"
 
+      - name: Resolve curated release notes
+        id: release_notes
+        env:
+          TAG: ${{ github.ref_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          body_file="${RUNNER_TEMP}/forge-release-notes.md"
+          title="$(node forge/release/resolve-release-notes.mjs --tag "$TAG" --body-output "$body_file")"
+          printf 'title=%s\n' "$title" >> "$GITHUB_OUTPUT"
+          printf 'body=%s\n' "$body_file" >> "$GITHUB_OUTPUT"
+
       - name: Verify signed annotated tag and main ancestry
         env:
           GH_TOKEN: ${{ github.token }}
@@ -153,11 +165,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ github.ref_name }}
-          VERSION: ${{ steps.package.outputs.version }}
+          RELEASE_TITLE: ${{ steps.release_notes.outputs.title }}
+          RELEASE_NOTES: ${{ steps.release_notes.outputs.body }}
         shell: bash
         run: |
           set -euo pipefail
           gh release create "$TAG" forge-release/* \
-            --title "FORGE $VERSION" \
-            --generate-notes \
+            --title "$RELEASE_TITLE" \
+            --notes-file "$RELEASE_NOTES" \
             --verify-tag
