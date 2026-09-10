@@ -175,6 +175,8 @@ FORGE keeps project-specific information separate from framework rules.
 ├── decisions/              ← important decisions and trade-offs
 ├── state.md                ← current project state
 ├── runs/                   ← resumable workflow plans, approvals, and evidence
+├── cache/
+│   └── work-packets/       ← reusable deterministic AI preparation
 ├── workflows/              ← reusable procedures
 ├── intelligence/           ← reasoning modules
 ├── policies/               ← non-negotiable guardrails
@@ -344,6 +346,7 @@ forge doctor
 forge validate
 forge context
 forge plan --task "Describe the outcome"
+forge prepare --task "Describe the outcome"
 forge run start --task "Describe the outcome"
 forge run status
 ```
@@ -436,7 +439,7 @@ REPOSITORY FOUNDATION      █████████████████�
 CONTEXT MODEL              ████████████████████  ESTABLISHED
 README INTELLIGENCE        ████████████░░░░░░░░  FOUNDATION
 INTELLIGENCE MODULES       ████░░░░░░░░░░░░░░░░  IN DEVELOPMENT
-ORCHESTRATOR               ████████████████░░░░  RESUMABLE RUNS
+ORCHESTRATOR               ██████████████████░░  AI PREFLIGHT
 EXECUTABLE VERIFICATION    ██████░░░░░░░░░░░░░░  FOUNDATION
 AGENT ADAPTERS             █░░░░░░░░░░░░░░░░░░░  PLANNED
 ```

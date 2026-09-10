@@ -29,6 +29,8 @@ Verification + external tooling
 ### Project state
 `.forge/context/`, `.forge/decisions/`, `.forge/state.md`, and `.forge/runs/` contain the living project-specific layer. The agent maintains these as material information changes. Workflow run records preserve plans, approvals, ordered step completion, timestamps, and evidence in portable YAML.
 
+`.forge/cache/work-packets/` stores content-addressed preflight results. A packet is generated without an AI call and contains only bounded repository facts, selected context, relevant framework references, discovered commands, and routing hints. Adapters consume the packet and fetch additional source only when the task requires it.
+
 ### Verification
 `.forge/verification/` defines checks and quality gates. Executable checks should be preferred over purely instructional rules. The approved FORGE stack uses TypeScript, Rust, Playwright, CUE, Open Policy Agent (OPA), WebAssembly (WASM), SQLite, GitHub Actions, and OpenTelemetry where their responsibilities justify them; Python and Temporal are available for specialized analysis and durable workflows.
 

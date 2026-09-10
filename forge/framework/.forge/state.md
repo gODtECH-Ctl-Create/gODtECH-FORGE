@@ -3,7 +3,7 @@
 > This file is maintained by the AI agent using FORGE.
 
 ## Current stage
-Orchestrator core — resumable workflow runs
+Orchestrator core — deterministic AI preflight
 
 ## Completed
 - FORGE repository foundation, agent contract, policies, and README system established.
@@ -18,11 +18,13 @@ Orchestrator core — resumable workflow runs
 - `forge context` inspection and safe scalar updates implemented.
 - `forge plan` task classification, risk escalation, selective capability activation, workflow selection, and human-approval checkpoints implemented.
 - Persistent workflow runs with atomic YAML writes, ordered evidence, approval gates, status lookup, and safe resume transitions implemented.
+- `forge prepare` bounded repository inspection, manifest/language detection, Git-state hashing, command discovery, selective context, model-tier hints, and content-addressed packet caching implemented without AI calls.
+- Secret-like paths, dependencies, build output, installed FORGE assets, and volatile run/cache state excluded from AI packet inventory.
 
 ## In progress
-- Review and merge resumable workflow runs.
+- Review and merge deterministic AI preflight and compact work packets.
 - Confirm the public package identifier and registry ownership.
-- Design the trusted command-execution boundary and verification adapters.
+- Design the Model Context Protocol server around the provider-neutral work-packet contract.
 
 ## Open questions
 - Which agent environments receive native adapters first?

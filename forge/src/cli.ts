@@ -4,7 +4,8 @@ import { showContext, updateContext } from "./context.js";
 import { doctorProject } from "./doctor.js";
 import { initProject } from "./init.js";
 import { createPlan } from "./planner.js";
-import type { CommandReport, ContextReport, InitReport, OrchestrationPlan, WorkflowRun } from "./types.js";
+import { prepareWorkPacket } from "./preflight.js";
+import type { CommandReport, ContextReport, InitReport, OrchestrationPlan, WorkPacket, WorkflowRun } from "./types.js";
 import { validateProject } from "./validate.js";
 import { VERSION } from "./version.js";
 import {
@@ -25,6 +26,7 @@ Usage:
   forge context [--cwd <directory>] [--json]
   forge context set --key <field> --value <value> [--cwd <directory>] [--json]
   forge plan --task <description> [--cwd <directory>] [--json]
+  forge prepare --task <description> [--cwd <directory>] [--json]
   forge run start --task <description> [--cwd <directory>] [--json]
   forge run status [--id <run-id>] [--cwd <directory>] [--json]
   forge run approve --id <run-id> --checkpoint <checkpoint-id> --by <identity> [--cwd <directory>] [--json]
@@ -38,6 +40,7 @@ Commands:
   validate  Validate the installed framework and project context.
   context   Inspect or safely update allowlisted project-context fields.
   plan      Classify work and produce a risk-aware execution plan.
+  prepare   Build or reuse a compact deterministic AI work packet.
   run       Start, inspect, approve, and advance persistent workflow runs.
 `;
 
@@ -173,6 +176,23 @@ function printRun(run: WorkflowRun): void {
   }
 }
 
+function printPacket(packet: WorkPacket): void {
+  console.log(`Packet: ${packet.id}${packet.cached ? " (cached)" : ""}`);
+  console.log(`Task: ${packet.task}`);
+  console.log(`Classification: ${packet.plan.taskKind}`);
+  console.log(`Risk: ${packet.plan.risk}`);
+  console.log(`Suggested model tier: ${packet.preparation.suggestedModelTier}`);
+  console.log(`Repository: ${packet.repository.filesScanned} files scanned; ${packet.repository.languages.map((item) => item.name).join(", ") || "no language detected"}`);
+  if (packet.repository.git.detected) {
+    console.log(`Git: ${packet.repository.git.branch ?? "detached"}${packet.repository.git.dirty ? " (changes present)" : " (clean)"}`);
+  }
+  if (packet.commands.length > 0) {
+    console.log("Discovered commands:");
+    for (const item of packet.commands) console.log(`- ${item.command} (${item.source})`);
+  }
+  console.log(`Selected framework references: ${packet.frameworkReferences.length}`);
+}
+
 async function main(): Promise<number> {
   let args: Arguments;
   try {
@@ -201,6 +221,12 @@ async function main(): Promise<number> {
   if (args.command === "plan") {
     const plan = await createPlan(args.cwd, args.task ?? "");
     args.json ? console.log(JSON.stringify(plan, null, 2)) : printPlan(plan);
+    return 0;
+  }
+
+  if (args.command === "prepare") {
+    const packet = await prepareWorkPacket(args.cwd, args.task ?? "");
+    args.json ? console.log(JSON.stringify(packet, null, 2)) : printPacket(packet);
     return 0;
   }
 
