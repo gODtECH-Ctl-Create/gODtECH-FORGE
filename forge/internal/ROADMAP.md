@@ -35,8 +35,8 @@ This roadmap describes the intended build order. Contributors may pick work from
 - [x] Implement context loading and writing
 - [x] Implement workflow execution model
 - [x] Implement human-approval checkpoints
-- [ ] Build deterministic repository preflight and compact AI work packets
-- [ ] Add task budgets and model-escalation hints for agent adapters
+- [x] Build deterministic repository preflight and compact AI work packets
+- [x] Add task budgets and model-escalation hints for agent adapters
 
 ## Phase 3 · Intelligence
 
@@ -58,9 +58,9 @@ This roadmap describes the intended build order. Contributors may pick work from
 - [ ] Tree-sitter repository analysis
 - [ ] CUE validation
 - [ ] Open Policy Agent (OPA) / Rego evaluation
-- [ ] Dependency and manifest inspection
-- [ ] Git state and branch checks
-- [ ] Build/test command discovery
+- [x] Dependency and manifest inspection
+- [x] Git state and branch checks
+- [x] Build/test command discovery
 - [ ] WebAssembly execution boundary where justified
 
 ## Phase 5 · Verification
@@ -79,8 +79,8 @@ This roadmap describes the intended build order. Contributors may pick work from
 - [ ] SQLite project memory
 - [ ] Context deduplication
 - [ ] Research/result caching
-- [ ] Deterministic-first routing
-- [ ] Model escalation policy
+- [x] Deterministic-first routing
+- [x] Model escalation policy
 - [ ] Usage/cost telemetry
 - [ ] Efficiency metrics
 - [ ] Baseline-versus-assisted credit measurement

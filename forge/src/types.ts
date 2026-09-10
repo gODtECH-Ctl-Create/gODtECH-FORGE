@@ -105,3 +105,57 @@ export interface WorkflowRun {
   approvals: WorkflowRunApproval[];
   completedSteps: CompletedRunStep[];
 }
+
+export interface RepositoryManifest {
+  path: string;
+  kind: string;
+  sha256: string;
+}
+
+export interface RepositoryLanguage {
+  name: string;
+  files: number;
+}
+
+export interface DiscoveredCommand {
+  name: string;
+  command: string;
+  source: string;
+}
+
+export interface WorkPacket {
+  schemaVersion: 1;
+  command: "prepare";
+  id: string;
+  fingerprint: string;
+  cached: boolean;
+  createdAt: string;
+  task: string;
+  plan: OrchestrationPlan;
+  repository: {
+    git: {
+      detected: boolean;
+      branch?: string;
+      commit?: string;
+      dirty: boolean;
+      changedFiles: string[];
+      changedFilesTruncated: boolean;
+    };
+    filesScanned: number;
+    filesOmitted: number;
+    manifests: RepositoryManifest[];
+    languages: RepositoryLanguage[];
+  };
+  projectContext: Record<string, unknown>;
+  commands: DiscoveredCommand[];
+  frameworkReferences: string[];
+  preparation: {
+    deterministicWorkCompleted: string[];
+    modelWorkRemaining: string[];
+    suggestedModelTier: "economy" | "standard" | "advanced";
+    selectedContextCharacters: number;
+    maxContextFiles: number;
+    maxContextCharacters: number;
+  };
+  warnings: string[];
+}

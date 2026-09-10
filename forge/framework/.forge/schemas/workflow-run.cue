@@ -19,6 +19,21 @@ package forge
 	capability: #Capability
 }
 
+#OrchestrationPlan: {
+	command:      "plan"
+	task:         string & != ""
+	taskKind:     #TaskKind
+	risk:         #RiskLevel
+	workflow:     #WorkflowName
+	signals:      [...string]
+	capabilities: [...{
+		capability: #Capability
+		reasons:    [string, ...string]
+	}]
+	approvals: [...#RunApproval]
+	steps:     [#PlanStep, ...#PlanStep]
+}
+
 #WorkflowRun: {
 	schemaVersion: 1
 	id:            string & =~"^[A-Za-z0-9][A-Za-z0-9._-]{0,100}$"
@@ -26,20 +41,7 @@ package forge
 	createdAt:     string & != ""
 	updatedAt:     string & != ""
 	task:          string & != ""
-	plan: {
-		command:      "plan"
-		task:         string & != ""
-		taskKind:     #TaskKind
-		risk:         #RiskLevel
-		workflow:     #WorkflowName
-		signals:      [...string]
-		capabilities: [...{
-			capability: #Capability
-			reasons:    [string, ...string]
-		}]
-		approvals: [...#RunApproval]
-		steps:     [#PlanStep, ...#PlanStep]
-	}
+	plan:          #OrchestrationPlan
 	approvals: [...#RunApproval]
 	completedSteps: [...{
 		stepId:      string & =~"^[a-z][a-z0-9-]*$"
