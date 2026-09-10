@@ -7,7 +7,8 @@
     "forge": "dist/src/cli.js"
   },
   "files": [
-    "dist"
+    "dist/src",
+    "dist/framework"
   ],
   "engines": {
     "node": ">=20"
