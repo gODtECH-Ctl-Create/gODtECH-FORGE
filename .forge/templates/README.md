@@ -6,12 +6,18 @@ Reusable artifacts generated from verified project context.
 
 `readme/` contains the standard README system for projects using FORGE:
 
-- `README.md` — rules and selection logic
+- `README.md` — rules, selection logic, and generation standards
 - `PRODUCT.md` — applications, platforms, and user-facing products
 - `LIBRARY.md` — reusable packages and developer libraries
 - `TOOL.md` — developer tools, command-line interfaces (CLIs), infrastructure utilities, and technical projects
 
-FORGE selects and adapts the appropriate pattern instead of forcing every repository into the same README.
+FORGE initializes the project README as part of early product planning. The agent selects and adapts the appropriate pattern from verified project context rather than waiting until the end of development.
+
+Every generated README preserves required gODtECH FORGE provenance while keeping the product's own identity primary.
+
+## Project provenance template
+
+`manifest.yaml` is the starting point for the project's machine-readable FORGE provenance metadata. The agent populates it during initialization and keeps the framework version and synchronization state current.
 
 ## Other templates
 
