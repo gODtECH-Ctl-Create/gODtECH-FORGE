@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/version-0.6.0-7c3aed?style=for-the-badge" alt="FORGE version 0.6.0" />
   <img src="https://img.shields.io/badge/Node.js-%E2%89%A520-111827?style=for-the-badge&logo=nodedotjs" alt="Node.js 20 or newer" />
   <img src="https://img.shields.io/badge/MCP-stdio-b7ff3c?style=for-the-badge&labelColor=11110f" alt="MCP stdio server" />
-  <img src="https://img.shields.io/badge/license-decision_pending-6b7280?style=for-the-badge" alt="License decision pending" />
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-3da639?style=for-the-badge" alt="Apache License 2.0" /></a>
 </p>
 
 ### Framework for Orchestrated Reasoning, Governance & Engineering
@@ -213,7 +213,7 @@ Events are Git-ignored under `.forge/metrics/`. They contain counts and categori
 | **GitHub template / fork** | 🧪 Possible | Framework experimentation and contributors |
 | **npm / Homebrew / Scoop / native binaries** | 🗺️ Planned | One-command distribution |
 
-> The repository is currently marked `UNLICENSED`. GitHub can technically fork it, but broad open-source reuse rights should not be implied until a license is deliberately selected.
+> FORGE is open source under the Apache License 2.0. Commercial use, modification, distribution, and private use are permitted subject to the license terms.
 
 ---
 
@@ -389,7 +389,7 @@ FORGE is designed to increase agent capability without quietly removing human co
 - [x] Provider-neutral MCP server
 - [x] Repository-bundled Codex plugin
 - [x] Privacy-preserving local cache, latency, and context-reduction metrics
-- [ ] Choose an open-source license
+- [x] Choose an open-source license
 - [ ] Publish signed package and release artifacts
 - [ ] Accept opt-in provider usage and retry outcomes for assisted-versus-baseline studies
 
@@ -436,9 +436,9 @@ Contributions should keep implementation under `forge/`, preserve the distinctio
 
 ## 📄 License
 
-No open-source license has been selected yet. The package currently declares `UNLICENSED`.
+FORGE is licensed under the [Apache License 2.0](./LICENSE).
 
-Before public distribution, the project should deliberately choose and add a license rather than implying permissions that have not been granted.
+You may use, modify, and distribute FORGE, including for commercial purposes, subject to the terms of the license. Contributions intentionally submitted for inclusion in FORGE are licensed under the same terms unless explicitly stated otherwise.
 
 ---
 
