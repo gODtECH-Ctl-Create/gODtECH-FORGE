@@ -22,8 +22,22 @@ Never modify FORGE's core rules simply to make a task easier. Project context ma
 1. Read the relevant `.forge/workflows/` procedure.
 2. Read only the relevant `.forge/intelligence/` modules.
 3. Inspect existing project structure, dependencies, configuration, and conventions.
-4. Determine the required product, market, architecture, design, security, quality, and deployment context.
-5. Record important decisions, assumptions, and unresolved risks in `.forge/`.
+4. Determine the required product, market, architecture, design, security, quality, deployment, and documentation context.
+5. If the project is entering planning or architecture and the README does not yet exist, initialize it using `.forge/workflows/README-GENERATION.md` and the appropriate `.forge/templates/readme/` template.
+6. Record important decisions, assumptions, and unresolved risks in `.forge/`.
+
+## Product README rule
+
+The project README is created early and maintained throughout the lifecycle. It must be written for the actual product, not copied from another repository or treated as a generic starter document.
+
+The agent must:
+
+- derive the README from verified project context and the real repository;
+- select the appropriate README pattern for the product type;
+- give the product its own identity, narrative, visual language, architecture, capabilities, and status;
+- add required gODtECH FORGE provenance without replacing the product's own branding;
+- update the README when meaningful product, architecture, design, security, deployment, or status changes occur;
+- never invent features, commands, metrics, links, assets, or production claims.
 
 ## During implementation
 
@@ -31,7 +45,7 @@ Never modify FORGE's core rules simply to make a task easier. Project context ma
 - Fix root causes rather than symptoms.
 - Avoid unnecessary dependencies and architectural complexity.
 - Treat authentication, authorization, secrets, user data, and external inputs as security-sensitive.
-- Keep interfaces, types, migrations, documentation, and project context consistent with implementation.
+- Keep interfaces, types, migrations, documentation, README, and project context consistent with implementation.
 
 ## Before completion
 
@@ -44,6 +58,7 @@ Do not declare work complete until the applicable checks have been run. At minim
 - security checks
 - accessibility and responsive behavior for user-facing interfaces
 - visual verification when UI changes are involved
+- README accuracy when product-facing or documentation changes are involved
 
 If a required check cannot run, state that explicitly and identify why.
 
