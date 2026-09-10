@@ -22,6 +22,8 @@ forge upgrade
 forge eject
 ```
 
+The registry package identifier may include an owner scope where the registry requires uniqueness. Everyday commands, generated code, filenames, and project configuration use the neutral `forge` / `FORGE` identity.
+
 The TypeScript package provides the cross-platform CLI. A later Rust core provides high-confidence analysis and local execution behind the same interface. Users should not need to install Rust.
 
 ## Installation boundary
@@ -46,7 +48,7 @@ Framework-owned files are updated from a versioned release. Project-owned contex
 
 ## Packaging direction
 
-- Publish the CLI as `@godtech/forge` on npm.
+- Confirm the available npm package identifier; an owner scope may be used for registry ownership without becoming a code or command prefix.
 - Publish versioned release archives and checksums on GitHub.
 - Keep the portable framework usable without the CLI.
 - Add Homebrew, Scoop, and standalone binaries only after the CLI contract stabilizes.

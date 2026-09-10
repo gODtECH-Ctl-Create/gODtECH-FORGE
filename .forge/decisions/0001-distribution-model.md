@@ -17,7 +17,7 @@ FORGE will be distributed through three supported modes:
 2. a FORGE-enabled repository template for new projects;
 3. a documented manual copy path for early adopters and constrained environments.
 
-The CLI will install and manage versioned framework-owned files while preserving project-owned context and decisions. The future Rust core remains an implementation detail behind the CLI, not a prerequisite for users.
+The CLI will install and manage versioned framework-owned files while preserving project-owned context and decisions. User-facing commands and generated project code use the neutral `forge` / `FORGE` identity; the origin name is retained only where provenance or registry ownership requires it. The future Rust core remains an implementation detail behind the CLI, not a prerequisite for users.
 
 ## Consequences
 
@@ -26,3 +26,4 @@ The CLI will install and manage versioned framework-owned files while preserving
 - Mixed-ownership files require conflict-aware updates.
 - The repository template cannot be the only distribution mechanism.
 - Package names and registry ownership must be confirmed before the first public release.
+- Provenance is minimal and must not become a prefix applied to ordinary commands, links, identifiers, or generated application code.

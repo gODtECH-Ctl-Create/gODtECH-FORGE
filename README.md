@@ -332,7 +332,7 @@ forge validate
 forge upgrade
 ```
 
-The CLI will add FORGE to new or existing repositories, preserve project-owned context during upgrades, and keep the consuming project's application stack independent. Repository-template and manual installation modes will remain supported. See [the installation and distribution contract](.forge/docs/INSTALLATION.md).
+The CLI will add FORGE to new or existing repositories, preserve project-owned context during upgrades, and keep the consuming project's application stack independent. Normal commands and generated project code use the neutral `forge` / `FORGE` identity; origin attribution is kept to the manifest and one appropriate developer-facing location. Repository-template and manual installation modes will remain supported. See [the installation and distribution contract](.forge/docs/INSTALLATION.md).
 
 ---
 
