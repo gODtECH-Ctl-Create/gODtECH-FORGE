@@ -4,9 +4,17 @@ import { showContext, updateContext } from "./context.js";
 import { doctorProject } from "./doctor.js";
 import { initProject } from "./init.js";
 import { createPlan } from "./planner.js";
-import type { CommandReport, ContextReport, InitReport, OrchestrationPlan } from "./types.js";
+import type { CommandReport, ContextReport, InitReport, OrchestrationPlan, WorkflowRun } from "./types.js";
 import { validateProject } from "./validate.js";
 import { VERSION } from "./version.js";
+import {
+  advanceWorkflowRun,
+  approveWorkflowRun,
+  latestWorkflowRun,
+  loadWorkflowRun,
+  nextRunStep,
+  startWorkflowRun,
+} from "./workflow-run.js";
 
 const HELP = `FORGE ${VERSION}
 
@@ -17,6 +25,10 @@ Usage:
   forge context [--cwd <directory>] [--json]
   forge context set --key <field> --value <value> [--cwd <directory>] [--json]
   forge plan --task <description> [--cwd <directory>] [--json]
+  forge run start --task <description> [--cwd <directory>] [--json]
+  forge run status [--id <run-id>] [--cwd <directory>] [--json]
+  forge run approve --id <run-id> --checkpoint <checkpoint-id> --by <identity> [--cwd <directory>] [--json]
+  forge run advance --id <run-id> --evidence <text> [--cwd <directory>] [--json]
   forge --version
   forge --help
 
@@ -26,6 +38,7 @@ Commands:
   validate  Validate the installed framework and project context.
   context   Inspect or safely update allowlisted project-context fields.
   plan      Classify work and produce a risk-aware execution plan.
+  run       Start, inspect, approve, and advance persistent workflow runs.
 `;
 
 interface Arguments {
@@ -41,6 +54,10 @@ interface Arguments {
   task?: string;
   key?: string;
   value?: string;
+  id?: string;
+  checkpoint?: string;
+  by?: string;
+  evidence?: string;
 }
 
 function requiredValue(argv: string[], index: number, flag: string): string {
@@ -63,7 +80,7 @@ function parse(argv: string[]): Arguments {
   for (let index = 0; index < argv.length; index += 1) {
     const value = argv[index]!;
     if (!value.startsWith("-") && !parsed.command) parsed.command = value;
-    else if (!value.startsWith("-") && parsed.command === "context" && !parsed.subcommand) parsed.subcommand = value;
+    else if (!value.startsWith("-") && ["context", "run"].includes(parsed.command ?? "") && !parsed.subcommand) parsed.subcommand = value;
     else if (value === "--cwd") {
       parsed.cwd = path.resolve(requiredValue(argv, index, value));
       index += 1;
@@ -75,6 +92,18 @@ function parse(argv: string[]): Arguments {
       index += 1;
     } else if (value === "--value") {
       parsed.value = requiredValue(argv, index, value);
+      index += 1;
+    } else if (value === "--id") {
+      parsed.id = requiredValue(argv, index, value);
+      index += 1;
+    } else if (value === "--checkpoint") {
+      parsed.checkpoint = requiredValue(argv, index, value);
+      index += 1;
+    } else if (value === "--by") {
+      parsed.by = requiredValue(argv, index, value);
+      index += 1;
+    } else if (value === "--evidence") {
+      parsed.evidence = requiredValue(argv, index, value);
       index += 1;
     } else if (value === "--json") parsed.json = true;
     else if (value === "--dry-run") parsed.dryRun = true;
@@ -130,6 +159,20 @@ function printPlan(plan: OrchestrationPlan): void {
   for (const [index, item] of plan.steps.entries()) console.log(`${index + 1}. [${item.stage}] ${item.action}`);
 }
 
+function printRun(run: WorkflowRun): void {
+  console.log(`Run: ${run.id}`);
+  console.log(`Status: ${run.status}`);
+  console.log(`Task: ${run.task}`);
+  console.log(`Progress: ${run.completedSteps.length}/${run.plan.steps.length} steps`);
+  const next = nextRunStep(run);
+  if (next) console.log(`Next: [${next.stage}] ${next.action}`);
+  const unresolved = run.approvals.filter((approval) => !approval.approvedAt);
+  if (unresolved.length > 0) {
+    console.log("Awaiting approvals:");
+    for (const approval of unresolved) console.log(`- ${approval.id}: ${approval.reason}`);
+  }
+}
+
 async function main(): Promise<number> {
   let args: Arguments;
   try {
@@ -169,6 +212,31 @@ async function main(): Promise<number> {
         ? await updateContext(args.cwd, args.key!, args.value!)
         : await showContext(args.cwd);
     args.json ? console.log(JSON.stringify(report, null, 2)) : printContext(report);
+    return 0;
+  }
+
+  if (args.command === "run") {
+    if (!args.subcommand || !["start", "status", "approve", "advance"].includes(args.subcommand)) {
+      throw new Error("run requires one of: start, status, approve, advance.");
+    }
+
+    let run: WorkflowRun;
+    if (args.subcommand === "start") {
+      if (!args.task) throw new Error("run start requires --task.");
+      run = await startWorkflowRun(args.cwd, args.task);
+    } else if (args.subcommand === "status") {
+      run = args.id ? await loadWorkflowRun(args.cwd, args.id) : await latestWorkflowRun(args.cwd);
+    } else if (args.subcommand === "approve") {
+      if (!args.id || !args.checkpoint || !args.by) {
+        throw new Error("run approve requires --id, --checkpoint, and --by.");
+      }
+      run = await approveWorkflowRun(args.cwd, args.id, args.checkpoint, args.by);
+    } else {
+      if (!args.id || !args.evidence) throw new Error("run advance requires --id and --evidence.");
+      run = await advanceWorkflowRun(args.cwd, args.id, args.evidence);
+    }
+
+    args.json ? console.log(JSON.stringify(run, null, 2)) : printRun(run);
     return 0;
   }
 

@@ -158,6 +158,10 @@ all relevant domains + deeper security + stronger verification
 
 The objective is **proportional intelligence**, not maximum ceremony.
 
+### Credit-aware AI execution
+
+FORGE is designed to complete reliable preparation before an AI provider is called: reuse project context, inspect repository facts, classify risk, select only relevant modules, discover deterministic checks, and produce a compact work packet. This reduces repeated discovery, oversized prompts, unnecessary high-tier model calls, retries, and hallucinations. Savings are measured against comparable unassisted runs rather than advertised as a fixed percentage.
+
 ---
 
 ## 🗃️ Living project context
@@ -170,6 +174,7 @@ FORGE keeps project-specific information separate from framework rules.
 │   └── project.yaml        ← evolving product + technical context
 ├── decisions/              ← important decisions and trade-offs
 ├── state.md                ← current project state
+├── runs/                   ← resumable workflow plans, approvals, and evidence
 ├── workflows/              ← reusable procedures
 ├── intelligence/           ← reasoning modules
 ├── policies/               ← non-negotiable guardrails
@@ -339,6 +344,8 @@ forge doctor
 forge validate
 forge context
 forge plan --task "Describe the outcome"
+forge run start --task "Describe the outcome"
+forge run status
 ```
 
 Initialization detects conflicts before writing, preserves project-owned context, and supports structured JSON output. Normal commands and generated project code use the neutral `forge` / `FORGE` identity. See [the installation and distribution contract](forge/framework/.forge/docs/INSTALLATION.md).
@@ -429,7 +436,7 @@ REPOSITORY FOUNDATION      █████████████████�
 CONTEXT MODEL              ████████████████████  ESTABLISHED
 README INTELLIGENCE        ████████████░░░░░░░░  FOUNDATION
 INTELLIGENCE MODULES       ████░░░░░░░░░░░░░░░░  IN DEVELOPMENT
-ORCHESTRATOR               ██████████████░░░░░░  PLANNER CORE
+ORCHESTRATOR               ████████████████░░░░  RESUMABLE RUNS
 EXECUTABLE VERIFICATION    ██████░░░░░░░░░░░░░░  FOUNDATION
 AGENT ADAPTERS             █░░░░░░░░░░░░░░░░░░░  PLANNED
 ```
