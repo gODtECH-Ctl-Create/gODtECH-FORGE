@@ -35,10 +35,16 @@ forge validate --strict
 forge context
 forge context set --key product.problem --value "Describe the problem"
 forge plan --task "Implement account authentication"
+forge run start --task "Implement account authentication"
+forge run status
+forge run approve --id <run-id> --checkpoint <checkpoint-id> --by <identity>
+forge run advance --id <run-id> --evidence "Describe the completed result"
 forge --version
 ```
 
 Commands support `--cwd <directory>` and `--json`. Initialization aborts before writing when a framework-owned file conflicts, unless the user explicitly supplies `--force`. Project-owned context, state, and manifest files are preserved during repeated initialization.
+
+Workflow runs are stored as readable YAML under `.forge/runs/`. The runner records the original deterministic plan, approvals, completed steps, timestamps, and evidence. High-risk work cannot advance until every required human checkpoint has been approved. This release records and validates work; it does not execute arbitrary project commands.
 
 ## Installation boundary
 

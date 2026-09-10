@@ -80,3 +80,28 @@ export interface OrchestrationPlan {
   approvals: ApprovalCheckpoint[];
   steps: PlanStep[];
 }
+
+export type WorkflowRunStatus = "awaiting-approval" | "in-progress" | "completed";
+
+export interface WorkflowRunApproval extends ApprovalCheckpoint {
+  approvedAt?: string;
+  approvedBy?: string;
+}
+
+export interface CompletedRunStep {
+  stepId: string;
+  evidence: string;
+  completedAt: string;
+}
+
+export interface WorkflowRun {
+  schemaVersion: 1;
+  id: string;
+  status: WorkflowRunStatus;
+  createdAt: string;
+  updatedAt: string;
+  task: string;
+  plan: OrchestrationPlan;
+  approvals: WorkflowRunApproval[];
+  completedSteps: CompletedRunStep[];
+}

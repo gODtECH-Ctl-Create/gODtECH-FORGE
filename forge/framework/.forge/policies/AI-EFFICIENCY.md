@@ -6,6 +6,19 @@ FORGE is designed to maximize useful work per unit of AI computation, tokens, or
 
 > Do not spend model intelligence on work that FORGE, the repository, or a deterministic tool can establish reliably.
 
+## Preprocess-before-model contract
+
+Before an adapter calls an AI model, FORGE should do as much reliable preparation as the available deterministic tooling permits:
+
+1. inspect repository facts and current Git state;
+2. load verified project context and reusable decisions;
+3. classify the task, risk, workflow, and required capabilities;
+4. select only the files and framework modules material to the task;
+5. discover available build, test, policy, and verification commands;
+6. produce a compact work packet containing facts, constraints, unresolved decisions, expected outputs, and exit conditions.
+
+The model should not be asked to rediscover facts already present in that packet. Adapters should send references, summaries, hashes, or bounded excerpts where possible instead of entire repositories or unchanged conversation history.
+
 ## Efficiency principles
 
 - Load only the intelligence modules relevant to the task.
@@ -76,6 +89,9 @@ reasoning escalations
 deterministic tool usage
 verification failures
 completed work per model call
+baseline tokens versus FORGE-assisted tokens
+retries caused by missing or incorrect context
+percentage of planning and verification resolved deterministically
 ```
 
-The objective is to improve the amount of reliable product work achieved for each unit of AI usage.
+The objective is to improve the amount of reliable product work achieved for each unit of AI usage. FORGE must not claim a fixed percentage saving without measuring the same task, repository, model, and provider against an unassisted baseline.

@@ -42,6 +42,7 @@ jobs:
           cue vet -d '#WorkflowDocument' ./forge/framework/.forge/schemas ./forge/framework/.forge/schemas/examples/valid/workflow.yaml
           cue vet -d '#DecisionRecord' ./forge/framework/.forge/schemas ./forge/framework/.forge/schemas/examples/valid/decision.yaml
           cue vet -d '#VerificationDocument' ./forge/framework/.forge/schemas ./forge/framework/.forge/schemas/examples/valid/verification.yaml
+          cue vet -d '#WorkflowRun' ./forge/framework/.forge/schemas ./forge/framework/.forge/schemas/examples/valid/workflow-run.yaml
 
       - name: Reject known-invalid fixture
         run: |

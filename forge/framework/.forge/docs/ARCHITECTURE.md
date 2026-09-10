@@ -27,7 +27,7 @@ Verification + external tooling
 `.forge/workflows/` defines procedures and exit conditions. `.forge/policies/` contains cross-cutting guardrails that should not be weakened by project context.
 
 ### Project state
-`.forge/context/`, `.forge/decisions/`, and `.forge/state.md` contain the living project-specific layer. The agent maintains these as material information changes.
+`.forge/context/`, `.forge/decisions/`, `.forge/state.md`, and `.forge/runs/` contain the living project-specific layer. The agent maintains these as material information changes. Workflow run records preserve plans, approvals, ordered step completion, timestamps, and evidence in portable YAML.
 
 ### Verification
 `.forge/verification/` defines checks and quality gates. Executable checks should be preferred over purely instructional rules. The approved FORGE stack uses TypeScript, Rust, Playwright, CUE, Open Policy Agent (OPA), WebAssembly (WASM), SQLite, GitHub Actions, and OpenTelemetry where their responsibilities justify them; Python and Temporal are available for specialized analysis and durable workflows.

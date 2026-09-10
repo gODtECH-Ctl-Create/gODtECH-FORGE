@@ -1,6 +1,6 @@
 {
   "name": "@godtech/forge",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A reusable operating framework for deliberate, verified AI-assisted product engineering.",
   "type": "module",
   "bin": {

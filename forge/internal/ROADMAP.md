@@ -33,8 +33,10 @@ This roadmap describes the intended build order. Contributors may pick work from
 - [x] Implement task classification
 - [x] Implement selective module activation
 - [x] Implement context loading and writing
-- [ ] Implement workflow execution model
+- [x] Implement workflow execution model
 - [x] Implement human-approval checkpoints
+- [ ] Build deterministic repository preflight and compact AI work packets
+- [ ] Add task budgets and model-escalation hints for agent adapters
 
 ## Phase 3 · Intelligence
 
@@ -81,6 +83,7 @@ This roadmap describes the intended build order. Contributors may pick work from
 - [ ] Model escalation policy
 - [ ] Usage/cost telemetry
 - [ ] Efficiency metrics
+- [ ] Baseline-versus-assisted credit measurement
 
 ## Phase 7 · Agent ecosystem
 
