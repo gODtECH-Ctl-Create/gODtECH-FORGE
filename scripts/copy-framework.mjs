@@ -7,9 +7,13 @@ const targetRoot = path.join(repositoryRoot, "dist", "framework");
 const forgeTarget = path.join(targetRoot, ".forge");
 
 await fs.rm(targetRoot, { recursive: true, force: true });
-await fs.mkdir(forgeTarget, { recursive: true });
+await fs.mkdir(path.join(forgeTarget, "cue.mod"), { recursive: true });
 await fs.copyFile(path.join(repositoryRoot, "AGENTS.md"), path.join(targetRoot, "AGENTS.md"));
 await fs.copyFile(path.join(repositoryRoot, ".forge", "README.md"), path.join(forgeTarget, "README.md"));
+await fs.copyFile(
+  path.join(repositoryRoot, "cue.mod", "module.cue"),
+  path.join(forgeTarget, "cue.mod", "module.cue"),
+);
 
 for (const directory of [
   "adapters",

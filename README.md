@@ -318,21 +318,28 @@ The framework should feel like **one coherent operating system**, even though it
 
 ---
 
-## 📦 Installation model
+## 📦 Installation
 
-FORGE currently works as a portable repository framework: early adopters can copy `.forge/` and `AGENTS.md`, while framework contributors can fork this repository.
-
-The planned recommended experience is an installable cross-platform CLI:
+The first cross-platform FORGE CLI is implemented and can currently be installed from source. It has not yet been published to a package registry.
 
 ```bash
-npm install --global @godtech/forge
+git clone https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE.git
+cd gODtECH-FORGE
+npm ci
+npm run build
+npm link
+```
+
+Use it in a new or existing project:
+
+```bash
+forge init --dry-run
 forge init
 forge doctor
 forge validate
-forge upgrade
 ```
 
-The CLI will add FORGE to new or existing repositories, preserve project-owned context during upgrades, and keep the consuming project's application stack independent. Normal commands and generated project code use the neutral `forge` / `FORGE` identity; origin attribution is kept to the manifest and one appropriate developer-facing location. Repository-template and manual installation modes will remain supported. See [the installation and distribution contract](.forge/docs/INSTALLATION.md).
+Initialization detects conflicts before writing, preserves project-owned context, and supports structured JSON output. Normal commands and generated project code use the neutral `forge` / `FORGE` identity. See [the installation and distribution contract](.forge/docs/INSTALLATION.md).
 
 ---
 
@@ -418,8 +425,8 @@ REPOSITORY FOUNDATION      █████████████████�
 CONTEXT MODEL              ████████████████████  ESTABLISHED
 README INTELLIGENCE        ████████████░░░░░░░░  FOUNDATION
 INTELLIGENCE MODULES       ████░░░░░░░░░░░░░░░░  IN DEVELOPMENT
-ORCHESTRATOR               ██░░░░░░░░░░░░░░░░░░  PLANNED
-EXECUTABLE VERIFICATION    ██░░░░░░░░░░░░░░░░░░  PLANNED
+ORCHESTRATOR               ████████░░░░░░░░░░░░  CLI FOUNDATION
+EXECUTABLE VERIFICATION    ██████░░░░░░░░░░░░░░  FOUNDATION
 AGENT ADAPTERS             █░░░░░░░░░░░░░░░░░░░  PLANNED
 ```
 

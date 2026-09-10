@@ -11,6 +11,7 @@ const REQUIRED_FILES = [
   ".forge/policies/CORE.md",
   ".forge/workflows/GIT.md",
   ".forge/schemas/project-context.cue",
+  ".forge/cue.mod/module.cue",
 ] as const;
 
 function scalar(document: string, dottedPath: string): string | undefined {
@@ -52,8 +53,8 @@ function runCue(cwd: string): Diagnostic {
 
   const result = spawnSync(
     "cue",
-    ["vet", "-d", "#ProjectContext", "./.forge/schemas", "./.forge/context/project.yaml"],
-    { cwd, encoding: "utf8", shell: false },
+    ["vet", "-d", "#ProjectContext", "./schemas", "./context/project.yaml"],
+    { cwd: path.join(cwd, ".forge"), encoding: "utf8", shell: false },
   );
 
   return result.status === 0

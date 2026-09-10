@@ -27,8 +27,8 @@ This roadmap describes the intended build order. Contributors may pick work from
 
 ## Phase 2 · Orchestrator core
 
-- [ ] Build a minimal TypeScript CLI shell
-- [ ] Implement `forge init`, `doctor`, and `validate`
+- [x] Build a minimal TypeScript CLI shell
+- [x] Implement `forge init`, `doctor`, and `validate`
 - [ ] Build Rust core runtime
 - [ ] Implement task classification
 - [ ] Implement selective module activation

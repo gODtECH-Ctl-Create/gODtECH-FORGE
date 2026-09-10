@@ -7,6 +7,7 @@ on:
       - "test/**"
       - "scripts/**"
       - "package.json"
+      - "package-lock.json"
       - "tsconfig.json"
       - ".github/workflows/cli.yml"
       - ".forge/**"
@@ -19,6 +20,7 @@ on:
       - "test/**"
       - "scripts/**"
       - "package.json"
+      - "package-lock.json"
       - "tsconfig.json"
       - ".github/workflows/cli.yml"
       - ".forge/**"
@@ -29,7 +31,7 @@ permissions:
 
 jobs:
   test:
-    name: Build and test on Node.js ${{ matrix.node }}
+    name: ${{ matrix.os }} / Node.js ${{ matrix.node }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -44,9 +46,10 @@ jobs:
         uses: actions/setup-node@v7.0.0
         with:
           node-version: ${{ matrix.node }}
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Type-check
         run: npm run check
@@ -56,3 +59,35 @@ jobs:
 
       - name: Verify CLI
         run: node dist/src/cli.js --version
+
+      - name: Inspect package contents
+        if: matrix.os == 'ubuntu-latest' && matrix.node == 24
+        run: npm pack --dry-run
+
+  schema-smoke:
+    name: Installed-project CUE validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7.0.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install CUE
+        uses: cue-lang/setup-cue@v1.0.1
+        with:
+          version: v0.17.1
+
+      - name: Build CLI
+        run: |
+          npm ci
+          npm run build
+
+      - name: Initialize and validate a clean project
+        run: |
+          node dist/src/cli.js init --cwd "${{ runner.temp }}/forge-smoke"
+          node dist/src/cli.js validate --cwd "${{ runner.temp }}/forge-smoke" --strict
