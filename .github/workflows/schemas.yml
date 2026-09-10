@@ -31,21 +31,21 @@ jobs:
           version: v0.17.1
 
       - name: Compile schema package
-        run: cue vet .forge/schemas
+        run: cue vet ./.forge/schemas
 
       - name: Validate project context
-        run: cue vet -d '#ProjectContext' .forge/schemas .forge/context/project.yaml
+        run: cue vet -d '#ProjectContext' ./.forge/schemas ./.forge/context/project.yaml
 
       - name: Validate known-good fixtures
         run: |
-          cue vet -d '#ModuleDocument' .forge/schemas .forge/schemas/examples/valid/module.yaml
-          cue vet -d '#WorkflowDocument' .forge/schemas .forge/schemas/examples/valid/workflow.yaml
-          cue vet -d '#DecisionRecord' .forge/schemas .forge/schemas/examples/valid/decision.yaml
-          cue vet -d '#VerificationDocument' .forge/schemas .forge/schemas/examples/valid/verification.yaml
+          cue vet -d '#ModuleDocument' ./.forge/schemas ./.forge/schemas/examples/valid/module.yaml
+          cue vet -d '#WorkflowDocument' ./.forge/schemas ./.forge/schemas/examples/valid/workflow.yaml
+          cue vet -d '#DecisionRecord' ./.forge/schemas ./.forge/schemas/examples/valid/decision.yaml
+          cue vet -d '#VerificationDocument' ./.forge/schemas ./.forge/schemas/examples/valid/verification.yaml
 
       - name: Reject known-invalid fixture
         run: |
-          if cue vet -d '#ModuleDocument' .forge/schemas .forge/schemas/examples/invalid/module.yaml; then
+          if cue vet -d '#ModuleDocument' ./.forge/schemas ./.forge/schemas/examples/invalid/module.yaml; then
             echo "Invalid fixture unexpectedly passed validation."
             exit 1
           fi

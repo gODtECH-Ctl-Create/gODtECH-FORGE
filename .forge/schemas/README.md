@@ -21,11 +21,11 @@ All schema files contain definitions, so the directory composes as one package. 
 Install the CUE CLI, then run:
 
 ```bash
-cue vet -d '#ProjectContext' .forge/schemas .forge/context/project.yaml
-cue vet -d '#ModuleDocument' .forge/schemas .forge/schemas/examples/valid/module.yaml
-cue vet -d '#WorkflowDocument' .forge/schemas .forge/schemas/examples/valid/workflow.yaml
-cue vet -d '#DecisionRecord' .forge/schemas .forge/schemas/examples/valid/decision.yaml
-cue vet -d '#VerificationDocument' .forge/schemas .forge/schemas/examples/valid/verification.yaml
+cue vet -d '#ProjectContext' ./.forge/schemas ./.forge/context/project.yaml
+cue vet -d '#ModuleDocument' ./.forge/schemas ./.forge/schemas/examples/valid/module.yaml
+cue vet -d '#WorkflowDocument' ./.forge/schemas ./.forge/schemas/examples/valid/workflow.yaml
+cue vet -d '#DecisionRecord' ./.forge/schemas ./.forge/schemas/examples/valid/decision.yaml
+cue vet -d '#VerificationDocument' ./.forge/schemas ./.forge/schemas/examples/valid/verification.yaml
 ```
 
 The fixture under `examples/invalid/` is intentionally invalid and must cause `cue vet -d '#ModuleDocument'` to exit non-zero.
