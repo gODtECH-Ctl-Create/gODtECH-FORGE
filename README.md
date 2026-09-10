@@ -2,26 +2,28 @@
 
 <div align="center">
 
-# ⚒️ FORGE
-
-### Less discovery for the model. More evidence for the result.
-
-**A credit-aware operating framework for deliberate, governed AI-assisted software development.**
+<img src="./docs/assets/forge-hero.svg" alt="FORGE AI engineering operating framework" width="100%" />
 
 <p>
   <a href="https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/actions/workflows/cli.yml"><img src="https://img.shields.io/github/actions/workflow/status/gODtECH-Ctl-Create/gODtECH-FORGE/cli.yml?branch=main&style=for-the-badge&label=CLI" alt="CLI workflow status" /></a>
-  <img src="https://img.shields.io/badge/version-0.5.0-7c3aed?style=for-the-badge" alt="Version 0.5.0" />
+  <img src="https://img.shields.io/badge/version-0.5.0-7c3aed?style=for-the-badge" alt="FORGE version 0.5.0" />
   <img src="https://img.shields.io/badge/Node.js-%E2%89%A520-111827?style=for-the-badge&logo=nodedotjs" alt="Node.js 20 or newer" />
-  <img src="https://img.shields.io/badge/MCP-stdio-0f766e?style=for-the-badge" alt="MCP stdio server" />
+  <img src="https://img.shields.io/badge/MCP-stdio-b7ff3c?style=for-the-badge&labelColor=11110f" alt="MCP stdio server" />
   <img src="https://img.shields.io/badge/license-decision_pending-6b7280?style=for-the-badge" alt="License decision pending" />
 </p>
 
+### Framework for Orchestrated Reasoning, Governance & Engineering
+
+**A credit-aware control layer for deliberate, governed AI-assisted software development.**
+
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=18&duration=2400&pause=750&color=B7FF3C&center=true&vCenter=true&width=1000&lines=Prepare+the+repository+before+the+model+explores+it.;Bound+context.+Classify+risk.+Select+the+right+workflow.;Spend+model+reasoning+where+reasoning+is+actually+needed.;Intent+%E2%86%92+Context+%E2%86%92+Reasoning+%E2%86%92+Evidence+%E2%86%92+Ship" alt="Animated FORGE capabilities" />
+
 <p>
   <a href="#-quick-start">Quick start</a> ·
-  <a href="#-how-forge-saves-ai-work">AI efficiency</a> ·
-  <a href="#-ways-to-use-forge">Adoption</a> ·
-  <a href="#-ai-coding-plugin">Plugin</a> ·
-  <a href="#-command-map">Commands</a> ·
+  <a href="#-how-forge-works">How it works</a> ·
+  <a href="#-what-you-get">What you get</a> ·
+  <a href="#-ai-coding-integration">AI integration</a> ·
+  <a href="#-architecture">Architecture</a> ·
   <a href="#-roadmap">Roadmap</a>
 </p>
 
@@ -31,52 +33,59 @@
 
 ## ⚡ The 30-second version
 
-FORGE sits between a developer's intent and an AI coding agent. Before a model spends credits exploring a repository, FORGE performs repeatable local work: it inspects project facts, selects relevant context, classifies risk, discovers verification commands, and packages the result for the agent.
+**FORGE** sits between developer intent and an AI coding agent.
+
+Instead of making the model spend paid reasoning time rediscovering a repository, FORGE performs repeatable local preparation first: repository inspection, bounded context selection, risk classification, command discovery, workflow planning, approval gating, caching, and evidence tracking.
 
 ```text
 TASK + REPOSITORY
        ↓
 DETERMINISTIC PREFLIGHT
        ↓
-COMPACT WORK PACKET
+BOUNDED AI WORK PACKET
        ↓
-AI REASONING + IMPLEMENTATION
+PROPORTIONAL MODEL REASONING
        ↓
-APPROVALS + EVIDENCE + VERIFICATION
+APPROVALS + IMPLEMENTATION
+       ↓
+EVIDENCE + VERIFICATION
+       ↓
+SHIP
 ```
 
-It is not a model, a fixed application stack, or one giant prompt. It is a local CLI, a portable `.forge/` project layer, and an MCP server that compatible AI coding clients can call directly.
+FORGE is **not a model**, **not a fixed application stack**, and **not one giant prompt**. It is a local CLI, a portable `.forge/` project layer, a deterministic planning engine, and a provider-neutral MCP server.
 
-> **Current release:** the CLI, deterministic planner, cached AI work packets, resumable workflow records, CUE contracts, MCP server, and Codex plugin are implemented. Public registry packages, native binaries, automatic command execution, and provider-specific adapters beyond generic MCP remain future releases.
+> **v0.5 focus:** the CLI, deterministic planner, cached AI work packets, resumable runs, CUE contracts, MCP server, and Codex plugin are implemented. Public registry packages, native binaries, automatic trusted execution, and dedicated provider adapters remain roadmap work.
 
 <a href="#readme-top">↑ back to top</a>
 
 ---
 
-## 🎯 What problem does it solve?
+## 🎯 Why FORGE exists
 
-AI coding sessions often spend paid model time rediscovering the same repository facts, loading unrelated files, guessing the intended workflow, and recovering from avoidable mistakes. A stronger model can still waste credits; a smaller model can become unreliable when the context is noisy or incomplete.
+AI coding tools are powerful, but a surprising amount of model work is mechanical rather than intelligent: finding manifests, locating relevant files, guessing test commands, re-reading project rules, reconstructing previous decisions, or loading context that never mattered.
 
-FORGE moves suitable work out of the model call.
+FORGE moves the repeatable parts out of the model call so model capacity can be spent on judgment, design, implementation, and interpretation.
 
-| Without a preparation layer | With FORGE |
+| Typical AI coding session | FORGE-assisted session |
 | --- | --- |
-| Re-scan the repository in each session | Reuse a fingerprinted work packet |
-| Load broad context “just in case” | Select bounded, task-relevant context |
-| Guess build and test commands | Discover allowlisted commands from manifests |
-| Treat every task with the same ceremony | Scale capabilities and approvals to risk |
-| Rely on chat memory for progress | Persist runs, approvals, steps, and evidence |
-| Let instructions and proof blur together | Separate guidance, policy, and verification |
+| Re-scan the repository every session | Reuse fingerprinted repository facts |
+| Load broad context “just in case” | Select bounded task-relevant context |
+| Guess build, lint, and test commands | Discover commands from allowlisted manifests |
+| Use the same model/ceremony for every task | Scale reasoning and approvals to task risk |
+| Keep progress only in chat history | Persist runs, checkpoints, steps, and evidence |
+| Mix instructions, assumptions, and proof | Separate context, policy, workflow, and verification |
+| Recover from avoidable hallucinations later | Reduce ambiguity before implementation begins |
 
-FORGE does **not** claim a fixed 50% credit reduction. Actual savings depend on the repository, task, client, and model. The goal is measurable reduction in discovery tokens, repeated tool calls, high-tier model use, retries, and hallucination recovery.
+FORGE does **not** claim a universal fixed percentage of token or credit savings. Savings depend on the repository, task, client, and model. The engineering goal is to reduce unnecessary discovery tokens, repeated tool calls, retries, context noise, and avoidable use of expensive reasoning.
 
 ---
 
 ## 🚀 Quick start
 
-### 1. Install the CLI from source
+### 1. Install from source
 
-The package is not yet published to npm. The current supported installation is:
+The package is not yet published to npm, so the current supported path is a source install:
 
 ```bash
 git clone https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE.git
@@ -87,7 +96,7 @@ npm link
 forge --version
 ```
 
-### 2. Initialize a project
+### 2. Add FORGE to a project
 
 ```bash
 cd /path/to/your-project
@@ -97,15 +106,15 @@ forge doctor
 forge validate
 ```
 
-The dry run reports conflicts before writing. Initialization installs only the portable `.forge/` workspace and `AGENTS.md`; it does not copy FORGE's source, tests, or contributor files into the target project.
+`--dry-run` reports conflicts before anything is written. Initialization installs the portable `.forge/` workspace and `AGENTS.md`; it does not copy the FORGE implementation into your application.
 
-### 3. Prepare work before calling a model
+### 3. Prepare the work before the model
 
 ```bash
 forge prepare --task "Add passwordless sign-in"
 ```
 
-Use JSON when another tool or coding agent will consume the packet:
+For agents and other tools:
 
 ```bash
 forge prepare --task "Add passwordless sign-in" --json
@@ -118,50 +127,88 @@ forge run start --task "Add passwordless sign-in"
 forge run status
 ```
 
-High-risk plans pause at explicit approval checkpoints. FORGE records evidence; this release does not automatically execute arbitrary discovered commands.
+Higher-risk plans can stop at explicit human approval checkpoints. FORGE records workflow evidence; v0.5 does not silently execute arbitrary discovered project commands.
 
 ---
 
-## 🧠 How FORGE saves AI work
+## 🌀 How FORGE works
 
-`forge prepare` performs a bounded, model-free preflight:
+```mermaid
+flowchart LR
+    A[Developer intent] --> B[FORGE CLI / MCP]
+    B --> C[Repository preflight]
+    C --> D[Relevant context]
+    C --> E[Risk + capabilities]
+    C --> F[Verification commands]
+    D --> G[AI work packet]
+    E --> G
+    F --> G
+    G --> H[AI coding agent]
+    H --> I[Implementation]
+    I --> J{Approval required?}
+    J -->|Yes| K[Human checkpoint]
+    J -->|No| L[Evidence]
+    K --> L
+    L --> M[Verification]
+    M --> N[Ship / continue]
+```
 
-- scans at most 4,000 application files while excluding dependencies, builds, caches, and FORGE's own installed files;
-- detects languages and allowlisted project manifests;
-- reads Git branch, commit, dirty state, and up to 100 non-secret changed paths;
-- excludes secret-like files such as environment, credential, key, and secret paths;
-- selects only task-relevant project context;
-- discovers build, check, lint, test, type-check, and verify commands;
-- classifies task type, risk, capabilities, workflow, and human approvals;
-- selects at most 12 framework references and 12,000 context characters;
-- suggests an `economy`, `standard`, or `advanced` model tier;
-- caches the packet by a SHA-256 fingerprint for reuse.
+The important boundary is simple: **deterministic tooling prepares facts; the model handles judgment.** FORGE tries to remove work the model should never have needed to do in the first place.
 
-This preparation can help a capable small model behave more consistently because it receives fewer irrelevant choices and more verified facts. The model still owns judgment, implementation, and interpretation where deterministic tooling cannot.
+### What `forge prepare` does locally
+
+A preparation pass can:
+
+- scan application files while excluding dependencies, builds, caches, and installed FORGE files;
+- detect languages and allowlisted project manifests;
+- inspect Git branch, commit, dirty state, and non-secret changed paths;
+- reject secret-like environment, credential, key, and secret paths from context;
+- select task-relevant project context instead of indiscriminate repository loading;
+- discover build, check, lint, test, type-check, and verification commands;
+- classify task type, risk, capabilities, workflow, and human approval requirements;
+- select a bounded set of framework references and context;
+- suggest an `economy`, `standard`, or `advanced` model tier;
+- cache the resulting work packet by a SHA-256 fingerprint for reuse.
+
+---
+
+## ✨ What you get
+
+| Area | FORGE provides |
+| --- | --- |
+| **Repository intelligence** | Deterministic inspection of project facts, Git state, manifests, context, and verification commands |
+| **AI efficiency** | Bounded work packets, cache reuse, task-relevant context, and proportional model-tier suggestions |
+| **Planning** | Task classification, risk-aware capabilities, ordered steps, workflows, and approval checkpoints |
+| **Governance** | Human gates for sensitive work and explicit separation of instructions, policies, evidence, and execution |
+| **Memory** | Maintained project context, decisions, resumable runs, progress, approvals, and evidence under `.forge/` |
+| **Agent integration** | Provider-neutral local MCP server plus a repository-bundled Codex plugin |
+| **Verification** | Discovered quality commands and evidence records without silently running arbitrary application commands |
+| **Portability** | A project-owned `.forge/` layer that stays independent of the consuming application's technology stack |
+
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=ts,nodejs,github,npm&perline=4" alt="FORGE active implementation technologies" />
+</p>
 
 ---
 
 ## 📦 Ways to use FORGE
 
-| Mode | Status | Best for | Important boundary |
-| --- | --- | --- | --- |
-| Source-installed CLI | **Available** | New or existing local projects | Requires Node.js 20+ and a source build |
-| Portable `.forge/` layer | **Available** | Teams using repository instructions without the CLI at runtime | Manual upgrades until `forge upgrade` exists |
-| Generic MCP server | **Available** | MCP-compatible AI coding clients | Client configuration differs by provider |
-| Codex plugin | **Available from this repository** | Codex users who want direct tools | CLI must be installed on `PATH` first |
-| Fork the framework repository | **Technically available** | Contributors changing FORGE itself | Not the recommended way to start an ordinary app |
-| Use as a GitHub project template | **Possible, not hardened** | Experimental new-project starts | CLI initialization is safer and easier to upgrade |
-| npm/Homebrew/Scoop/native binary | **Planned** | One-command machine installation | No public release is claimed yet |
+| Mode | Status | Best for |
+| --- | --- | --- |
+| **Source-installed CLI** | ✅ Available | Local development and existing repositories |
+| **Portable `.forge/` layer** | ✅ Available | Teams that want durable project context and governance inside the repository |
+| **Generic MCP server** | ✅ Available | MCP-compatible AI coding clients |
+| **Codex plugin** | ✅ Available in this repo | Codex users who want FORGE tools exposed directly |
+| **GitHub template / fork** | 🧪 Possible | Framework experimentation and contributors |
+| **npm / Homebrew / Scoop / native binaries** | 🗺️ Planned | One-command distribution |
 
-### Can other people fork and reuse it?
-
-GitHub can technically fork the repository, and the framework is designed to be reusable. However, the package currently declares `UNLICENSED` and no open-source license has been selected. That means broad reuse rights are not yet clearly granted. Choosing MIT or Apache-2.0 is a release decision that should be made explicitly before presenting FORGE as a public open-source template.
+> The repository is currently marked `UNLICENSED`. GitHub can technically fork it, but broad open-source reuse rights should not be implied until a license is deliberately selected.
 
 ---
 
-## 🔌 AI coding plugin
+## 🔌 AI coding integration
 
-FORGE exposes the same deterministic engine over a local stdio MCP server:
+FORGE exposes its deterministic engine over a local stdio MCP server:
 
 ```bash
 forge mcp serve
@@ -182,7 +229,7 @@ forge mcp serve
 
 ### Codex plugin
 
-A validated local marketplace and plugin are contained in `forge/codex/`:
+A local marketplace and plugin bundle lives under `forge/codex/`:
 
 ```bash
 codex plugin marketplace add ./forge/codex
@@ -191,16 +238,70 @@ codex plugin add forge@personal
 
 Start a new Codex thread after installation.
 
-| MCP tool | What it gives the coding agent |
+| MCP tool | What the agent receives |
 | --- | --- |
 | `forge_prepare` | Cached repository facts, selected context, risk, commands, and remaining model work |
 | `forge_plan` | Proportional capabilities, approvals, workflow, and ordered steps |
 | `forge_context` | Maintained product, technical, experience, security, and operations context |
 | `forge_run_status` | Current progress, next step, approvals, and evidence for a resumable run |
 
-The MCP tools do not call a model, edit application source, execute discovered commands, or approve human gates. `forge_prepare` may refresh its cache under `.forge/cache/`.
+These tools do not call a model, approve human gates, or silently execute arbitrary project commands. The MCP layer exposes FORGE's preparation and workflow engine; the coding client remains responsible for model execution.
 
-Claude, Cursor, GitHub Copilot, and other clients that accept local MCP servers can use the generic server command where their current configuration supports it. Dedicated provider installers and tested adapters are roadmap work; compatibility is not claimed solely because a provider mentions MCP.
+---
+
+## 🧠 Architecture
+
+```mermaid
+graph TD
+    U[Developer / AI client] --> CLI[CLI or MCP server]
+
+    CLI --> PRE[Deterministic preflight]
+    CLI --> PLAN[Risk-aware planner]
+    CLI --> RUN[Run + evidence engine]
+
+    PRE --> CTX[Context selector]
+    PRE --> CMD[Command discovery]
+    PRE --> GIT[Git + repository facts]
+
+    CTX --> PACK[AI work packet]
+    CMD --> PACK
+    GIT --> PACK
+    PLAN --> PACK
+
+    PACK --> AGENT[AI coding agent]
+    AGENT --> RUN
+    RUN --> GATE[Human approvals]
+    RUN --> VERIFY[Verification evidence]
+```
+
+FORGE's implementation stack is deliberately independent of the consuming application's stack. The target project can be Next.js, Laravel, Django, Go, Rust, .NET, Flutter, or another reasonable technology. FORGE inspects and governs the project; it does not force that project to adopt FORGE's internal tools.
+
+### Living project layer
+
+```text
+.forge/
+├── context/          product and technical context
+├── decisions/        important choices and trade-offs
+├── runs/             plans, approvals, progress, and evidence
+├── cache/            reusable deterministic work packets
+├── workflows/        reusable procedures
+├── intelligence/     selectively activated reasoning modules
+├── policies/         guardrails
+├── verification/     quality and release gates
+└── templates/        generated project artifacts
+```
+
+### Framework repository
+
+```text
+forge/
+├── src/              CLI, planner, preflight, runs, and MCP server
+├── test/             regression and protocol tests
+├── scripts/          build and packaging helpers
+├── framework/        assets installed into target projects
+├── codex/            local marketplace and plugin
+└── internal/         contributor planning
+```
 
 ---
 
@@ -221,91 +322,43 @@ Claude, Cursor, GitHub Copilot, and other clients that accept local MCP servers 
 | `forge run advance --id … --evidence …` | Complete the next step with evidence |
 | `forge mcp serve` | Serve provider-neutral tools over stdio |
 
-Commands that operate on a project accept `--cwd <directory>`; normal output can be replaced with structured output using `--json`.
+Project-aware commands accept `--cwd <directory>`. Structured consumers can use `--json` where supported.
 
 ---
 
-## 🏛️ Architecture
+## 🛠️ Technology direction
 
-```mermaid
-flowchart TD
-    U["Developer intent"] --> C["CLI or MCP client"]
-    C --> P["Deterministic preflight"]
-    P --> W["Compact work packet"]
-    W --> A["AI coding agent"]
-    A --> R["Resumable run"]
-    R --> G["Approvals and evidence"]
-    G --> V["Project verification"]
-```
+FORGE adds technology by responsibility rather than adding every ambitious component at once.
 
-FORGE's implementation stack is independent of the consuming application's stack. A target project can use Next.js, Laravel, Django, Go, Rust, .NET, Flutter, or another reasonable technology. FORGE inspects and governs the project; it does not force the application to adopt FORGE's internal tools.
-
-### Living project layer
-
-```text
-.forge/
-├── context/          product and technical context
-├── decisions/        important choices and trade-offs
-├── runs/             plans, approvals, progress, and evidence
-├── cache/            reusable deterministic work packets
-├── workflows/        reusable procedures
-├── intelligence/     selectively activated reasoning modules
-├── policies/         guardrails
-├── verification/     quality and release gates
-└── templates/        generated project artifacts
-```
-
-### Compact source repository
-
-Implementation and distribution assets stay together:
-
-```text
-forge/
-├── src/              CLI, planner, preflight, runs, and MCP server
-├── test/             executable regression and protocol tests
-├── scripts/          build and packaging helpers
-├── framework/        assets installed into target projects
-├── codex/            local plugin marketplace and plugin
-└── internal/         contributor planning
-```
-
-Only discovery files, package metadata, automation, licensing, and the agent entry point belong at the repository root.
-
----
-
-## 🛠️ Approved technology baseline
-
-The approved stack is being introduced by responsibility, not all at once.
-
-| Technology | Current use | Direction |
+| Technology | State | Responsibility |
 | --- | --- | --- |
-| TypeScript + Node.js | **Active** | CLI, orchestration, preflight, workflow state, MCP |
-| CUE | **Active** | Project, module, workflow, evidence, run, and work-packet contracts |
-| GitHub Actions | **Active** | Cross-platform Node 20/22/24 validation and CUE checks |
-| Model Context Protocol | **Active** | Provider-neutral local agent tools |
-| Rust | Planned | Trusted execution core and standalone native binaries |
-| SQLite | Planned | Indexed local memory, evidence, and queryable history |
-| Tree-sitter | Planned | Structural multi-language source analysis |
-| OPA + Rego | Planned | Executable security and governance policy |
-| Playwright | Planned | Browser, responsive, interaction, and visual verification |
-| OpenTelemetry | Planned | Traces, metrics, and operational cost measurement |
-| Python | Optional | Research and experimental analysis only where justified |
-| Temporal | Optional | Durable distributed workflows only when local runs are insufficient |
+| **TypeScript + Node.js** | ✅ Active | CLI, orchestration, preflight, workflow state, MCP |
+| **CUE** | ✅ Active | Project, module, workflow, evidence, run, and work-packet contracts |
+| **GitHub Actions** | ✅ Active | Cross-platform validation and schema checks |
+| **Model Context Protocol** | ✅ Active | Provider-neutral local agent tools |
+| **Rust** | 🗺️ Planned | Trusted execution boundary and standalone native binaries |
+| **SQLite** | 🗺️ Planned | Indexed local memory, evidence, and queryable history |
+| **Tree-sitter** | 🗺️ Planned | Structural multi-language source analysis |
+| **OPA + Rego** | 🗺️ Planned | Executable security and governance policy |
+| **Playwright** | 🗺️ Planned | Browser, responsive, interaction, and visual verification |
+| **OpenTelemetry** | 🗺️ Planned | Cost, latency, quality, and operational traces |
 
-This is why the early milestones use TypeScript, Node.js, CUE, GitHub Actions, and MCP now. Rust and SQLite become valuable once trusted command execution and indexed memory are mature enough to justify their operational cost.
+The current foundation stays intentionally compact: **TypeScript, Node.js, CUE, GitHub Actions, and MCP**. Heavier components should enter only when their operational value justifies their cost.
 
 ---
 
 ## 🛡️ Safety boundaries
 
-- Initialization checks all conflicts before writing and preserves project-owned state.
-- Secret-like paths are removed from work packets.
+FORGE is designed to increase agent capability without quietly removing human control.
+
+- Initialization checks conflicts before writing and preserves project-owned state.
+- Secret-like paths are excluded from generated work packets.
 - Context and framework selections are explicitly bounded.
-- High-risk plans require recorded human checkpoints.
-- MCP begins with preparation and read-oriented workflow tools.
-- Discovered commands are reported, not silently executed.
-- Application stack selection remains with the project.
-- Generated claims should be verified against repository evidence.
+- Higher-risk plans can require recorded human checkpoints.
+- MCP begins with preparation and workflow-oriented tools.
+- Discovered commands are reported rather than silently executed.
+- Application technology choices remain with the consuming project.
+- Claims and completion should be backed by repository evidence.
 
 ---
 
@@ -313,24 +366,24 @@ This is why the early milestones use TypeScript, Node.js, CUE, GitHub Actions, a
 
 ### Phase I · Executable foundation
 
-- [x] portable project contracts and CUE validation
-- [x] cross-platform CLI and safe initialization
-- [x] context management and risk-aware planning
-- [x] resumable runs, approvals, steps, and evidence
-- [x] deterministic, cached AI work packets
-- [x] provider-neutral MCP server
-- [x] validated Codex plugin bundle
-- [ ] choose an open-source license
-- [ ] publish signed package and release artifacts
-- [ ] measure token, latency, cache-hit, and retry baselines
+- [x] Portable project contracts and CUE validation
+- [x] Cross-platform CLI and safe initialization
+- [x] Context management and risk-aware planning
+- [x] Resumable runs, approvals, steps, and evidence
+- [x] Deterministic cached AI work packets
+- [x] Provider-neutral MCP server
+- [x] Repository-bundled Codex plugin
+- [ ] Choose an open-source license
+- [ ] Publish signed package and release artifacts
+- [ ] Measure token, latency, cache-hit, and retry baselines
 
 ### Phase II · Intelligence
 
-- [ ] product and market intelligence
-- [ ] research workflow and evidence quality
-- [ ] architecture and design intelligence
-- [ ] engineering, security, quality, and operations intelligence
-- [ ] adaptive packet selection informed by measured outcomes
+- [ ] Product and market intelligence
+- [ ] Research workflow and evidence quality
+- [ ] Architecture and design intelligence
+- [ ] Engineering, security, quality, and operations intelligence
+- [ ] Adaptive packet selection informed by measured outcomes
 
 ### Phase III · Enforcement
 
@@ -338,15 +391,15 @@ This is why the early milestones use TypeScript, Node.js, CUE, GitHub Actions, a
 - [ ] Tree-sitter structural analysis
 - [ ] OPA/Rego policy evaluation
 - [ ] Playwright product verification
-- [ ] signed evidence and release gates
+- [ ] Signed evidence and release gates
 
-### Phase IV · Ecosystem and memory
+### Phase IV · Ecosystem + memory
 
 - [ ] SQLite indexed project memory
-- [ ] dedicated Claude, Cursor, and GitHub Copilot adapters
-- [ ] plugin install and update automation
+- [ ] Dedicated Claude, Cursor, and GitHub Copilot adapters
+- [ ] Plugin installation and update automation
 - [ ] OpenTelemetry cost and quality traces
-- [ ] durable remote orchestration where justified
+- [ ] Durable remote orchestration where justified
 
 ---
 
@@ -359,23 +412,25 @@ npm test
 npm pack --dry-run
 ```
 
-The CLI workflow tests Linux, Windows, and macOS with Node.js 20, 22, and 24, plus an installed-project CUE smoke test. The separate schema workflow validates the bundled CUE contracts and fixtures.
+The CLI workflow validates Linux, Windows, and macOS across supported Node versions, while the schema workflow validates bundled CUE contracts and fixtures.
 
-Contributions should keep implementation under `forge/`, preserve the distinction between instructions and proof, and follow the issue → branch → verification → pull request → review → merge workflow in `AGENTS.md`.
+Contributions should keep implementation under `forge/`, preserve the distinction between instructions and proof, and follow the issue → branch → verification → pull request → review → merge workflow documented in [`AGENTS.md`](./AGENTS.md).
 
 ---
 
 ## 📄 License
 
-No open-source license has been selected yet. The package is currently marked `UNLICENSED`. Before public distribution, choose and add a license deliberately; MIT and Apache-2.0 have different patent and notice implications.
+No open-source license has been selected yet. The package currently declares `UNLICENSED`.
+
+Before public distribution, the project should deliberately choose and add a license rather than implying permissions that have not been granted.
 
 ---
 
 <div align="center">
 
-### Prepare locally. Reason proportionally. Ship with evidence.
+### Less discovery for the model. More evidence for the result.
 
-Maintained in the canonical [gODtECH-FORGE repository](https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE).
+**Prepare locally. Reason proportionally. Govern explicitly. Ship with evidence.**
 
 <a href="#readme-top">↑ back to top</a>
 
