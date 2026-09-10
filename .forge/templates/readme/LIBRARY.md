@@ -8,6 +8,8 @@
 
 </div>
 
+> Built with **gODtECH FORGE** — Framework for Orchestrated Reasoning, Governance & Engineering.
+
 ---
 
 ## Overview
