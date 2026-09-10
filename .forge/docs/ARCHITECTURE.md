@@ -15,21 +15,24 @@ Verification + external tooling
 ```
 
 ### Agent entry point
-`/AGENTS.md` provides the small, discoverable contract an agent should read first.
+`/AGENTS.md` provides the small, discoverable contract an agent should read first. Tool-specific discovery files may live under `.github/` and similar integration locations.
 
 ### Orchestration
-`core/` determines what context and modules are relevant to a task. It should stay lightweight.
+`.forge/core/` determines what context, workflows, policies, and intelligence modules are relevant to a task. It should remain lightweight and should not contain product-specific assumptions.
 
 ### Intelligence
-`intelligence/` contains domain-specific reasoning guidance. Modules are activated selectively.
+`.forge/intelligence/` contains domain-specific reasoning guidance. Modules are activated selectively according to the task, product context, and risk profile.
 
 ### Workflows and policies
-`workflows/` define procedures and exit conditions. `policies/` contain cross-cutting guardrails that should not be weakened by project context.
+`.forge/workflows/` defines procedures and exit conditions. `.forge/policies/` contains cross-cutting guardrails that should not be weakened by project context.
 
 ### Project state
-`context/`, `decisions/`, and `state.md` contain the living project-specific layer. The agent maintains these as material information changes.
+`.forge/context/`, `.forge/decisions/`, and `.forge/state.md` contain the living project-specific layer. The agent maintains these as material information changes.
 
 ### Verification
-`verification/` defines checks and quality gates. Where possible, checks should be executable rather than purely instructional.
+`.forge/verification/` defines checks and quality gates. Executable checks should be preferred over purely instructional rules. The approved FORGE stack uses TypeScript, Rust, Playwright, CUE, Open Policy Agent (OPA), WebAssembly (WASM), SQLite, GitHub Actions, and OpenTelemetry where their responsibilities justify them; Python and Temporal are available for specialized analysis and durable workflows.
+
+### Integration model
+FORGE should be usable as a repository template, an agent skill set, and eventually as a command-line and Model Context Protocol (MCP) interface. The implementation stack of FORGE must remain independent from the stack chosen by a project using it.
 
 The root should remain intentionally small: `README.md`, `AGENTS.md`, optional tool-discovery files such as `.github/`, and the single `.forge/` system directory.
