@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="DG-BM-001: the first DeployGuard pilot benchmark comparing plain AI and FORGE-assisted implementation." />
+  <meta name="theme-color" content="#08090d" />
+  <title>DG-BM-001 · DeployGuard Pilot — FORGE Evidence Lab</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <header class="nav-shell"><nav class="nav container"><a class="brand" href="../index.html"><span class="brand-mark">FG</span><span>FORGE</span></a><div class="nav-links"><a href="../index.html#install">Install</a><a href="../index.html#evidence">Evidence Lab</a><a href="https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE">GitHub</a></div></nav></header>
+  <main class="benchmark-page container">
+    <a class="back-link" href="../index.html#evidence">← Evidence Lab</a>
+    <div class="benchmark-page-head"><span class="status-pill pilot">PILOT · DG-BM-001</span><h1>DeployGuard incident CRUD</h1><p>First external-project pilot of FORGE on a real application task, run on 10 September 2026.</p></div>
+
+    <section class="card prose-card">
+      <h2>Question</h2>
+      <p>Does a FORGE-assisted AI coding workflow show less repository-discovery noise and less implementation rework while preserving successful build, type-check and automated-test outcomes?</p>
+      <h2>Task</h2>
+      <p>Add PostgreSQL-backed incident management to DeployGuard: create, list, get, update and delete endpoints; title and description; severity levels; incident status; validation; tests; and preservation of the existing health endpoint.</p>
+    </section>
+
+    <section class="benchmark-table-wrap card">
+      <h2>Observed results</h2>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Metric</th><th>Plain AI control</th><th>FORGE-assisted</th><th>Observation</th></tr></thead>
+        <tbody>
+          <tr><td>Unique files inspected</td><td>7</td><td>5</td><td><strong>28.6% fewer</strong></td></tr>
+          <tr><td>Clearly unnecessary files inspected</td><td>3</td><td>0 established</td><td>Lower discovery noise</td></tr>
+          <tr><td>Failed commands</td><td>Several</td><td>0 during implementation</td><td>Cleaner assisted run</td></tr>
+          <tr><td>Retries / rework</td><td>Several</td><td>0</td><td>Cleaner assisted run</td></tr>
+          <tr><td>Automated tests</td><td>3 / 3 passed</td><td>3 / 3 passed</td><td>Same tested outcome</td></tr>
+          <tr><td>Build</td><td>Passed</td><td>Passed</td><td>Same</td></tr>
+          <tr><td>Type-check</td><td>Passed</td><td>Passed</td><td>Same</td></tr>
+          <tr><td>Feature completion</td><td>Partial*</td><td>Yes at implementation level*</td><td>Verification scopes differed</td></tr>
+          <tr><td>Provider tokens / cost</td><td>Not available</td><td>Not available</td><td>No cost claim possible</td></tr>
+        </tbody>
+      </table></div>
+      <p class="table-note">*The control attempted live Docker verification and encountered unresolved connection resets/timeouts. Docker runtime verification was not rerun on the FORGE branch, so completion labels are not directly comparable.</p>
+    </section>
+
+    <section class="metric-grid benchmark-detail-metrics">
+      <div class="metric estimated"><strong>3</strong><span>prepare events</span></div>
+      <div class="metric estimated"><strong>263 ms</strong><span>average prepare duration</span></div>
+      <div class="metric estimated"><strong>695 / 2748</strong><span>characters selected / considered</span></div>
+      <div class="metric estimated"><strong>514</strong><span>estimated context tokens avoided</span></div>
+      <div class="metric estimated"><strong>74.7%</strong><span>estimated context reduction</span></div>
+      <div class="metric estimated"><strong>15</strong><span>deterministic steps completed</span></div>
+    </section>
+
+    <section class="card prose-card">
+      <h2>FORGE telemetry</h2>
+      <p>The assisted run reported 3 preparation events, 0 cache hits, 263 ms average preparation duration, 695 of 2,748 context characters selected, 514 estimated context tokens avoided, 74.7% estimated context reduction, and 15 deterministic steps completed.</p>
+      <div class="evidence-note"><strong>Important:</strong> FORGE token values use an approximate engineering heuristic. They are not provider billing data and do not mean the run used 74.7% fewer paid credits.</div>
+    </section>
+
+    <section class="card prose-card limitations">
+      <h2>Why this is labelled a pilot</h2>
+      <ul>
+        <li>The control started from commit <code>ab59830</code>, while the FORGE-assisted run started from <code>638be04</code>.</li>
+        <li>The plain run could still inspect FORGE-generated files such as <code>AGENTS.md</code>, <code>AI-EFFICIENCY.md</code> and <code>GIT.md</code>, so it was not a completely FORGE-free control.</li>
+        <li>Docker/runtime verification was attempted on the control and not repeated on the assisted branch.</li>
+        <li>Exact provider tokens, model identity, cost/credits and total tool-call counts were unavailable.</li>
+      </ul>
+      <p>DG-BM-001 is therefore evidence that the measurement workflow works and a promising signal — not proof of a universal performance or cost reduction.</p>
+    </section>
+
+    <section class="card prose-card">
+      <h2>What we learned about FORGE itself</h2>
+      <p>The pilot also found a classifier weakness: a new incident CRUD capability was classified as a <code>bug</code> rather than a <code>feature</code>. External testing is being used to turn these observations into product improvements rather than hiding them.</p>
+      <h2>Next benchmark</h2>
+      <p>Future runs will use identical application starting states and equal acceptance criteria across both branches. Planned categories include authentication/security, database changes, CI/CD, and Kubernetes/infrastructure.</p>
+    </section>
+
+    <div class="benchmark-page-cta"><a class="button" href="../index.html#install">Install FORGE</a><a class="button button-secondary" href="../index.html#evidence">Back to Evidence Lab</a></div>
+  </main>
+  <footer><div class="container footer-row"><div><strong>FORGE Evidence Lab</strong><p>Measured claims, visible limitations.</p></div><div><a href="../index.html">Home</a><a href="https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE">GitHub</a></div></div></footer>
+</body>
+</html>
