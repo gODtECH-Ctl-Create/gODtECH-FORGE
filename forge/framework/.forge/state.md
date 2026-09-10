@@ -3,7 +3,7 @@
 > This file is maintained by the AI agent using FORGE.
 
 ## Current stage
-Phase 1 completion — measurable AI preparation and release readiness
+Phase I public release complete — measurement studies and distribution expansion next
 
 ## Completed
 - FORGE repository foundation, agent contract, policies, and README system established.
@@ -22,11 +22,14 @@ Phase 1 completion — measurable AI preparation and release readiness
 - Secret-like paths, dependencies, build output, installed FORGE assets, and volatile run/cache state excluded from AI packet inventory.
 - Provider-neutral MCP server and validated Codex plugin implemented under the compact `forge/` distribution folder.
 - Privacy-preserving local preparation metrics implemented for cache reuse, latency, deterministic work, tier routing, and estimated context reduction.
+- Apache-2.0 selected and applied across package metadata and repository documentation.
+- `v0.6.0` published as the first public Phase I GitHub Release from a GitHub-verified signed annotated tag on `main`.
+- `v0.6.0` release assets include the packaged CLI, Linux/macOS installer, Windows PowerShell installer, SHA-256 manifest, and GitHub/Sigstore-backed build provenance.
 
 ## In progress
-- Confirm the public package identifier and registry ownership.
-- Choose the public license and prepare signed release artifacts.
+- Confirm the public npm package identifier and registry ownership before any npm publication.
 - Design opt-in assisted-versus-unassisted studies using provider-reported usage and outcome data.
+- Sequence Phase II intelligence work from measured developer value rather than adding heavy components speculatively.
 
 ## Open questions
 - Which agent environments receive native adapters first?

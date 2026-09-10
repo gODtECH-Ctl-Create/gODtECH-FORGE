@@ -6,7 +6,7 @@
 
 <p>
   <a href="https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/actions/workflows/cli.yml"><img src="https://img.shields.io/github/actions/workflow/status/gODtECH-Ctl-Create/gODtECH-FORGE/cli.yml?branch=main&style=for-the-badge&label=CLI" alt="CLI workflow status" /></a>
-  <img src="https://img.shields.io/badge/version-0.6.0-7c3aed?style=for-the-badge" alt="FORGE version 0.6.0" />
+  <a href="https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/tag/v0.6.0"><img src="https://img.shields.io/badge/release-v0.6.0-7c3aed?style=for-the-badge" alt="FORGE v0.6.0 release" /></a>
   <img src="https://img.shields.io/badge/Node.js-%E2%89%A520-111827?style=for-the-badge&logo=nodedotjs" alt="Node.js 20 or newer" />
   <img src="https://img.shields.io/badge/MCP-stdio-b7ff3c?style=for-the-badge&labelColor=11110f" alt="MCP stdio server" />
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-3da639?style=for-the-badge" alt="Apache License 2.0" /></a>
@@ -55,7 +55,7 @@ SHIP
 
 FORGE is **not a model**, **not a fixed application stack**, and **not one giant prompt**. It is a local CLI, a portable `.forge/` project layer, a deterministic planning engine, and a provider-neutral MCP server.
 
-> **v0.6 focus:** the CLI, deterministic planner, cached AI work packets, privacy-preserving efficiency metrics, resumable runs, CUE contracts, MCP server, and Codex plugin are implemented. Public registry packages, native binaries, automatic trusted execution, and dedicated provider adapters remain roadmap work.
+> **v0.6 focus:** the CLI, deterministic planner, cached AI work packets, privacy-preserving efficiency metrics, resumable runs, CUE contracts, MCP server, Codex plugin, and verified GitHub release distribution are implemented. Public registry packages, native binaries, automatic trusted execution, and dedicated provider adapters remain roadmap work.
 
 <a href="#readme-top">↑ back to top</a>
 
@@ -83,9 +83,27 @@ FORGE does **not** claim a universal fixed percentage of token or credit savings
 
 ## 🚀 Quick start
 
-### 1. Install from source
+### 1. Install the verified GitHub release
 
-The package is not yet published to npm, so the current supported path is a source install:
+FORGE `v0.6.0` is available from the signed GitHub Release. The installers verify the release checksum before performing the global package installation.
+
+Linux or macOS:
+
+```bash
+curl -fsSLO https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/download/v0.6.0/install.sh
+sh install.sh 0.6.0
+forge --version
+```
+
+Windows PowerShell:
+
+```powershell
+Invoke-WebRequest https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/download/v0.6.0/install.ps1 -OutFile install.ps1
+.\install.ps1 -Version 0.6.0
+forge --version
+```
+
+The npm registry is a separate publication channel and is **not yet published**. Contributors can still install from source:
 
 ```bash
 git clone https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE.git
@@ -206,12 +224,13 @@ Events are Git-ignored under `.forge/metrics/`. They contain counts and categori
 
 | Mode | Status | Best for |
 | --- | --- | --- |
-| **Source-installed CLI** | ✅ Available | Local development and existing repositories |
+| **Verified GitHub release** | ✅ Available | Users who want the checksum-verified packaged CLI and platform installer |
+| **Source-installed CLI** | ✅ Available | Contributors, local development, and existing repositories |
 | **Portable `.forge/` layer** | ✅ Available | Teams that want durable project context and governance inside the repository |
 | **Generic MCP server** | ✅ Available | MCP-compatible AI coding clients |
 | **Codex plugin** | ✅ Available in this repo | Codex users who want FORGE tools exposed directly |
 | **GitHub template / fork** | 🧪 Possible | Framework experimentation and contributors |
-| **npm / Homebrew / Scoop / native binaries** | 🗺️ Planned | One-command distribution |
+| **npm / Homebrew / Scoop / native binaries** | 🗺️ Planned | Additional distribution channels |
 
 > FORGE is open source under the Apache License 2.0. Commercial use, modification, distribution, and private use are permitted subject to the license terms.
 
@@ -390,7 +409,7 @@ FORGE is designed to increase agent capability without quietly removing human co
 - [x] Repository-bundled Codex plugin
 - [x] Privacy-preserving local cache, latency, and context-reduction metrics
 - [x] Choose an open-source license
-- [ ] Publish signed package and release artifacts
+- [x] Publish signed package and release artifacts
 - [ ] Accept opt-in provider usage and retry outcomes for assisted-versus-baseline studies
 
 ### Phase II · Intelligence
