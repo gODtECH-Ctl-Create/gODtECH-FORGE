@@ -36,6 +36,7 @@ forge context
 forge context set --key product.problem --value "Describe the problem"
 forge plan --task "Implement account authentication"
 forge prepare --task "Implement account authentication"
+forge mcp serve
 forge run start --task "Implement account authentication"
 forge run status
 forge run approve --id <run-id> --checkpoint <checkpoint-id> --by <identity>
@@ -48,6 +49,41 @@ Commands support `--cwd <directory>` and `--json`. Initialization aborts before 
 Workflow runs are stored as readable YAML under `.forge/runs/`. The runner records the original deterministic plan, approvals, completed steps, timestamps, and evidence. High-risk work cannot advance until every required human checkpoint has been approved. This release records and validates work; it does not execute arbitrary project commands.
 
 `forge prepare` performs a bounded, model-free repository preflight and caches the result under `.forge/cache/work-packets/`. It detects languages, allowlisted manifests, Git state, relevant project context, verification commands, framework references, risk, and a provider-neutral model-tier hint. Dependency/build folders and FORGE's own installed files do not pollute the application inventory, while secret-like paths and values are excluded from packet output.
+
+## AI coding clients
+
+`forge mcp serve` starts a local stdio Model Context Protocol server using the current official TypeScript server package. It exposes four provider-neutral tools:
+
+| Tool | Purpose |
+| --- | --- |
+| `forge_prepare` | Complete bounded repository discovery before model reasoning |
+| `forge_plan` | Classify risk and produce a proportional execution plan |
+| `forge_context` | Read the installed project's maintained context |
+| `forge_run_status` | Read the latest or a named resumable workflow run |
+
+These tools do not call a model, execute discovered project commands, edit application source, or approve human checkpoints. `forge_prepare` may update its deterministic cache under `.forge/cache/`.
+
+MCP-compatible clients can launch the server with this common configuration shape:
+
+```json
+{
+  "mcpServers": {
+    "forge": {
+      "command": "forge",
+      "args": ["mcp", "serve"]
+    }
+  }
+}
+```
+
+A validated Codex plugin and local marketplace live under `forge/codex/`. After the source install above:
+
+```bash
+codex plugin marketplace add ./forge/codex
+codex plugin add forge@personal
+```
+
+Start a new Codex thread after installation. Other MCP clients use their own configuration UI or file; provider-specific installers remain future adapters rather than current compatibility claims.
 
 ## Installation boundary
 
@@ -83,7 +119,6 @@ Only package metadata, the project README and license, GitHub automation, and th
 ```bash
 forge upgrade
 forge eject
-forge mcp serve
 forge plugin install <provider>
 ```
 

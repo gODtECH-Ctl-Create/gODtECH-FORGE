@@ -1,0 +1,27 @@
+{
+  "name": "forge",
+  "version": "0.5.0",
+  "description": "Credit-aware project preparation and governed engineering tools for AI coding.",
+  "author": {
+    "name": "gODtECH-Ctl-Create",
+    "url": "https://github.com/gODtECH-Ctl-Create"
+  },
+  "homepage": "https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE",
+  "repository": "https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE",
+  "keywords": ["ai-coding", "mcp", "planning", "verification"],
+  "interface": {
+    "displayName": "FORGE",
+    "shortDescription": "Prepare compact, governed AI coding work.",
+    "longDescription": "FORGE performs deterministic repository discovery, risk-aware planning, and context selection before an AI coding model begins expensive work.",
+    "developerName": "gODtECH-Ctl-Create",
+    "category": "Developer Tools",
+    "capabilities": ["Project context", "Planning", "AI preflight"],
+    "defaultPrompt": [
+      "Prepare this repository for my next coding task.",
+      "Create a risk-aware plan for this change.",
+      "Show the current FORGE workflow status."
+    ],
+    "brandColor": "#7C3AED"
+  },
+  "mcpServers": "./.mcp.json"
+}

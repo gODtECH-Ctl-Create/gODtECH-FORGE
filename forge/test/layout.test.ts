@@ -16,6 +16,8 @@ test("implementation and bundled assets stay inside the forge folder", async () 
     "forge/internal",
     "forge/framework/.forge",
     "forge/framework/.forge/cue.mod/module.cue",
+    "forge/codex/plugins/forge/.codex-plugin/plugin.json",
+    "forge/codex/.agents/plugins/marketplace.json",
   ]) {
     await fs.access(path.join(repositoryRoot, compactPath));
   }
