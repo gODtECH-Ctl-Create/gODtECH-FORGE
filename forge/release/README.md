@@ -1,8 +1,15 @@
-# FORGE release readiness
+# FORGE release distribution
 
 This directory contains the machine-install and release-preflight boundary for FORGE.
 
-The repository is **release-ready, not publicly released**. FORGE is licensed under Apache-2.0, but publication remains owner-controlled and still requires a deliberately pushed signed version tag.
+FORGE `v0.6.0` is the first publicly released Phase I version. It is licensed under Apache-2.0 and was published from a GitHub-verified signed annotated tag after the repository's release gates completed successfully.
+
+Public release:
+
+- GitHub Release: https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/tag/v0.6.0
+- Build provenance: https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/attestations/46538361
+
+The npm registry is a separate publication boundary. Do not claim npm availability until the package is explicitly published there.
 
 ## What a release proves
 
@@ -35,20 +42,20 @@ Everything after that heading becomes the GitHub Release body. `resolve-release-
 
 ## Owner publication boundary
 
-The Apache-2.0 license decision is explicit, and curated release metadata is version-controlled. Do not push a public version tag until the intended release commit is on `main`, repository CI is green, and the owner is deliberately ready to publish.
+`v0.6.0` has already been published and must not be moved, reused, or overwritten. Future public versions remain owner-controlled and require a deliberately pushed signed annotated tag after the intended release commit is on `main`, repository CI is green, and matching curated release metadata exists.
 
-The intended publication action is a signed annotated tag, for example:
+For a future version, the publication sequence remains:
 
 ```bash
 git switch main
 git pull --ff-only
-git tag -s v0.6.0 -m "FORGE v0.6.0 — Phase I: Governed AI Engineering Foundation"
-git push origin v0.6.0
+git tag -s vX.Y.Z -m "FORGE vX.Y.Z — <release title>"
+git push origin vX.Y.Z
 ```
 
-Pushing that signed tag is the explicit release trigger. The workflow will still fail closed if the curated metadata, license, versions, signature, `main` ancestry, tests, package smoke test, checksums, or provenance step do not pass.
+Pushing a matching signed version tag is the explicit GitHub Release trigger. The workflow fails closed if curated metadata, license, versions, signature, `main` ancestry, tests, package smoke test, checksums, or provenance do not pass.
 
-## Install from a selected release
+## Install v0.6.0
 
 Linux or macOS:
 
