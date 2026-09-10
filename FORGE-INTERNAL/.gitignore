@@ -1,0 +1,5 @@
+*.md
+*.dec
+*.zip
+*.key
+.env*
