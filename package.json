@@ -1,6 +1,6 @@
 {
   "name": "@godtech/forge",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A reusable operating framework for deliberate, verified AI-assisted product engineering.",
   "type": "module",
   "bin": {
@@ -27,7 +27,9 @@
     "verification"
   ],
   "license": "UNLICENSED",
-  "dependencies": {},
+  "dependencies": {
+    "yaml": "^2.9.0"
+  },
   "devDependencies": {
     "@types/node": "^20.19.11",
     "typescript": "^5.9.2"
