@@ -27,6 +27,7 @@ test("init creates a usable framework and is idempotent", async (context) => {
   assert.equal(first.ok, true);
   assert.ok(first.created.includes("AGENTS.md"));
   assert.ok(first.created.includes(".forge/cache/.gitignore"));
+  assert.ok(first.created.includes(".forge/metrics/.gitignore"));
 
   const second = await initProject({ cwd, now: new Date("2026-09-11T00:00:00Z") });
   assert.equal(second.ok, true);

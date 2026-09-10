@@ -76,6 +76,12 @@ Verification should be proportional to risk. Cheap deterministic checks should r
 
 Credit efficiency must never be achieved by skipping material security, testing, accessibility, correctness, or release checks. The goal is less wasted intelligence, not less engineering discipline.
 
+## Local measurement
+
+Every `forge prepare` invocation records a local, Git-ignored metric event with cache status, elapsed preparation time, bounded-context counts, task category, risk, model-tier hint, and deterministic-step count. `forge metrics` summarizes those events. Metrics must not contain task text, filenames, source, repository identity, Git metadata, or secrets.
+
+Estimated tokens use a documented four-characters-per-token heuristic. This is useful for consistent local comparison but is not provider billing data. True assisted-versus-unassisted studies require opt-in provider usage and outcome data for the same task, repository, model, and provider.
+
 ## Future measurement
 
 FORGE should eventually measure:
@@ -83,13 +89,12 @@ FORGE should eventually measure:
 ```text
 model calls
 input/output usage
-reused context
-cached analysis
+provider-reported input/output usage
+assisted versus unassisted baselines
 reasoning escalations
 deterministic tool usage
 verification failures
 completed work per model call
-baseline tokens versus FORGE-assisted tokens
 retries caused by missing or incorrect context
 percentage of planning and verification resolved deterministically
 ```

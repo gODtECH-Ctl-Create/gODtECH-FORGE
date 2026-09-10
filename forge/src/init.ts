@@ -149,6 +149,11 @@ async function planFiles(options: InitOptions): Promise<PlannedFile[]> {
       projectOwned: false,
     },
     {
+      relativePath: ".forge/metrics/.gitignore",
+      content: "*\n!.gitignore\n",
+      projectOwned: false,
+    },
+    {
       relativePath: ".forge/context/project.yaml",
       content: projectContext(projectName, date),
       projectOwned: true,

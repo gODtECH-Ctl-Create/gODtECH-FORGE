@@ -14,6 +14,7 @@ These CUE schemas are the stable Phase 1 data boundary shared by future runtimes
 | `verification.cue` | Deterministic check results and release decisions |
 | `workflow-run.cue` | Persisted plans, approvals, progress, and evidence |
 | `work-packet.cue` | Bounded deterministic repository and AI handoff facts |
+| `efficiency-metric.cue` | Privacy-preserving local preparation measurements |
 | `manifest.cue` | FORGE installation and provenance metadata |
 
 All schema files contain definitions, so the directory composes as one package. Contracts use semantic versions. Backward-compatible additions increment the minor version; incompatible field or meaning changes require a major version. Unknown integration-specific data belongs under `extensions`.
@@ -30,6 +31,7 @@ cue vet -d '#DecisionRecord' ./.forge/schemas ./.forge/schemas/examples/valid/de
 cue vet -d '#VerificationDocument' ./.forge/schemas ./.forge/schemas/examples/valid/verification.yaml
 cue vet -d '#WorkflowRun' ./.forge/schemas ./.forge/schemas/examples/valid/workflow-run.yaml
 cue vet -d '#WorkPacket' ./.forge/schemas ./.forge/schemas/examples/valid/work-packet.yaml
+cue vet -d '#PrepareMetricEvent' ./.forge/schemas ./.forge/schemas/examples/valid/efficiency-metric.yaml
 ```
 
 The fixture under `examples/invalid/` is intentionally invalid and must cause `cue vet -d '#ModuleDocument'` to exit non-zero.

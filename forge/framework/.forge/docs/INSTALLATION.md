@@ -36,6 +36,7 @@ forge context
 forge context set --key product.problem --value "Describe the problem"
 forge plan --task "Implement account authentication"
 forge prepare --task "Implement account authentication"
+forge metrics
 forge mcp serve
 forge run start --task "Implement account authentication"
 forge run status
@@ -50,9 +51,11 @@ Workflow runs are stored as readable YAML under `.forge/runs/`. The runner recor
 
 `forge prepare` performs a bounded, model-free repository preflight and caches the result under `.forge/cache/work-packets/`. It detects languages, allowlisted manifests, Git state, relevant project context, verification commands, framework references, risk, and a provider-neutral model-tier hint. Dependency/build folders and FORGE's own installed files do not pollute the application inventory, while secret-like paths and values are excluded from packet output.
 
+`forge metrics` summarizes privacy-preserving events stored under `.forge/metrics/`. It reports cache reuse, preparation duration, deterministic steps, tier routing, and estimated context reduction. Events contain no task text, filenames, source, repository identity, Git metadata, or secrets. Token estimates use an approximate four-characters-per-token heuristic; they are not provider billing data or guaranteed credit savings.
+
 ## AI coding clients
 
-`forge mcp serve` starts a local stdio Model Context Protocol server using the current official TypeScript server package. It exposes four provider-neutral tools:
+`forge mcp serve` starts a local stdio Model Context Protocol server using the current official TypeScript server package. It exposes five provider-neutral tools:
 
 | Tool | Purpose |
 | --- | --- |
@@ -60,6 +63,7 @@ Workflow runs are stored as readable YAML under `.forge/runs/`. The runner recor
 | `forge_plan` | Classify risk and produce a proportional execution plan |
 | `forge_context` | Read the installed project's maintained context |
 | `forge_run_status` | Read the latest or a named resumable workflow run |
+| `forge_metrics` | Read local aggregate preparation-efficiency measurements |
 
 These tools do not call a model, execute discovered project commands, edit application source, or approve human checkpoints. `forge_prepare` may update its deterministic cache under `.forge/cache/`.
 
@@ -105,10 +109,12 @@ The repository keeps its reusable implementation under one `forge/` directory:
 
 ```text
 forge/
+├── assets/       # README and distribution presentation assets
 ├── src/          # CLI and orchestration code
 ├── test/         # executable regression tests
 ├── scripts/      # build and packaging helpers
 ├── framework/    # assets installed into consuming projects
+├── codex/        # local plugin marketplace and validated plugin
 └── internal/     # contributor planning material
 ```
 

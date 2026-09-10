@@ -2,11 +2,11 @@
 
 <div align="center">
 
-<img src="./docs/assets/forge-hero.svg" alt="FORGE AI engineering operating framework" width="100%" />
+<img src="./forge/assets/readme/forge-hero.svg" alt="FORGE AI engineering operating framework" width="100%" />
 
 <p>
   <a href="https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/actions/workflows/cli.yml"><img src="https://img.shields.io/github/actions/workflow/status/gODtECH-Ctl-Create/gODtECH-FORGE/cli.yml?branch=main&style=for-the-badge&label=CLI" alt="CLI workflow status" /></a>
-  <img src="https://img.shields.io/badge/version-0.5.0-7c3aed?style=for-the-badge" alt="FORGE version 0.5.0" />
+  <img src="https://img.shields.io/badge/version-0.6.0-7c3aed?style=for-the-badge" alt="FORGE version 0.6.0" />
   <img src="https://img.shields.io/badge/Node.js-%E2%89%A520-111827?style=for-the-badge&logo=nodedotjs" alt="Node.js 20 or newer" />
   <img src="https://img.shields.io/badge/MCP-stdio-b7ff3c?style=for-the-badge&labelColor=11110f" alt="MCP stdio server" />
   <img src="https://img.shields.io/badge/license-decision_pending-6b7280?style=for-the-badge" alt="License decision pending" />
@@ -55,7 +55,7 @@ SHIP
 
 FORGE is **not a model**, **not a fixed application stack**, and **not one giant prompt**. It is a local CLI, a portable `.forge/` project layer, a deterministic planning engine, and a provider-neutral MCP server.
 
-> **v0.5 focus:** the CLI, deterministic planner, cached AI work packets, resumable runs, CUE contracts, MCP server, and Codex plugin are implemented. Public registry packages, native binaries, automatic trusted execution, and dedicated provider adapters remain roadmap work.
+> **v0.6 focus:** the CLI, deterministic planner, cached AI work packets, privacy-preserving efficiency metrics, resumable runs, CUE contracts, MCP server, and Codex plugin are implemented. Public registry packages, native binaries, automatic trusted execution, and dedicated provider adapters remain roadmap work.
 
 <a href="#readme-top">↑ back to top</a>
 
@@ -127,7 +127,7 @@ forge run start --task "Add passwordless sign-in"
 forge run status
 ```
 
-Higher-risk plans can stop at explicit human approval checkpoints. FORGE records workflow evidence; v0.5 does not silently execute arbitrary discovered project commands.
+Higher-risk plans can stop at explicit human approval checkpoints. FORGE records workflow evidence; v0.6 does not silently execute arbitrary discovered project commands.
 
 ---
 
@@ -169,6 +169,17 @@ A preparation pass can:
 - select a bounded set of framework references and context;
 - suggest an `economy`, `standard`, or `advanced` model tier;
 - cache the resulting work packet by a SHA-256 fingerprint for reuse.
+
+### Measure the preparation layer
+
+Every prepare call records a privacy-preserving local event. View aggregate cache reuse, preparation latency, deterministic steps, model-tier routing, and estimated context reduction with:
+
+```bash
+forge metrics
+forge metrics --json
+```
+
+Events are Git-ignored under `.forge/metrics/`. They contain counts and categories—not task text, filenames, source, repository identity, Git metadata, or secrets. Token estimates use a transparent four-characters-per-token approximation and are not provider billing or guaranteed credit savings.
 
 ---
 
@@ -244,6 +255,7 @@ Start a new Codex thread after installation.
 | `forge_plan` | Proportional capabilities, approvals, workflow, and ordered steps |
 | `forge_context` | Maintained product, technical, experience, security, and operations context |
 | `forge_run_status` | Current progress, next step, approvals, and evidence for a resumable run |
+| `forge_metrics` | Local cache reuse, latency, deterministic-work, and context-reduction aggregates |
 
 These tools do not call a model, approve human gates, or silently execute arbitrary project commands. The MCP layer exposes FORGE's preparation and workflow engine; the coding client remains responsible for model execution.
 
@@ -284,6 +296,7 @@ FORGE's implementation stack is deliberately independent of the consuming applic
 ├── decisions/        important choices and trade-offs
 ├── runs/             plans, approvals, progress, and evidence
 ├── cache/            reusable deterministic work packets
+├── metrics/          private local preparation measurements
 ├── workflows/        reusable procedures
 ├── intelligence/     selectively activated reasoning modules
 ├── policies/         guardrails
@@ -295,6 +308,7 @@ FORGE's implementation stack is deliberately independent of the consuming applic
 
 ```text
 forge/
+├── assets/           README and distribution presentation assets
 ├── src/              CLI, planner, preflight, runs, and MCP server
 ├── test/             regression and protocol tests
 ├── scripts/          build and packaging helpers
@@ -316,6 +330,7 @@ forge/
 | `forge context set --key … --value …` | Update an allowlisted scalar context field |
 | `forge plan --task …` | Produce a risk-aware deterministic plan |
 | `forge prepare --task …` | Build or reuse a compact AI work packet |
+| `forge metrics` | Summarize local preparation efficiency and estimated context reduction |
 | `forge run start --task …` | Persist a resumable workflow run |
 | `forge run status [--id …]` | Read the latest or a named run |
 | `forge run approve --id … --checkpoint … --by …` | Record a required human approval |
@@ -373,9 +388,10 @@ FORGE is designed to increase agent capability without quietly removing human co
 - [x] Deterministic cached AI work packets
 - [x] Provider-neutral MCP server
 - [x] Repository-bundled Codex plugin
+- [x] Privacy-preserving local cache, latency, and context-reduction metrics
 - [ ] Choose an open-source license
 - [ ] Publish signed package and release artifacts
-- [ ] Measure token, latency, cache-hit, and retry baselines
+- [ ] Accept opt-in provider usage and retry outcomes for assisted-versus-baseline studies
 
 ### Phase II · Intelligence
 

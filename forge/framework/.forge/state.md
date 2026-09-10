@@ -3,7 +3,7 @@
 > This file is maintained by the AI agent using FORGE.
 
 ## Current stage
-Orchestrator core — deterministic AI preflight
+Phase 1 completion — measurable AI preparation and release readiness
 
 ## Completed
 - FORGE repository foundation, agent contract, policies, and README system established.
@@ -20,11 +20,13 @@ Orchestrator core — deterministic AI preflight
 - Persistent workflow runs with atomic YAML writes, ordered evidence, approval gates, status lookup, and safe resume transitions implemented.
 - `forge prepare` bounded repository inspection, manifest/language detection, Git-state hashing, command discovery, selective context, model-tier hints, and content-addressed packet caching implemented without AI calls.
 - Secret-like paths, dependencies, build output, installed FORGE assets, and volatile run/cache state excluded from AI packet inventory.
+- Provider-neutral MCP server and validated Codex plugin implemented under the compact `forge/` distribution folder.
+- Privacy-preserving local preparation metrics implemented for cache reuse, latency, deterministic work, tier routing, and estimated context reduction.
 
 ## In progress
-- Review and merge deterministic AI preflight and compact work packets.
 - Confirm the public package identifier and registry ownership.
-- Design the Model Context Protocol server around the provider-neutral work-packet contract.
+- Choose the public license and prepare signed release artifacts.
+- Design opt-in assisted-versus-unassisted studies using provider-reported usage and outcome data.
 
 ## Open questions
 - Which agent environments receive native adapters first?

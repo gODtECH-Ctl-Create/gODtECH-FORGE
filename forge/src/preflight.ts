@@ -5,6 +5,7 @@ import { spawnSync } from "node:child_process";
 import { parseDocument, stringify } from "yaml";
 import { getPath, loadProjectContext } from "./context.js";
 import { exists } from "./files.js";
+import { recordPrepareMetric } from "./metrics.js";
 import { createPlan } from "./planner.js";
 import type {
   Capability,
@@ -194,6 +195,7 @@ function inspectGit(cwd: string): GitInspection {
     .map((file) => file.includes(" -> ") ? file.split(" -> ").at(-1)! : file)
     .map(normalize)
     .filter((file) => !file.startsWith(".forge/cache/") && !file.startsWith(".forge/runs/"))
+    .filter((file) => !file.startsWith(".forge/metrics/"))
     .sort();
   const projectChanges = nonVolatileChanges.filter((file) => !file.startsWith(".forge/"));
   const sensitiveChanges = projectChanges.filter(isSensitivePath).length;
@@ -343,6 +345,7 @@ async function writePacket(file: string, packet: WorkPacket): Promise<void> {
 }
 
 export async function prepareWorkPacket(cwdInput: string, taskInput: string, now = new Date()): Promise<WorkPacket> {
+  const startedAt = performance.now();
   const cwd = path.resolve(cwdInput);
   const [context, plan, inventory] = await Promise.all([
     loadProjectContext(cwd),
@@ -371,7 +374,9 @@ export async function prepareWorkPacket(cwdInput: string, taskInput: string, now
     const document = parseDocument(await fs.readFile(file, "utf8"));
     if (document.errors.length > 0) throw new Error(`Cached work packet is invalid YAML: ${document.errors[0]!.message}`);
     const cached = validateCachedPacket(document.toJS(), fingerprint);
-    return { ...cached, cached: true };
+    const packet = { ...cached, cached: true };
+    const recorded = await recordPrepareMetric(cwd, packet, rawContext.toString("utf8").length, performance.now() - startedAt, now);
+    return recorded ? packet : { ...packet, warnings: [...packet.warnings, "Local efficiency metrics could not be recorded."] };
   }
 
   const warnings: string[] = [];
@@ -430,5 +435,6 @@ export async function prepareWorkPacket(cwdInput: string, taskInput: string, now
     warnings,
   };
   await writePacket(file, packet);
-  return packet;
+  const recorded = await recordPrepareMetric(cwd, packet, rawContext.toString("utf8").length, performance.now() - startedAt, now);
+  return recorded ? packet : { ...packet, warnings: [...packet.warnings, "Local efficiency metrics could not be recorded."] };
 }
