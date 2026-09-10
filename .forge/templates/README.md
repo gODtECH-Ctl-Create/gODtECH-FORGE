@@ -6,21 +6,26 @@ Reusable artifacts generated from verified project context.
 
 `readme/` contains the standard README system for projects using FORGE:
 
-- `README.md` — rules, selection logic, and generation standards
-- `PRODUCT.md` — applications, platforms, and user-facing products
-- `LIBRARY.md` — reusable packages and developer libraries
+- `README.md` — README rules, reference pattern, selection, generation, attribution, and validation
+- `PRODUCT.md` — applications, platforms, SaaS products, and user-facing systems
+- `LIBRARY.md` — reusable packages, software development kits (SDKs), frameworks, and developer libraries
 - `TOOL.md` — developer tools, command-line interfaces (CLIs), infrastructure utilities, and technical projects
 
-FORGE initializes the project README as part of early product planning. The agent selects and adapts the appropriate pattern from verified project context rather than waiting until the end of development.
+FORGE selects and adapts the appropriate pattern instead of forcing every repository into the same README.
 
-Every generated README preserves required gODtECH FORGE provenance while keeping the product's own identity primary.
+## GitHub work templates
 
-## Project provenance template
+`issue/` and `pull-request/` provide reusable structures for tracked engineering work:
 
-`manifest.yaml` is the starting point for the project's machine-readable FORGE provenance metadata. The agent populates it during initialization and keeps the framework version and synchronization state current.
+- `FEATURE.md` — product and feature work
+- `BUG.md` — reproducible defects and regressions
+- `SECURITY.md` — security findings and remediation
+- `pull-request/DEFAULT.md` — review and verification record
+
+These templates guide agents; repository-specific GitHub configuration can later turn them into native issue or pull request forms.
 
 ## Other templates
 
-This directory will also hold templates for product briefs, architecture records, design decisions, security assessments, verification plans, deployment checklists, and other project artifacts.
+This directory will also hold templates for product briefs, architecture records, design decisions, security assessments, verification plans, deployment checklists, provenance records, and other project artifacts.
 
 Templates stay generic. Project-specific facts belong in `.forge/context/`, `.forge/decisions/`, and `.forge/state.md`.
