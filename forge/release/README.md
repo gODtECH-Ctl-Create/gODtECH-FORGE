@@ -2,7 +2,7 @@
 
 This directory contains the machine-install and release-preflight boundary for FORGE.
 
-The repository is **release-ready, not publicly released**. Publication remains owner-controlled. The tag workflow is intentionally unable to publish while `package.json` is `UNLICENSED` or while a non-empty root license file is absent.
+The repository is **release-ready, not publicly released**. FORGE is licensed under Apache-2.0, but publication remains owner-controlled and still requires a deliberately pushed signed version tag.
 
 ## What a release proves
 
@@ -22,9 +22,9 @@ The workflow refuses to replace an existing release for the same tag.
 
 ## Owner publication boundary
 
-Do not create a public version tag until the owner has deliberately selected the project license and the related license metadata has been reviewed.
+The Apache-2.0 license decision is now explicit. Do not create a public version tag until the intended release commit is on `main`, repository CI is green, and the owner is deliberately ready to publish.
 
-After the license decision is committed to `main` and CI is green, the intended publication action is a signed annotated tag, for example:
+The intended publication action is a signed annotated tag, for example:
 
 ```bash
 git switch main
