@@ -2,58 +2,36 @@
 
 **A universal operating framework for intelligent AI-assisted product development.**
 
-FORGE is a reusable repository template for building software products with AI. It sits between human intent and AI execution, giving an agent a structured way to reason about what should be built, how it should be designed and engineered, how it should be secured, and how the result should be verified.
+FORGE sits between human product intent and AI execution. It gives AI agents a structured way to reason about a product before, during, and after implementation, while keeping project context, decisions, workflows, policies, and verification in one portable system.
 
-FORGE is not a fixed application stack and it is not one giant prompt. Its capabilities are modular, project context is generated and maintained as the work evolves, and objective checks are separated from instructions.
-
-## The model
+## What FORGE does
 
 ```text
-Human intent
-    ↓
-FORGE context + orchestration
-    ↓
-Product / Market / Research
-    ↓
-Architecture / Design
-    ↓
-Engineering / Security
-    ↓
-Build / Test / Verify
-    ↓
-Deploy / Improve
+IDEA
+  ↓
+DISCOVER → RESEARCH → DEFINE → ARCHITECT → DESIGN
+  ↓
+BUILD → SECURE → TEST → VERIFY → DEPLOY → IMPROVE
 ```
 
-## Root structure
+FORGE combines modular product, market, research, architecture, design, engineering, security, quality, and operations intelligence. It is deliberately not one giant prompt. The relevant capabilities are activated according to the task, context, and risk.
+
+## Repository shape
 
 ```text
-README.md                 human entry point
-AGENTS.md                 agent entry point
-.github/                  tool-specific discovery/instructions
-.forge/                   the FORGE system
+AGENTS.md          agent entry point
+README.md          human entry point
+.github/           optional tool-specific discovery
+.forge/            the complete FORGE system
 ```
 
-Everything that belongs to the framework or its project-specific operating state lives under `.forge/`.
+Everything that makes FORGE work lives under `.forge/`. Project-specific context and state are maintained there as the product evolves.
 
-## Inside `.forge/`
+## Approved technology baseline
 
-```text
-core/          orchestration and shared mechanisms
-intelligence/  modular reasoning domains
-workflows/     lifecycle procedures and exit conditions
-policies/      non-negotiable framework guardrails
-verification/  objective and human quality gates
-adapters/      AI-environment integration guidance
-templates/     project artifacts FORGE can generate
-context/       living project-specific context
-decisions/     consequential project decisions
-state.md       current project state
-docs/          FORGE system documentation
-```
+**Rust + TypeScript + Python + CUE + Tree-sitter + Open Policy Agent (OPA)/Rego + WebAssembly (WASM) + Model Context Protocol (MCP) + SQLite + Playwright + GitHub Actions + OpenTelemetry**, with **Temporal** available as an advanced durable-workflow option.
 
-## Core lifecycle
-
-IDEA → DISCOVER → RESEARCH → DEFINE → ARCHITECT → DESIGN → BUILD → SECURE → TEST → VERIFY → DEPLOY → IMPROVE
+These technologies implement FORGE itself. They do **not** dictate the application stack of a project using FORGE.
 
 ## Design principles
 
@@ -61,17 +39,16 @@ IDEA → DISCOVER → RESEARCH → DEFINE → ARCHITECT → DESIGN → BUILD →
 - Reason before defaulting.
 - Build the right thing, not everything.
 - Prefer root-cause fixes.
-- Keep intelligence modular.
-- Separate instructions from enforcement.
-- Keep project context living.
-- Never weaken core guardrails to bypass a check.
-- Verify the product, not just the code.
-- Use deeper controls when risk or complexity justifies them.
+- Put guidance in instructions, knowledge in modules, and objective checks in tooling.
+- Keep project context living and explicit.
+- Protect core security and quality guardrails.
+- Verify real behavior and experience, not just successful compilation.
+- Scale the depth of analysis to the product's risk and complexity.
 
 ## Status
 
-FORGE is in foundation development. The structure is intentionally being stabilized before the intelligence modules become extensive.
+FORGE is in foundation development. The architecture and technology baseline are established first; intelligence modules, orchestration tooling, and executable verification will be added in deliberate layers.
 
-## Goal
+## Vision
 
-A user should be able to start from FORGE, describe the product they want to build, and let an AI agent progressively establish the required context, activate the relevant intelligence, create the necessary project artifacts, build the product, verify it, and keep the project context current without requiring the user to manually configure a large collection of framework files.
+A developer should be able to start with an idea, give it to an AI agent operating with FORGE, and have the system help determine what should be built, why it should be built, how it should be designed and engineered, how it should be secured, and whether the resulting product is actually ready to ship.
