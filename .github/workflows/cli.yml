@@ -8,6 +8,7 @@ on:
       - "package-lock.json"
       - "tsconfig.json"
       - ".github/workflows/cli.yml"
+      - ".github/workflows/release.yml"
       - "AGENTS.md"
   push:
     branches:
@@ -18,6 +19,7 @@ on:
       - "package-lock.json"
       - "tsconfig.json"
       - ".github/workflows/cli.yml"
+      - ".github/workflows/release.yml"
       - "AGENTS.md"
 
 permissions:
@@ -57,6 +59,27 @@ jobs:
       - name: Inspect package contents
         if: matrix.os == 'ubuntu-latest' && matrix.node == 24
         run: npm pack --dry-run
+
+      - name: Check POSIX installer syntax
+        if: matrix.node == 24 && matrix.os != 'windows-latest'
+        shell: bash
+        run: bash -n forge/release/install.sh
+
+      - name: Check PowerShell installer syntax
+        if: matrix.os == 'windows-latest' && matrix.node == 24
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            (Resolve-Path "forge/release/install.ps1"),
+            [ref]$tokens,
+            [ref]$errors
+          ) | Out-Null
+          if ($errors.Count -gt 0) {
+            $errors | ForEach-Object { Write-Error $_ }
+            exit 1
+          }
 
   schema-smoke:
     name: Installed-project CUE validation
