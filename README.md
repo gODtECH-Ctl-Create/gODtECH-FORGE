@@ -337,9 +337,13 @@ forge init --dry-run
 forge init
 forge doctor
 forge validate
+forge context
+forge plan --task "Describe the outcome"
 ```
 
-Initialization detects conflicts before writing, preserves project-owned context, and supports structured JSON output. Normal commands and generated project code use the neutral `forge` / `FORGE` identity. See [the installation and distribution contract](.forge/docs/INSTALLATION.md).
+Initialization detects conflicts before writing, preserves project-owned context, and supports structured JSON output. Normal commands and generated project code use the neutral `forge` / `FORGE` identity. See [the installation and distribution contract](forge/framework/.forge/docs/INSTALLATION.md).
+
+The source repository keeps implementation, tests, scripts, bundled framework assets, and contributor planning under one [`forge/`](forge/) folder. The root remains limited to discovery, package metadata, automation, licensing, and agent entry points, making forks easier to turn into product repositories.
 
 ---
 
@@ -375,7 +379,7 @@ Initialization detects conflicts before writing, preserves project-owned context
 - [x] core agent contract
 - [x] approved technology baseline
 - [x] README template system
-- [ ] executable core orchestrator
+- [x] executable core orchestrator
 
 ### Phase II · Intelligence
 
@@ -425,7 +429,7 @@ REPOSITORY FOUNDATION      █████████████████�
 CONTEXT MODEL              ████████████████████  ESTABLISHED
 README INTELLIGENCE        ████████████░░░░░░░░  FOUNDATION
 INTELLIGENCE MODULES       ████░░░░░░░░░░░░░░░░  IN DEVELOPMENT
-ORCHESTRATOR               ████████░░░░░░░░░░░░  CLI FOUNDATION
+ORCHESTRATOR               ██████████████░░░░░░  PLANNER CORE
 EXECUTABLE VERIFICATION    ██████░░░░░░░░░░░░░░  FOUNDATION
 AGENT ADAPTERS             █░░░░░░░░░░░░░░░░░░░  PLANNED
 ```

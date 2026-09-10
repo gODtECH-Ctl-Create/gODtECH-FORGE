@@ -1,6 +1,6 @@
 {
   "name": "@godtech/forge",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A reusable operating framework for deliberate, verified AI-assisted product engineering.",
   "type": "module",
   "bin": {
@@ -14,9 +14,9 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "tsc && node scripts/copy-framework.mjs",
+    "build": "tsc && node forge/scripts/copy-framework.mjs",
     "check": "tsc --noEmit",
-    "test": "npm run build && node scripts/run-tests.mjs",
+    "test": "npm run build && node forge/scripts/run-tests.mjs",
     "prepack": "npm run build"
   },
   "keywords": [
@@ -27,7 +27,9 @@
     "verification"
   ],
   "license": "UNLICENSED",
-  "dependencies": {},
+  "dependencies": {
+    "yaml": "^2.9.0"
+  },
   "devDependencies": {
     "@types/node": "^20.19.11",
     "typescript": "^5.9.2"

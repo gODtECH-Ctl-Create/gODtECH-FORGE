@@ -14,7 +14,7 @@ You are operating inside a repository that follows gODtECH FORGE.
 
 ## FORGE system
 
-The `.forge/` directory contains the framework and project-specific operating layer. Read only the relevant workflow, intelligence modules, policies, context, decisions, and verification guidance for the task.
+The `.forge/` directory contains the installed framework and project-specific operating layer. In the FORGE source repository, the canonical bundled copy lives at `forge/framework/.forge/`; consuming projects receive it as `.forge/`. Read only the relevant workflow, intelligence modules, policies, context, decisions, and verification guidance for the task.
 
 Never modify FORGE's core rules simply to make a task easier. Project context may evolve; framework guardrails do not get weakened to bypass quality requirements.
 

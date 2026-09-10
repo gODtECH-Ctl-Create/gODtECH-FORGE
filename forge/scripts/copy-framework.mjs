@@ -2,16 +2,17 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
+const sourceRoot = path.join(repositoryRoot, "forge", "framework", ".forge");
 const targetRoot = path.join(repositoryRoot, "dist", "framework");
 const forgeTarget = path.join(targetRoot, ".forge");
 
 await fs.rm(targetRoot, { recursive: true, force: true });
 await fs.mkdir(path.join(forgeTarget, "cue.mod"), { recursive: true });
 await fs.copyFile(path.join(repositoryRoot, "AGENTS.md"), path.join(targetRoot, "AGENTS.md"));
-await fs.copyFile(path.join(repositoryRoot, ".forge", "README.md"), path.join(forgeTarget, "README.md"));
+await fs.copyFile(path.join(sourceRoot, "README.md"), path.join(forgeTarget, "README.md"));
 await fs.copyFile(
-  path.join(repositoryRoot, "cue.mod", "module.cue"),
+  path.join(sourceRoot, "cue.mod", "module.cue"),
   path.join(forgeTarget, "cue.mod", "module.cue"),
 );
 
@@ -26,9 +27,7 @@ for (const directory of [
   "verification",
   "workflows",
 ]) {
-  await fs.cp(
-    path.join(repositoryRoot, ".forge", directory),
-    path.join(forgeTarget, directory),
-    { recursive: true },
-  );
+  await fs.cp(path.join(sourceRoot, directory), path.join(forgeTarget, directory), {
+    recursive: true,
+  });
 }

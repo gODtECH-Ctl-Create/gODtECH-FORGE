@@ -1,6 +1,8 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { parseDocument } from "yaml";
+import { getPath } from "./context.js";
 import { exists } from "./files.js";
 import type { CommandReport, Diagnostic } from "./types.js";
 
@@ -13,32 +15,6 @@ const REQUIRED_FILES = [
   ".forge/schemas/project-context.cue",
   ".forge/cue.mod/module.cue",
 ] as const;
-
-function scalar(document: string, dottedPath: string): string | undefined {
-  const target = dottedPath.split(".");
-  const stack: Array<{ indent: number; key: string }> = [];
-
-  for (const line of document.split(/\r?\n/)) {
-    if (/^\s*(#|$)/.test(line)) continue;
-    const match = /^(\s*)([A-Za-z0-9_-]+):(?:\s*(.*))?$/.exec(line);
-    if (!match) continue;
-
-    const indent = match[1]?.length ?? 0;
-    const key = match[2] ?? "";
-    const value = (match[3] ?? "").trim();
-
-    while (stack.length > 0 && stack[stack.length - 1]!.indent >= indent) stack.pop();
-    const currentPath = [...stack.map((item) => item.key), key];
-
-    if (currentPath.join(".") === target.join(".") && value !== "") {
-      return value.replace(/^["']|["']$/g, "");
-    }
-
-    if (value === "") stack.push({ indent, key });
-  }
-
-  return undefined;
-}
 
 function runCue(cwd: string): Diagnostic {
   const version = spawnSync("cue", ["version"], { cwd, encoding: "utf8", shell: false, stdio: "ignore" });
@@ -81,23 +57,34 @@ export async function validateProject(cwdInput: string, strict = false): Promise
 
   const contextPath = path.join(cwd, ".forge", "context", "project.yaml");
   if (await exists(contextPath)) {
-    const context = await fs.readFile(contextPath, "utf8");
-    const name = scalar(context, "project.name");
-    const status = scalar(context, "project.status");
-    const risk = scalar(context, "security.risk_level");
+    const source = await fs.readFile(contextPath, "utf8");
+    const document = parseDocument(source);
+    const context = document.errors.length === 0 ? document.toJS() : undefined;
+    const name = getPath(context, "project.name");
+    const status = getPath(context, "project.status");
+    const risk = getPath(context, "security.risk_level");
+
+    if (document.errors.length > 0) {
+      diagnostics.push({
+        id: "context:yaml",
+        level: "error",
+        message: "Project context is invalid YAML.",
+        detail: document.errors[0]!.message,
+      });
+    }
 
     diagnostics.push(
-      name
+      typeof name === "string" && name.trim()
         ? { id: "context:name", level: "ok", message: `Project name: ${name}` }
         : { id: "context:name", level: "error", message: "project.name must be populated." },
     );
     diagnostics.push(
-      status && ["discovery", "planning", "active", "maintenance", "deprecated", "archived"].includes(status)
+      typeof status === "string" && ["discovery", "planning", "active", "maintenance", "deprecated", "archived"].includes(status)
         ? { id: "context:status", level: "ok", message: `Project status: ${status}` }
         : { id: "context:status", level: "error", message: "project.status is missing or invalid." },
     );
     diagnostics.push(
-      risk && ["low", "medium", "high", "critical"].includes(risk)
+      typeof risk === "string" && ["low", "medium", "high", "critical"].includes(risk)
         ? { id: "context:risk", level: "ok", message: `Security risk: ${risk}` }
         : { id: "context:risk", level: "error", message: "security.risk_level is missing or invalid." },
     );

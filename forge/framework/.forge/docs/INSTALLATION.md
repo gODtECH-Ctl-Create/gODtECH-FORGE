@@ -32,6 +32,9 @@ forge init --dry-run
 forge doctor
 forge validate
 forge validate --strict
+forge context
+forge context set --key product.problem --value "Describe the problem"
+forge plan --task "Implement account authentication"
 forge --version
 ```
 
@@ -50,6 +53,21 @@ Commands support `--cwd <directory>` and `--json`. Initialization aborts before 
 7. reports every created, updated, unchanged, preserved, or conflicting file.
 
 It does not select the consuming application's stack, store credentials, or silently replace existing content.
+
+## Source repository layout
+
+The repository keeps its reusable implementation under one `forge/` directory:
+
+```text
+forge/
+├── src/          # CLI and orchestration code
+├── test/         # executable regression tests
+├── scripts/      # build and packaging helpers
+├── framework/    # assets installed into consuming projects
+└── internal/     # contributor planning material
+```
+
+Only package metadata, the project README and license, GitHub automation, and the agent-discovery entry point remain at the repository root. Installed projects receive the portable `.forge/` workspace and `AGENTS.md`; they do not receive FORGE's source, tests, or internal planning files.
 
 ## Planned commands
 

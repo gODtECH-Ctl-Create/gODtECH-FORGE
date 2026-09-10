@@ -2,7 +2,7 @@
 
 > Temporary contributor and architecture planning material for building gODtECH FORGE.
 
-This directory is intentionally **outside `.forge/`**.
+This directory is intentionally **outside the bundled `.forge/` workspace** but consolidated inside the source repository's `forge/` folder.
 
 It describes the intended end-state, implementation plan, module boundaries, roadmap, and contributor workflow used while FORGE is being engineered.
 
@@ -10,8 +10,8 @@ It describes the intended end-state, implementation plan, module boundaries, roa
 
 - This is development-source material, not part of the consumable FORGE runtime/template surface.
 - It may be removed, relocated, or condensed before FORGE is published as a polished public template.
-- The actual reusable framework lives under `.forge/`.
-- Changes to `.forge/` should be based on decisions recorded here while this planning area exists.
+- The actual reusable framework lives under `forge/framework/.forge/` and is installed as `.forge/`.
+- Changes to the bundled framework should be based on decisions recorded here while this planning area exists.
 
 ## Read in this order
 

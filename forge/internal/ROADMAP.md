@@ -30,11 +30,11 @@ This roadmap describes the intended build order. Contributors may pick work from
 - [x] Build a minimal TypeScript CLI shell
 - [x] Implement `forge init`, `doctor`, and `validate`
 - [ ] Build Rust core runtime
-- [ ] Implement task classification
-- [ ] Implement selective module activation
-- [ ] Implement context loading and writing
+- [x] Implement task classification
+- [x] Implement selective module activation
+- [x] Implement context loading and writing
 - [ ] Implement workflow execution model
-- [ ] Implement human-approval checkpoints
+- [x] Implement human-approval checkpoints
 
 ## Phase 3 · Intelligence
 
@@ -103,8 +103,8 @@ This roadmap describes the intended build order. Contributors may pick work from
 ## Phase 9 · Template productization
 
 - [ ] Automated repository-template release
-- [ ] Clean separation of framework vs project state
+- [x] Clean separation of framework vs project state
 - [ ] Documentation for adopters
 - [ ] Public contribution model
-- [ ] Remove or relocate internal planning material
+- [x] Remove or relocate internal planning material
 - [ ] Stable versioning and release process
