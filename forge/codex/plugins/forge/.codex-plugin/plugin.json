@@ -1,6 +1,6 @@
 {
   "name": "forge",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Credit-aware project preparation and governed engineering tools for AI coding.",
   "author": {
     "name": "gODtECH-Ctl-Create",
@@ -15,7 +15,7 @@
     "longDescription": "FORGE performs deterministic repository discovery, risk-aware planning, and context selection before an AI coding model begins expensive work.",
     "developerName": "gODtECH-Ctl-Create",
     "category": "Developer Tools",
-    "capabilities": ["Project context", "Planning", "AI preflight"],
+    "capabilities": ["Project context", "Planning", "AI preflight", "Efficiency metrics"],
     "defaultPrompt": [
       "Prepare this repository for my next coding task.",
       "Create a risk-aware plan for this change.",

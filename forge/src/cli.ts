@@ -4,9 +4,10 @@ import { showContext, updateContext } from "./context.js";
 import { doctorProject } from "./doctor.js";
 import { initProject } from "./init.js";
 import { startMcpServer } from "./mcp.js";
+import { summarizeEfficiencyMetrics } from "./metrics.js";
 import { createPlan } from "./planner.js";
 import { prepareWorkPacket } from "./preflight.js";
-import type { CommandReport, ContextReport, InitReport, OrchestrationPlan, WorkPacket, WorkflowRun } from "./types.js";
+import type { CommandReport, ContextReport, EfficiencyMetricsReport, InitReport, OrchestrationPlan, WorkPacket, WorkflowRun } from "./types.js";
 import { validateProject } from "./validate.js";
 import { VERSION } from "./version.js";
 import {
@@ -28,6 +29,7 @@ Usage:
   forge context set --key <field> --value <value> [--cwd <directory>] [--json]
   forge plan --task <description> [--cwd <directory>] [--json]
   forge prepare --task <description> [--cwd <directory>] [--json]
+  forge metrics [--cwd <directory>] [--json]
   forge mcp serve
   forge run start --task <description> [--cwd <directory>] [--json]
   forge run status [--id <run-id>] [--cwd <directory>] [--json]
@@ -43,6 +45,7 @@ Commands:
   context   Inspect or safely update allowlisted project-context fields.
   plan      Classify work and produce a risk-aware execution plan.
   prepare   Build or reuse a compact deterministic AI work packet.
+  metrics   Summarize local preparation efficiency without source or task text.
   run       Start, inspect, approve, and advance persistent workflow runs.
 `;
 
@@ -195,6 +198,17 @@ function printPacket(packet: WorkPacket): void {
   console.log(`Selected framework references: ${packet.frameworkReferences.length}`);
 }
 
+function printMetrics(report: EfficiencyMetricsReport): void {
+  console.log(`Prepare events: ${report.events}`);
+  console.log(`Cache hits: ${report.cacheHits} (${(report.cacheHitRate * 100).toFixed(1)}%)`);
+  console.log(`Average prepare duration: ${report.averagePrepareDurationMs} ms`);
+  console.log(`Context selected: ${report.context.charactersSelected}/${report.context.charactersConsidered} characters`);
+  console.log(`Estimated context tokens avoided: ${report.context.estimatedTokensAvoided} (${(report.context.reductionRate * 100).toFixed(1)}%)`);
+  console.log(`Deterministic steps completed: ${report.deterministicStepsCompleted}`);
+  for (const warning of report.warnings) console.log(`! ${warning}`);
+  console.log(report.disclaimer);
+}
+
 async function main(): Promise<number> {
   let args: Arguments;
   try {
@@ -229,6 +243,12 @@ async function main(): Promise<number> {
   if (args.command === "prepare") {
     const packet = await prepareWorkPacket(args.cwd, args.task ?? "");
     args.json ? console.log(JSON.stringify(packet, null, 2)) : printPacket(packet);
+    return 0;
+  }
+
+  if (args.command === "metrics") {
+    const report = await summarizeEfficiencyMetrics(args.cwd);
+    args.json ? console.log(JSON.stringify(report, null, 2)) : printMetrics(report);
     return 0;
   }
 

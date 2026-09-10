@@ -3,12 +3,13 @@ import { McpServer } from "@modelcontextprotocol/server";
 import { serveStdio } from "@modelcontextprotocol/server/stdio";
 import * as z from "zod/v4";
 import { showContext } from "./context.js";
+import { summarizeEfficiencyMetrics } from "./metrics.js";
 import { createPlan } from "./planner.js";
 import { prepareWorkPacket } from "./preflight.js";
 import { latestWorkflowRun, loadWorkflowRun } from "./workflow-run.js";
 import { VERSION } from "./version.js";
 
-export const MCP_TOOL_NAMES = ["forge_prepare", "forge_plan", "forge_context", "forge_run_status"] as const;
+export const MCP_TOOL_NAMES = ["forge_prepare", "forge_metrics", "forge_plan", "forge_context", "forge_run_status"] as const;
 export type ForgeMcpTool = (typeof MCP_TOOL_NAMES)[number];
 
 const cwdSchema = z.string().min(1).max(500).optional().describe("Absolute or current-working-directory-relative path to the target repository.");
@@ -28,7 +29,8 @@ export async function executeForgeTool(name: ForgeMcpTool, args: { cwd?: string;
   if (name === "forge_prepare") return prepareWorkPacket(cwd, args.task ?? "");
   if (name === "forge_plan") return createPlan(cwd, args.task ?? "");
   if (name === "forge_context") return showContext(cwd);
-  return args.id ? loadWorkflowRun(cwd, args.id) : latestWorkflowRun(cwd);
+  if (name === "forge_run_status") return args.id ? loadWorkflowRun(cwd, args.id) : latestWorkflowRun(cwd);
+  return summarizeEfficiencyMetrics(cwd);
 }
 
 export function createForgeMcpServer(): McpServer {
@@ -46,6 +48,17 @@ export function createForgeMcpServer(): McpServer {
       annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: true },
     },
     async (args) => result(await executeForgeTool("forge_prepare", args)),
+  );
+
+  server.registerTool(
+    "forge_metrics",
+    {
+      title: "Read AI-efficiency metrics",
+      description: "Summarize local packet reuse, preparation duration, deterministic work, and estimated context reduction without task text or source content.",
+      inputSchema: z.object({ cwd: cwdSchema }).strict(),
+      annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true },
+    },
+    async (args) => result(await executeForgeTool("forge_metrics", args)),
   );
 
   server.registerTool(

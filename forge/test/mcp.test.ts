@@ -8,7 +8,7 @@ import { initProject } from "../src/init.js";
 import { executeForgeTool, MCP_TOOL_NAMES } from "../src/mcp.js";
 
 test("MCP exposes a small bounded tool surface", () => {
-  assert.deepEqual(MCP_TOOL_NAMES, ["forge_prepare", "forge_plan", "forge_context", "forge_run_status"]);
+  assert.deepEqual(MCP_TOOL_NAMES, ["forge_prepare", "forge_metrics", "forge_plan", "forge_context", "forge_run_status"]);
 });
 
 test("MCP tools reuse the deterministic planner", async () => {

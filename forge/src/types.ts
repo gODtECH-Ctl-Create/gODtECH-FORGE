@@ -159,3 +159,44 @@ export interface WorkPacket {
   };
   warnings: string[];
 }
+
+export interface PrepareMetricEvent {
+  schemaVersion: 1;
+  event: "prepare";
+  recordedAt: string;
+  cacheHit: boolean;
+  taskKind: TaskKind;
+  risk: RiskLevel;
+  suggestedModelTier: "economy" | "standard" | "advanced";
+  durationMs: number;
+  candidateContextCharacters: number;
+  selectedContextCharacters: number;
+  filesScanned: number;
+  commandsDiscovered: number;
+  frameworkReferencesSelected: number;
+  deterministicStepsCompleted: number;
+}
+
+export interface EfficiencyMetricsReport {
+  command: "metrics";
+  events: number;
+  cacheHits: number;
+  cacheHitRate: number;
+  averagePrepareDurationMs: number;
+  context: {
+    charactersConsidered: number;
+    charactersSelected: number;
+    charactersAvoided: number;
+    reductionRate: number;
+    estimatedTokensConsidered: number;
+    estimatedTokensSelected: number;
+    estimatedTokensAvoided: number;
+  };
+  modelTiers: Record<string, number>;
+  taskKinds: Record<string, number>;
+  deterministicStepsCompleted: number;
+  malformedEvents: number;
+  warnings: string[];
+  privacy: string;
+  disclaimer: string;
+}

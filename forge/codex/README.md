@@ -10,7 +10,7 @@ codex plugin marketplace add ./forge/codex
 codex plugin add forge@personal
 ```
 
-Start a new Codex thread after installation. The plugin exposes `forge_prepare`, `forge_plan`, `forge_context`, and `forge_run_status`. It does not call a model, execute discovered project commands, modify application source, or approve workflow gates.
+Start a new Codex thread after installation. The plugin exposes `forge_prepare`, `forge_metrics`, `forge_plan`, `forge_context`, and `forge_run_status`. It does not call a model, execute discovered project commands, modify application source, or approve workflow gates.
 
 Any MCP-compatible client can use the same server without the Codex plugin:
 
