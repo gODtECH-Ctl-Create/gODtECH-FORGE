@@ -318,6 +318,24 @@ The framework should feel like **one coherent operating system**, even though it
 
 ---
 
+## 📦 Installation model
+
+FORGE currently works as a portable repository framework: early adopters can copy `.forge/` and `AGENTS.md`, while framework contributors can fork this repository.
+
+The planned recommended experience is an installable cross-platform CLI:
+
+```bash
+npm install --global @godtech/forge
+forge init
+forge doctor
+forge validate
+forge upgrade
+```
+
+The CLI will add FORGE to new or existing repositories, preserve project-owned context during upgrades, and keep the consuming project's application stack independent. Normal commands and generated project code use the neutral `forge` / `FORGE` identity; origin attribution is kept to the manifest and one appropriate developer-facing location. Repository-template and manual installation modes will remain supported. See [the installation and distribution contract](.forge/docs/INSTALLATION.md).
+
+---
+
 ## 📌 Design doctrine
 
 **Understand before building.** Do not confuse speed with skipping reasoning.

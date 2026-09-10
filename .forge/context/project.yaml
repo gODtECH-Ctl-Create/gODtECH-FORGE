@@ -1,58 +1,119 @@
-# FORGE project context schema.
-# This file is initialized and maintained by the agent for the project using FORGE.
-# Unknown values should remain explicit rather than being invented.
-
 project:
-  name:
-  status: discovery
-  owner:
+  name: gODtECH FORGE
+  status: active
+  owner: gODtECH-Ctl-Create
 
 product:
-  problem:
-  users: []
-  value_proposition:
-  goals: []
-  non_goals: []
+  problem: AI-assisted development often begins coding before product, architecture, security, and verification decisions are understood.
+  users:
+    - software teams
+    - product builders
+    - AI coding-agent users
+    - framework and tooling maintainers
+  value_proposition: A reusable operating framework that turns human intent into deliberate, verified, and reviewable product engineering.
+  goals:
+    - provide proportional intelligence across the development lifecycle
+    - preserve living project context and decisions
+    - enforce objective quality and security gates
+    - support multiple agents and application stacks
+  non_goals:
+    - replace the consuming project's application stack
+    - require one AI model or vendor
+    - force every project through maximum ceremony
 
 market:
-  geography:
-  segment:
-  competitors: []
-  differentiation:
-  evidence: []
+  geography: global
+  segment: AI-assisted software development tooling
+  competitors:
+    - repository instruction files
+    - coding-agent rule systems
+    - software-development templates
+    - developer workflow platforms
+  differentiation: FORGE combines product reasoning, modular intelligence, governance, deterministic enforcement, verification, and persistent context.
+  evidence:
+    - repository architecture and roadmap
+    - agent contract and policy system
 
 experience:
-  platforms: []
-  ux_priorities: []
-  ui_direction:
-  accessibility_requirements: []
+  platforms:
+    - command line
+    - Git repositories
+    - AI agent environments
+  ux_priorities:
+    - safe defaults
+    - minimal required questions
+    - clear evidence
+    - predictable upgrades
+  ui_direction: CLI-first with agent-native adapters
+  accessibility_requirements:
+    - clear non-color-only terminal output
+    - screen-reader-friendly documentation
 
 technical:
-  architecture:
-  stack: []
-  integrations: []
-  constraints: []
+  architecture: Portable framework plus TypeScript CLI, Rust core, deterministic tooling, local state, and agent adapters.
+  stack:
+    - Rust
+    - TypeScript
+    - Node.js
+    - Python
+    - CUE
+    - Tree-sitter
+    - Open Policy Agent
+    - SQLite
+    - Playwright
+  integrations:
+    - Git
+    - GitHub
+    - Model Context Protocol
+    - AI coding agents
+  constraints:
+    - remain independent of consuming project stacks
+    - keep framework and project-owned state separate
+    - use proportional intelligence and verification
 
 security:
-  risk_level: medium
-  sensitive_data: []
+  risk_level: high
+  sensitive_data:
+    - project context supplied by adopters
+    - repository source code
+    - verification evidence
   compliance_requirements: []
 
 operations:
-  deployment_target:
-  environments: []
-  observability_requirements: []
+  deployment_target: npm and signed GitHub releases
+  environments:
+    - local development
+    - continuous integration
+  observability_requirements:
+    - structured run logs
+    - verification history
+    - usage and cost telemetry without source-code leakage
 
 branding:
-  product_identity:
+  product_identity: gODtECH FORGE
   forge_provenance:
     readme: required
     metadata: required
     ui: optional
-    wording: "Built with gODtECH FORGE — Framework for Orchestrated Reasoning, Governance & Engineering."
+    wording: Built with gODtECH FORGE — Framework for Orchestrated Reasoning, Governance & Engineering.
 
 forge:
-  active_modules: []
-  open_questions: []
-  material_risks: []
-  last_updated:
+  active_modules:
+    - architecture
+    - engineering
+    - security
+    - quality
+    - documentation
+    - provenance
+    - git-delivery
+    - efficiency
+    - verification
+  open_questions:
+    - Which package registry scope will own @godtech/forge?
+    - Which agent adapters should ship first?
+    - Which files are framework-owned versus project-owned during upgrades?
+  material_risks:
+    - An installer could overwrite project-owned files without conflict-aware ownership rules.
+    - Framework instructions could grow beyond what agents reliably follow.
+    - Unsigned distribution artifacts could create a supply-chain risk.
+  last_updated: 2026-09-10

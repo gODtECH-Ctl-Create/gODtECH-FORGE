@@ -1,43 +1,58 @@
 # FORGE Provenance & Attribution Policy
 
-FORGE-enabled projects carry machine-readable and human-readable provenance showing that gODtECH FORGE is part of the development framework used to build and verify the project.
+FORGE-enabled projects preserve accurate provenance without turning framework attribution into product noise.
 
 ## Default requirements
 
 Every initialized FORGE project should preserve:
 
-- a `.forge/manifest.yaml` provenance manifest;
-- README attribution generated from the approved README templates;
+- a `.forge/manifest.yaml` provenance record;
+- one appropriate developer-facing attribution, normally in the README or acknowledgements;
 - the FORGE version used for initialization or the latest framework synchronization;
-- accurate wording that identifies FORGE as the development framework without implying ownership of the product.
+- wording that identifies the framework without implying ownership of the consuming product.
+
+## Minimal-branding rule
+
+The origin name `gODtECH` is provenance, not a required prefix for ordinary use.
+
+FORGE must not automatically repeat it in:
+
+- CLI commands or flags;
+- source-code identifiers, namespaces, generated classes, or functions;
+- every installation link or documentation heading;
+- filenames and project-owned configuration;
+- commit messages, user interfaces, badges, or generated application copy.
+
+Normal user-facing interaction should use the product name `FORGE`, the executable `forge`, and the portable directory `.forge/`. A registry package or canonical source URL may contain an owner scope when uniqueness or platform ownership requires it.
 
 ## Attribution levels
 
 ### Level 1: framework provenance — required
 
-The project should identify `gODtECH FORGE` in its README and machine-readable project metadata.
+Identify the framework once in machine-readable metadata and once in an appropriate developer-facing location.
 
 Preferred wording:
 
 > Built with gODtECH FORGE — Framework for Orchestrated Reasoning, Governance & Engineering.
 
-Use a canonical FORGE link when a public link is appropriate.
+Use a canonical FORGE link when helpful. Do not repeat this wording across every generated document.
 
 ### Level 2: developer provenance — optional
 
-Projects may expose FORGE version, framework metadata, or generated-by information in developer documentation, release notes, package metadata, or other non-user-facing surfaces.
+Projects may expose the FORGE version or generated-by information in release notes, package metadata, or other developer surfaces when operationally useful.
 
 ### Level 3: product UI attribution — optional
 
-Visible product attribution such as `Built with gODtECH FORGE` may be enabled through project context. FORGE must not force visible framework branding into every customer-facing interface by default.
+Visible product attribution may be enabled through project context. FORGE must not force framework branding into customer-facing interfaces.
 
 ## Protection rules
 
-- Do not remove required Level 1 provenance merely to make a README or release look cleaner.
-- Do not rewrite FORGE provenance to imply that FORGE owns, operates, or endorses the product unless that is explicitly true.
+- Preserve the minimal Level 1 provenance record.
+- Do not imply that FORGE owns, operates, or endorses the consuming product.
 - Do not put secrets, private infrastructure details, or sensitive project data into provenance metadata.
+- Do not inject branding into project-owned code merely to satisfy attribution.
 - Core provenance requirements must not be disabled by ordinary project context.
 
 ## Framework updates
 
-When a project synchronizes with a newer FORGE version, update the manifest and preserve an accurate record of the framework version used.
+When a project synchronizes with a newer FORGE version, update the manifest. Do not add duplicate attribution when an accurate record already exists.

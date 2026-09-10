@@ -16,18 +16,20 @@ This roadmap describes the intended build order. Contributors may pick work from
 
 ## Phase 1 · Contracts and schemas
 
-- [ ] Define stable module contract
-- [ ] Define workflow schema
-- [ ] Define project-context schema in CUE
-- [ ] Define decision/evidence schema
-- [ ] Define verification-result schema
-- [ ] Define provenance manifest schema
-- [ ] Define capability and risk taxonomy
+- [x] Define stable module contract
+- [x] Define workflow schema
+- [x] Define project-context schema in CUE
+- [x] Define decision/evidence schema
+- [x] Define verification-result schema
+- [x] Define provenance manifest schema
+- [x] Define capability and risk taxonomy
+- [x] Define installation and distribution model
 
 ## Phase 2 · Orchestrator core
 
+- [ ] Build a minimal TypeScript CLI shell
+- [ ] Implement `forge init`, `doctor`, and `validate`
 - [ ] Build Rust core runtime
-- [ ] Build TypeScript orchestration/CLI layer
 - [ ] Implement task classification
 - [ ] Implement selective module activation
 - [ ] Implement context loading and writing
@@ -57,7 +59,7 @@ This roadmap describes the intended build order. Contributors may pick work from
 - [ ] Dependency and manifest inspection
 - [ ] Git state and branch checks
 - [ ] Build/test command discovery
-- [ ] WebAssembly (WASM) execution boundary where justified
+- [ ] WebAssembly execution boundary where justified
 
 ## Phase 5 · Verification
 
@@ -100,8 +102,7 @@ This roadmap describes the intended build order. Contributors may pick work from
 
 ## Phase 9 · Template productization
 
-- [ ] Automated `forge init`
-- [ ] Repository-template initialization
+- [ ] Automated repository-template release
 - [ ] Clean separation of framework vs project state
 - [ ] Documentation for adopters
 - [ ] Public contribution model
