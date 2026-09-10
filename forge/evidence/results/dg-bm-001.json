@@ -1,0 +1,74 @@
+{
+  "benchmark_id": "DG-BM-001",
+  "status": "exploratory",
+  "repository": {
+    "name": "DeployGuard",
+    "url": "https://github.com/gODtECH-Ctl-Create/deployguard"
+  },
+  "base_commit": "638be04",
+  "task_area": "Incident CRUD",
+  "task_summary": "Add PostgreSQL-backed incident create, list, get, update and delete behavior.",
+  "controlled": false,
+  "runs": {
+    "control": {
+      "branch": "control",
+      "commit": null,
+      "unique_files_inspected": 7,
+      "inspected_files": [],
+      "files_edited": [],
+      "failed_commands": 1,
+      "implementation_retries": 1,
+      "human_interventions": 0,
+      "verification": [
+        { "command": "test suite", "outcome": "passed", "notes": "3/3 tests passed" },
+        { "command": "build", "outcome": "passed" },
+        { "command": "type-check", "outcome": "passed" }
+      ],
+      "forge_metrics": null,
+      "provider_billing": null
+    },
+    "forge_assisted": {
+      "branch": "forge-assisted",
+      "commit": null,
+      "unique_files_inspected": 5,
+      "inspected_files": [],
+      "files_edited": [],
+      "failed_commands": 0,
+      "implementation_retries": 0,
+      "human_interventions": 0,
+      "verification": [
+        { "command": "test suite", "outcome": "passed", "notes": "3/3 tests passed" },
+        { "command": "build", "outcome": "passed" },
+        { "command": "type-check", "outcome": "passed" }
+      ],
+      "forge_metrics": {
+        "prepare_events": 3,
+        "cache_hits": 0,
+        "average_prepare_ms": 263,
+        "selected_context_characters": 695,
+        "considered_context_characters": 2748,
+        "estimated_context_tokens_avoided": 514,
+        "estimated_context_reduction_percent": 74.7,
+        "deterministic_steps_completed": 15,
+        "task_kind": "bug",
+        "risk": "standard"
+      },
+      "provider_billing": null
+    }
+  },
+  "comparisons": {
+    "unique_files_inspected_reduction_percent": 28.6,
+    "estimated_context_reduction_percent": 74.7,
+    "provider_credit_savings": null
+  },
+  "limitations": [
+    "The control and FORGE-assisted runs did not start from exactly the same commit.",
+    "The control AI could inspect FORGE-generated files.",
+    "Docker/runtime verification scope differed between runs.",
+    "Provider token, credit and exact tool-call telemetry were unavailable."
+  ],
+  "claim_boundaries": [
+    "DG-BM-001 is a pilot, not a controlled benchmark.",
+    "74.7% is FORGE's internal context-selection estimate, not a provider-token or credit-savings claim."
+  ]
+}

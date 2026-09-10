@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/blob/main/forge/evidence/result.schema.json",
+  "title": "FORGE benchmark result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "benchmark_id",
+    "status",
+    "repository",
+    "base_commit",
+    "task_area",
+    "task_summary",
+    "controlled",
+    "runs",
+    "limitations",
+    "claim_boundaries"
+  ],
+  "properties": {
+    "benchmark_id": { "type": "string", "pattern": "^[A-Z]+-BM-[0-9]{3}$" },
+    "status": { "type": "string", "enum": ["planned", "running", "complete", "failed", "exploratory"] },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "url"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" }
+      }
+    },
+    "base_commit": { "type": "string", "pattern": "^[0-9a-f]{7,40}$" },
+    "task_area": { "type": "string", "minLength": 1 },
+    "task_summary": { "type": "string", "minLength": 1 },
+    "controlled": { "type": "boolean" },
+    "runs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["control", "forge_assisted"],
+      "properties": {
+        "control": { "$ref": "#/$defs/run" },
+        "forge_assisted": { "$ref": "#/$defs/run" }
+      }
+    },
+    "comparisons": {
+      "type": "object",
+      "additionalProperties": {
+        "type": ["number", "string", "null"]
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "claim_boundaries": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "branch",
+        "commit",
+        "unique_files_inspected",
+        "files_edited",
+        "failed_commands",
+        "implementation_retries",
+        "verification"
+      ],
+      "properties": {
+        "branch": { "type": "string", "minLength": 1 },
+        "commit": { "type": ["string", "null"], "pattern": "^[0-9a-f]{7,40}$" },
+        "unique_files_inspected": { "type": "integer", "minimum": 0 },
+        "inspected_files": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "files_edited": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "failed_commands": { "type": "integer", "minimum": 0 },
+        "implementation_retries": { "type": "integer", "minimum": 0 },
+        "human_interventions": { "type": "integer", "minimum": 0, "default": 0 },
+        "verification": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["command", "outcome"],
+            "properties": {
+              "command": { "type": "string", "minLength": 1 },
+              "outcome": { "type": "string", "enum": ["passed", "failed", "not_run"] },
+              "notes": { "type": "string" }
+            }
+          }
+        },
+        "forge_metrics": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "properties": {
+            "prepare_events": { "type": "integer", "minimum": 0 },
+            "cache_hits": { "type": "integer", "minimum": 0 },
+            "average_prepare_ms": { "type": "number", "minimum": 0 },
+            "selected_context_characters": { "type": "integer", "minimum": 0 },
+            "considered_context_characters": { "type": "integer", "minimum": 0 },
+            "estimated_context_tokens_avoided": { "type": "integer", "minimum": 0 },
+            "estimated_context_reduction_percent": { "type": "number", "minimum": 0, "maximum": 100 },
+            "deterministic_steps_completed": { "type": "integer", "minimum": 0 },
+            "task_kind": { "type": "string" },
+            "risk": { "type": "string" }
+          }
+        },
+        "provider_billing": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "properties": {
+            "input_tokens": { "type": ["integer", "null"], "minimum": 0 },
+            "output_tokens": { "type": ["integer", "null"], "minimum": 0 },
+            "credits": { "type": ["number", "null"], "minimum": 0 },
+            "source": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}
