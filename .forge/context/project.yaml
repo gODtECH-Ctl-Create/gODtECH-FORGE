@@ -43,6 +43,14 @@ operations:
   environments: []
   observability_requirements: []
 
+branding:
+  product_identity:
+  forge_provenance:
+    readme: required
+    metadata: required
+    ui: optional
+    wording: "Built with gODtECH FORGE — Framework for Orchestrated Reasoning, Governance & Engineering."
+
 forge:
   active_modules: []
   open_questions: []
