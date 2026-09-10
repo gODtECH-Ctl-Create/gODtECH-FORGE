@@ -1,54 +1,68 @@
 # FORGE installation and distribution
 
-FORGE is currently a portable repository framework, not yet an installable executable. Today it can be copied into or forked with a project. The target product is an installable CLI that manages the framework safely.
+FORGE now has a source-installable TypeScript CLI. It is not yet published to a public package registry, so registry installation commands remain release targets rather than current claims.
+
+## Current source installation
+
+```bash
+git clone https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE.git
+cd gODtECH-FORGE
+npm ci
+npm run build
+npm link
+forge --help
+```
+
+Users interact with the neutral `forge` command. The repository URL and an eventual registry scope may carry the owner name where provenance or registry ownership requires it.
 
 ## Supported adoption modes
 
 | Mode | Intended user | Status | Trade-off |
 | --- | --- | --- | --- |
-| CLI: `forge init` | Existing or new repositories | Planned; recommended target | Safe merging, validation, version tracking, and upgrades |
+| CLI: `forge init` | Existing or new repositories | Implemented from source | Safe initialization, validation, diagnostics, and version tracking |
 | Repository template | New projects | Usable after template hardening | Fast start, but weaker upgrade behavior |
 | Fork FORGE itself | FORGE contributors | Usable now | Appropriate for framework development, not ordinary product adoption |
 | Manual copy of `.forge/` + `AGENTS.md` | Early adopters | Usable now | No automated conflict handling or upgrades |
 
-## Target commands
+## Current commands
 
 ```bash
-npm install --global @godtech/forge
 forge init
+forge init --dry-run
 forge doctor
 forge validate
-forge upgrade
-forge eject
+forge validate --strict
+forge --version
 ```
 
-The registry package identifier may include an owner scope where the registry requires uniqueness. Everyday commands, generated code, filenames, and project configuration use the neutral `forge` / `FORGE` identity.
-
-The TypeScript package provides the cross-platform CLI. A later Rust core provides high-confidence analysis and local execution behind the same interface. Users should not need to install Rust.
+Commands support `--cwd <directory>` and `--json`. Initialization aborts before writing when a framework-owned file conflicts, unless the user explicitly supplies `--force`. Project-owned context, state, and manifest files are preserved during repeated initialization.
 
 ## Installation boundary
 
-`forge init` will:
+`forge init`:
 
-1. inspect the repository before writing;
-2. ask only when a conflict or material choice cannot be inferred;
-3. install the portable `.forge/` framework and agent discovery files;
-4. create `.forge/manifest.yaml` with the installed version and ownership metadata;
-5. initialize project context without overwriting verified product information;
-6. generate or update product documentation using the selected template;
-7. validate the result and report every changed file.
+1. inspects the target before writing;
+2. packages the portable framework and agent-discovery file;
+3. creates a provenance manifest;
+4. initializes project context and state;
+5. preserves existing project-owned records;
+6. supports a no-write dry run;
+7. reports every created, updated, unchanged, preserved, or conflicting file.
 
-It must not select the consuming application's stack, overwrite unrelated files, store credentials, or silently replace project-owned content.
+It does not select the consuming application's stack, store credentials, or silently replace existing content.
 
-## Ownership and upgrades
+## Planned commands
 
-Framework-owned files are updated from a versioned release. Project-owned context, decisions, state, evidence, and local extensions are preserved. Files with mixed ownership require a three-way merge or human decision.
-
-`forge eject` removes framework-owned runtime material only after showing a dry-run. Product code and project-owned records remain untouched.
+```bash
+forge upgrade
+forge eject
+forge mcp serve
+forge plugin install <provider>
+```
 
 ## Packaging direction
 
-- Confirm the available npm package identifier; an owner scope may be used for registry ownership without becoming a code or command prefix.
+- Confirm the available npm package identifier before public publishing.
 - Publish versioned release archives and checksums on GitHub.
 - Keep the portable framework usable without the CLI.
 - Add Homebrew, Scoop, and standalone binaries only after the CLI contract stabilizes.
