@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="FORGE is a credit-aware control layer for deliberate, governed AI-assisted software development." />
+  <meta name="theme-color" content="#08090d" />
+  <title>FORGE — Governed AI Engineering</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="nav-shell">
+    <nav class="nav container" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="FORGE home"><span class="brand-mark">FG</span><span>FORGE</span></a>
+      <div class="nav-links">
+        <a href="#why">Why FORGE</a>
+        <a href="#install">Install</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#evidence">Evidence</a>
+        <a href="https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE" rel="noreferrer">GitHub</a>
+      </div>
+      <a class="button button-small" href="#install">Install v0.6.0</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section id="top" class="hero container">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> Open source · Apache-2.0 · v0.6.0</div>
+        <h1>Give AI less to rediscover.<br /><span>Give engineering more evidence.</span></h1>
+        <p class="hero-lede">FORGE is a credit-aware control layer for deliberate, governed AI-assisted software development. It prepares repository facts locally, bounds context, classifies risk, plans work, preserves approvals, and records verification evidence before the model spends deeper reasoning.</p>
+        <div class="hero-actions">
+          <a class="button" href="#install">Install FORGE</a>
+          <a class="button button-secondary" href="https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/tag/v0.6.0" rel="noreferrer">View release</a>
+        </div>
+        <div class="signal-row" aria-label="Release facts">
+          <span><strong>36/36</strong> release tests</span>
+          <span><strong>SHA-256</strong> verified assets</span>
+          <span><strong>Sigstore</strong> provenance</span>
+          <span><strong>Node 20+</strong></span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="https://raw.githubusercontent.com/gODtECH-Ctl-Create/gODtECH-FORGE/main/forge/assets/readme/forge-hero.svg" alt="FORGE terminal-style overview: prepare context, govern execution, verify with evidence" />
+      </div>
+    </section>
+
+    <section id="why" class="section container">
+      <div class="section-heading">
+        <span class="kicker">WHY FORGE</span>
+        <h2>Models should reason about the change — not repeatedly reconstruct the repository.</h2>
+        <p>FORGE moves deterministic preparation out of the model loop. The coding agent still writes and reasons; FORGE gives it a cleaner operating boundary.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card"><span class="feature-index">01</span><h3>Bounded context</h3><p>Inspect repository facts and select only relevant context instead of feeding the entire project into every task.</p></article>
+        <article class="feature-card"><span class="feature-index">02</span><h3>Risk-aware planning</h3><p>Classify work, activate proportional engineering capabilities, and surface approval points for sensitive changes.</p></article>
+        <article class="feature-card"><span class="feature-index">03</span><h3>Reusable work packets</h3><p>Cache deterministic preparation so repeated work can avoid unnecessary repository rediscovery when context has not changed.</p></article>
+        <article class="feature-card"><span class="feature-index">04</span><h3>Evidence, not vibes</h3><p>Track run state, validation, verification and privacy-preserving efficiency telemetry instead of treating a chat transcript as the only execution record.</p></article>
+      </div>
+    </section>
+
+    <section id="install" class="section install-section">
+      <div class="container">
+        <div class="section-heading split-heading">
+          <div><span class="kicker">INSTALL</span><h2>From release to <code>forge --version</code>.</h2></div>
+          <p>The v0.6.0 GitHub release ships checksum-verifying installers for Linux/macOS and Windows PowerShell. npm registry publication is separate and is not claimed here.</p>
+        </div>
+
+        <div class="install-layout">
+          <div class="install-guide card">
+            <div class="tabs" role="tablist" aria-label="Installation platform">
+              <button class="tab active" data-tab="unix" role="tab" aria-selected="true">Linux / macOS</button>
+              <button class="tab" data-tab="windows" role="tab" aria-selected="false">Windows PowerShell</button>
+            </div>
+
+            <div class="tab-panel active" id="unix" role="tabpanel">
+              <p class="step-label">1 · Download, verify and install</p>
+              <div class="codebox"><button class="copy" data-copy="curl -fsSLO https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/download/v0.6.0/install.sh\nsh install.sh 0.6.0\nforge --version">Copy</button><pre><code>curl -fsSLO https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/download/v0.6.0/install.sh
+sh install.sh 0.6.0
+forge --version</code></pre></div>
+              <p class="step-label">2 · Initialize inside your project</p>
+              <div class="codebox"><button class="copy" data-copy="forge init --dry-run\nforge init\nforge doctor\nforge validate">Copy</button><pre><code>forge init --dry-run
+forge init
+forge doctor
+forge validate</code></pre></div>
+            </div>
+
+            <div class="tab-panel" id="windows" role="tabpanel" hidden>
+              <p class="step-label">1 · Download and install</p>
+              <div class="codebox"><button class="copy" data-copy="Invoke-WebRequest https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/download/v0.6.0/install.ps1 -OutFile install.ps1\n.\\install.ps1 -Version 0.6.0\nforge --version">Copy</button><pre><code>Invoke-WebRequest https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/download/v0.6.0/install.ps1 -OutFile install.ps1
+.\install.ps1 -Version 0.6.0
+forge --version</code></pre></div>
+              <div class="notice"><strong>PowerShell execution policy?</strong><p>Use a process-scoped bypass only for the canonical release installer. It disappears when that PowerShell process closes.</p><div class="codebox compact"><button class="copy" data-copy="Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass\n.\\install.ps1 -Version 0.6.0">Copy</button><pre><code>Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\install.ps1 -Version 0.6.0</code></pre></div></div>
+              <p class="step-label">2 · Initialize inside your project</p>
+              <div class="codebox"><button class="copy" data-copy="forge init --dry-run\nforge init\nforge doctor\nforge validate">Copy</button><pre><code>forge init --dry-run
+forge init
+forge doctor
+forge validate</code></pre></div>
+            </div>
+          </div>
+
+          <aside class="release-card card">
+            <span class="status-pill">VERIFIED RELEASE</span>
+            <h3>v0.6.0</h3>
+            <p>Phase I: Governed AI Engineering Foundation</p>
+            <dl>
+              <div><dt>Distribution</dt><dd>GitHub Release</dd></div>
+              <div><dt>Integrity</dt><dd>SHA-256</dd></div>
+              <div><dt>Provenance</dt><dd>GitHub / Sigstore</dd></div>
+              <div><dt>License</dt><dd>Apache-2.0</dd></div>
+            </dl>
+            <a class="text-link" href="https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/tag/v0.6.0" rel="noreferrer">Open release →</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" aria-labelledby="terminal-heading">
+      <div class="section-heading"><span class="kicker">REAL INSTALL VALIDATION</span><h2 id="terminal-heading">The install path was tested outside the FORGE repository.</h2><p>Condensed terminal captures from the first real Windows and Codespaces/Linux installations. These are session excerpts, styled as terminal windows — not stock images.</p></div>
+      <div class="terminal-grid">
+        <figure class="terminal">
+          <figcaption><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="terminal-title">Windows PowerShell · verified</span></figcaption>
+          <pre><code><span class="prompt">PS C:\Users\User&gt;</span> Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+<span class="prompt">PS C:\Users\User&gt;</span> .\install.ps1 -Version 0.6.0
+Downloading FORGE 0.6.0...
+<span class="ok">Checksum verified.</span> Installing FORGE 0.6.0...
+
+added 5 packages in 18s
+<span class="ok">FORGE 0.6.0 installed successfully.</span>
+<span class="prompt">PS C:\Users\User&gt;</span> forge --version
+<span class="accent">0.6.0</span>
+<span class="prompt">PS C:\Users\User&gt;</span> node --version
+v24.18.0</code></pre>
+        </figure>
+        <figure class="terminal">
+          <figcaption><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span class="terminal-title">GitHub Codespaces · verified</span></figcaption>
+          <pre><code><span class="prompt">$</span> curl -fsSLO .../v0.6.0/install.sh
+<span class="prompt">$</span> sh install.sh 0.6.0
+Downloading FORGE 0.6.0...
+<span class="ok">Checksum verified.</span> Installing FORGE 0.6.0...
+
+added 5 packages in 2s
+<span class="ok">FORGE 0.6.0 installed successfully.</span>
+<span class="prompt">$</span> forge --version
+<span class="accent">0.6.0</span>
+<span class="prompt">$</span> forge doctor
+<span class="ok">✓ Node.js 24.20.0 is supported.</span>
+<span class="ok">✓ Git repository detected.</span></code></pre>
+        </figure>
+      </div>
+    </section>
+
+    <section id="workflow" class="section workflow-section">
+      <div class="container">
+        <div class="section-heading"><span class="kicker">OPERATING MODEL</span><h2>Intent → context → reasoning → evidence → ship.</h2></div>
+        <div class="workflow">
+          <div class="workflow-step"><span>01</span><h3>Prepare</h3><code>forge prepare --task "..."</code><p>Repository facts, bounded context, risk, discovered commands and remaining model work.</p></div>
+          <div class="workflow-step"><span>02</span><h3>Plan</h3><code>forge plan --task "..."</code><p>Proportional capabilities, approvals, workflow and ordered engineering steps.</p></div>
+          <div class="workflow-step"><span>03</span><h3>Run</h3><code>forge run start --task "..."</code><p>Persist resumable execution state instead of losing the workflow inside one conversation.</p></div>
+          <div class="workflow-step"><span>04</span><h3>Measure</h3><code>forge metrics</code><p>Local preparation telemetry: cache reuse, latency, deterministic work and context-reduction estimates.</p></div>
+        </div>
+        <div class="mcp-callout card">
+          <div><span class="kicker">AI CLIENT INTEGRATION</span><h3>Provider-neutral over MCP.</h3><p>FORGE exposes deterministic preparation and run state through a local stdio MCP server. The AI coding client remains responsible for model execution.</p></div>
+          <div class="codebox"><button class="copy" data-copy="forge mcp serve">Copy</button><pre><code>forge mcp serve</code></pre></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="evidence" class="section container evidence-section">
+      <div class="section-heading split-heading">
+        <div><span class="kicker">EVIDENCE LAB</span><h2>We test the claim before we market the claim.</h2></div>
+        <p>FORGE telemetry is deliberately separated from provider billing. The first DeployGuard experiment is published as a pilot with its limitations visible.</p>
+      </div>
+
+      <article class="benchmark card">
+        <div class="benchmark-head">
+          <div><span class="status-pill pilot">PILOT · DG-BM-001</span><h3>DeployGuard incident CRUD</h3><p>Plain AI control vs FORGE-assisted implementation of PostgreSQL-backed incident management.</p></div>
+          <a class="button button-secondary" href="benchmarks/deployguard-001.html">Read benchmark</a>
+        </div>
+        <div class="metric-grid">
+          <div class="metric"><strong>28.6%</strong><span>fewer unique files inspected</span><small>7 → 5</small></div>
+          <div class="metric"><strong>0</strong><span>FORGE implementation retries</span><small>control: several</small></div>
+          <div class="metric"><strong>3/3</strong><span>tests passed</span><small>both runs</small></div>
+          <div class="metric estimated"><strong>74.7%</strong><span>estimated context reduction</span><small>FORGE internal metric</small></div>
+        </div>
+        <div class="evidence-note"><strong>What this does not prove:</strong> DG-BM-001 was a pilot, not a clean controlled trial. Starting commits differed, the control could read FORGE-generated project files, Docker verification was not equal, and provider token/cost data was unavailable. The 74.7% figure is a FORGE context-selection estimate — not a claim of 74.7% credit savings.</div>
+      </article>
+    </section>
+
+    <section class="section container">
+      <div class="section-heading"><span class="kicker">SAFETY BOUNDARIES</span><h2>More capable does not mean less controlled.</h2></div>
+      <div class="boundary-grid">
+        <div>Secret-like paths excluded from generated work packets.</div>
+        <div>Higher-risk work can require explicit human checkpoints.</div>
+        <div>Discovered commands are reported, not silently executed.</div>
+        <div>Application technology choices remain with the consuming project.</div>
+        <div>Completion should be backed by repository evidence.</div>
+        <div>Metrics avoid task text, source code and repository identity.</div>
+      </div>
+    </section>
+
+    <section class="section cta-section">
+      <div class="container cta card">
+        <div><span class="kicker">START WITH YOUR REPOSITORY</span><h2>Prepare locally. Reason proportionally. Ship with evidence.</h2></div>
+        <div class="hero-actions"><a class="button" href="#install">Install v0.6.0</a><a class="button button-secondary" href="https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE" rel="noreferrer">Explore GitHub</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row"><div><strong>FORGE</strong><p>Framework for Orchestrated Reasoning, Governance &amp; Engineering.</p></div><div><a href="https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/blob/main/LICENSE">Apache-2.0</a><a href="https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/tag/v0.6.0">Release v0.6.0</a><a href="#evidence">Evidence Lab</a></div></div>
+  </footer>
+</body>
+</html>
