@@ -3,6 +3,7 @@ import path from "node:path";
 import { showContext, updateContext } from "./context.js";
 import { doctorProject } from "./doctor.js";
 import { initProject } from "./init.js";
+import { startMcpServer } from "./mcp.js";
 import { createPlan } from "./planner.js";
 import { prepareWorkPacket } from "./preflight.js";
 import type { CommandReport, ContextReport, InitReport, OrchestrationPlan, WorkPacket, WorkflowRun } from "./types.js";
@@ -27,6 +28,7 @@ Usage:
   forge context set --key <field> --value <value> [--cwd <directory>] [--json]
   forge plan --task <description> [--cwd <directory>] [--json]
   forge prepare --task <description> [--cwd <directory>] [--json]
+  forge mcp serve
   forge run start --task <description> [--cwd <directory>] [--json]
   forge run status [--id <run-id>] [--cwd <directory>] [--json]
   forge run approve --id <run-id> --checkpoint <checkpoint-id> --by <identity> [--cwd <directory>] [--json]
@@ -83,7 +85,7 @@ function parse(argv: string[]): Arguments {
   for (let index = 0; index < argv.length; index += 1) {
     const value = argv[index]!;
     if (!value.startsWith("-") && !parsed.command) parsed.command = value;
-    else if (!value.startsWith("-") && ["context", "run"].includes(parsed.command ?? "") && !parsed.subcommand) parsed.subcommand = value;
+    else if (!value.startsWith("-") && ["context", "mcp", "run"].includes(parsed.command ?? "") && !parsed.subcommand) parsed.subcommand = value;
     else if (value === "--cwd") {
       parsed.cwd = path.resolve(requiredValue(argv, index, value));
       index += 1;
@@ -227,6 +229,12 @@ async function main(): Promise<number> {
   if (args.command === "prepare") {
     const packet = await prepareWorkPacket(args.cwd, args.task ?? "");
     args.json ? console.log(JSON.stringify(packet, null, 2)) : printPacket(packet);
+    return 0;
+  }
+
+  if (args.command === "mcp") {
+    if (args.subcommand !== "serve") throw new Error("mcp requires: serve.");
+    await startMcpServer();
     return 0;
   }
 
