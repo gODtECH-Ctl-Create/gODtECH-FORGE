@@ -1,0 +1,52 @@
+name: Validate FORGE schemas
+
+on:
+  pull_request:
+    paths:
+      - ".forge/schemas/**"
+      - ".forge/context/project.yaml"
+      - ".github/workflows/schemas.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - ".forge/schemas/**"
+      - ".forge/context/project.yaml"
+      - ".github/workflows/schemas.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  cue:
+    name: CUE contracts and fixtures
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7.0.1
+
+      - name: Install CUE
+        uses: cue-lang/setup-cue@v1.0.1
+        with:
+          version: v0.17.1
+
+      - name: Compile schema package
+        run: cue vet .forge/schemas
+
+      - name: Validate project context
+        run: cue vet -d '#ProjectContext' .forge/schemas .forge/context/project.yaml
+
+      - name: Validate known-good fixtures
+        run: |
+          cue vet -d '#ModuleDocument' .forge/schemas .forge/schemas/examples/valid/module.yaml
+          cue vet -d '#WorkflowDocument' .forge/schemas .forge/schemas/examples/valid/workflow.yaml
+          cue vet -d '#DecisionRecord' .forge/schemas .forge/schemas/examples/valid/decision.yaml
+          cue vet -d '#VerificationDocument' .forge/schemas .forge/schemas/examples/valid/verification.yaml
+
+      - name: Reject known-invalid fixture
+        run: |
+          if cue vet -d '#ModuleDocument' .forge/schemas .forge/schemas/examples/invalid/module.yaml; then
+            echo "Invalid fixture unexpectedly passed validation."
+            exit 1
+          fi
+          echo "Invalid fixture was rejected as expected."
