@@ -2,80 +2,76 @@
 
 **A universal operating framework for intelligent AI-assisted product development.**
 
-FORGE is designed to sit between human product intent and AI execution. It gives AI coding agents a structured way to reason about a product before, during, and after implementation.
+FORGE is a reusable repository template for building software products with AI. It sits between human intent and AI execution, giving an agent a structured way to reason about what should be built, how it should be designed and engineered, how it should be secured, and how the result should be verified.
 
-FORGE is not a product template in the sense of a fixed application stack. It is a reusable development intelligence layer that can be applied to many kinds of software projects.
+FORGE is not a fixed application stack and it is not one giant prompt. Its capabilities are modular, project context is generated and maintained as the work evolves, and objective checks are separated from instructions.
 
-## Core lifecycle
+## The model
 
 ```text
-IDEA
-  ↓
-DISCOVER
-  ↓
-RESEARCH
-  ↓
-DEFINE
-  ↓
-ARCHITECT
-  ↓
-DESIGN
-  ↓
-BUILD
-  ↓
-SECURE
-  ↓
-TEST
-  ↓
-VERIFY
-  ↓
-DEPLOY
-  ↓
-IMPROVE
+Human intent
+    ↓
+FORGE context + orchestration
+    ↓
+Product / Market / Research
+    ↓
+Architecture / Design
+    ↓
+Engineering / Security
+    ↓
+Build / Test / Verify
+    ↓
+Deploy / Improve
 ```
 
-## Intelligence domains
+## Root structure
 
-- Product and market thinking
-- Research and evidence gathering
-- System architecture
-- User experience (UX) and User Interface (UI) design
-- Software engineering
-- Security hardening
-- Quality assurance and verification
-- Deployment and operations
+```text
+README.md                 human entry point
+AGENTS.md                 agent entry point
+.github/                  tool-specific discovery/instructions
+.forge/                   the FORGE system
+```
 
-These domains are modular. A project should activate the intelligence relevant to the task instead of loading one enormous instruction set into an AI agent.
+Everything that belongs to the framework or its project-specific operating state lives under `.forge/`.
 
-## Design principles
-
-1. **Understand before building.** Missing context should be discovered before implementation.
-2. **Reason before defaulting.** Technology, architecture, and design decisions must have a reason.
-3. **Build the right thing, not everything.** Scope should be challenged and unnecessary work should be removed.
-4. **Prefer root-cause fixes.** Do not paper over architectural or implementation problems.
-5. **Separate instruction from enforcement.** AI guidance belongs in the framework; objective checks belong in automation.
-6. **Keep project context living.** Product, architecture, design, decisions, and state evolve with the project.
-7. **Ship only after verification.** A successful edit is not the same thing as a verified product.
-
-## Repository structure
+## Inside `.forge/`
 
 ```text
 core/          orchestration and shared mechanisms
 intelligence/  modular reasoning domains
 workflows/     lifecycle procedures and exit conditions
-policies/      cross-cutting rules and guardrails
-forge/         project-specific context and state
-verification/  automated and human quality gates
-adapters/      integrations for different AI environments
-templates/     files generated or copied into a project
-
-docs/          FORGE architecture and design documentation
+policies/      non-negotiable framework guardrails
+verification/  objective and human quality gates
+adapters/      AI-environment integration guidance
+templates/     project artifacts FORGE can generate
+context/       living project-specific context
+decisions/     consequential project decisions
+state.md       current project state
+docs/          FORGE system documentation
 ```
+
+## Core lifecycle
+
+IDEA → DISCOVER → RESEARCH → DEFINE → ARCHITECT → DESIGN → BUILD → SECURE → TEST → VERIFY → DEPLOY → IMPROVE
+
+## Design principles
+
+- Understand before building.
+- Reason before defaulting.
+- Build the right thing, not everything.
+- Prefer root-cause fixes.
+- Keep intelligence modular.
+- Separate instructions from enforcement.
+- Keep project context living.
+- Never weaken core guardrails to bypass a check.
+- Verify the product, not just the code.
+- Use deeper controls when risk or complexity justifies them.
 
 ## Status
 
-FORGE is currently in foundation design. The repository is intentionally being built in layers so the core model is stable before the individual intelligence modules become extensive.
+FORGE is in foundation development. The structure is intentionally being stabilized before the intelligence modules become extensive.
 
-## Philosophy
+## Goal
 
-FORGE should make good development practice easier for an AI agent to follow, not replace engineering judgment. The framework should remain modular, inspectable, evidence-based, and practical.
+A user should be able to start from FORGE, describe the product they want to build, and let an AI agent progressively establish the required context, activate the relevant intelligence, create the necessary project artifacts, build the product, verify it, and keep the project context current without requiring the user to manually configure a large collection of framework files.
