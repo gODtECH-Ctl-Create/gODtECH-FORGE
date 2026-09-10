@@ -1,6 +1,6 @@
 # FORGE Internal Contribution Guide
 
-This guide applies while `FORGE-INTERNAL/` exists. It is intentionally separate from the eventual public adoption guide.
+This guide applies while `forge/internal/` exists. It is intentionally separate from the eventual public adoption guide.
 
 ## Before starting
 
@@ -59,4 +59,4 @@ A contribution is ready when:
 
 ## Internal planning material
 
-`FORGE-INTERNAL/` is temporary by design. Before public template release, maintainers should review every file here and decide whether it should be deleted, condensed into public documentation, or moved into the framework.
+`forge/internal/` is temporary by design. Before public template release, maintainers should review every file here and decide whether it should be deleted or condensed into public documentation.

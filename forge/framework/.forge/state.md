@@ -3,7 +3,7 @@
 > This file is maintained by the AI agent using FORGE.
 
 ## Current stage
-Orchestrator core — CLI minimum viable product
+Orchestrator core — deterministic planning
 
 ## Completed
 - FORGE repository foundation, agent contract, policies, and README system established.
@@ -14,12 +14,14 @@ Orchestrator core — CLI minimum viable product
 - `forge init`, `forge doctor`, and `forge validate` implemented.
 - Dry-run, JSON output, strict validation, conflict detection, and project-owned context preservation implemented.
 - Cross-platform Node.js test matrix and installed-project CUE smoke test added.
+- Repository implementation, tests, scripts, framework assets, and internal planning consolidated under `forge/`.
+- `forge context` inspection and safe scalar updates implemented.
+- `forge plan` task classification, risk escalation, selective capability activation, workflow selection, and human-approval checkpoints implemented.
 
 ## In progress
-- Review and merge the CLI minimum viable product.
+- Review and merge the deterministic orchestration planner.
 - Confirm the public package identifier and registry ownership.
-- Design task classification and selective module activation.
-- Resolve protection of internal planning material.
+- Design the executable workflow runner and approval-resume state.
 
 ## Open questions
 - Which agent environments receive native adapters first?
@@ -32,4 +34,4 @@ Orchestrator core — CLI minimum viable product
 - Do not let framework instructions become so large that agents ignore important rules.
 - Do not ship unsigned or unverifiable installation artifacts.
 - Do not claim registry availability before a package is actually published.
-- Do not treat existing public internal documents as confidential without resolving Git history.
+- Keep framework source and contributor material out of consuming-project installations.

@@ -14,9 +14,9 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "tsc && node scripts/copy-framework.mjs",
+    "build": "tsc && node forge/scripts/copy-framework.mjs",
     "check": "tsc --noEmit",
-    "test": "npm run build && node scripts/run-tests.mjs",
+    "test": "npm run build && node forge/scripts/run-tests.mjs",
     "prepack": "npm run build"
   },
   "keywords": [

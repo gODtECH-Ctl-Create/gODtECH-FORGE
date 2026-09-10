@@ -2,7 +2,7 @@
 
 This repository follows gODtECH FORGE.
 
-Before implementing a change, inspect the relevant FORGE documentation, workflow, intelligence module, project context, and existing repository conventions.
+Before implementing a change, inspect the relevant FORGE documentation, workflow, intelligence module, project context, and existing repository conventions. In this source repository those assets are consolidated under `forge/framework/.forge/`; installed projects expose the same assets at `.forge/`.
 
 Do not invent project facts or silently weaken FORGE policies. Prefer evidence, explicit decisions, simple robust solutions, root-cause fixes, and objective verification.
 
