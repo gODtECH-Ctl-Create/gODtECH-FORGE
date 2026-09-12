@@ -27,7 +27,7 @@ FORGE, StackPilot, and Steward are independent products with deliberately separa
 
 ## Integration
 
-Forge may invoke Steward through its public command-line interface (CLI), versioned JSON result contract, or `forge-evidence` adapter when repository health or maintenance is relevant.
+FORGE may invoke Steward through its public command-line interface (CLI), versioned JSON result contract, or `forge-evidence` adapter when repository health or maintenance is relevant.
 
 StackPilot may consume Steward's versioned scan report as optional observational input. It does not absorb Steward findings into `readiness-v1` and does not invoke Steward remediation.
 
