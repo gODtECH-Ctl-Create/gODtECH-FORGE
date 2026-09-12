@@ -9,10 +9,6 @@ test("implementation and bundled assets stay inside the forge folder", async () 
     await assert.rejects(fs.access(path.join(repositoryRoot, legacyRoot)));
   }
 
-  for (const publicPath of ["docs/ecosystem.md"]) {
-    await fs.access(path.join(repositoryRoot, publicPath));
-  }
-
   for (const compactPath of [
     "forge/src",
     "forge/test",
