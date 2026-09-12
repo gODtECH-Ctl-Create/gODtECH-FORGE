@@ -125,7 +125,7 @@ This roadmap describes the intended build order. Contributors may pick work from
 
 ## Cross-product architecture
 
-FORGE, StackPilot, and Steward are complementary gODtECH systems with different canonical responsibilities:
+FORGE, StackPilot, and Steward are complementary gODtECH systems with different canonical responsibilities.
 
 ```text
                     gODtECH FORGE
@@ -148,7 +148,7 @@ StackPilot owns stack selection, golden paths, recipe rendering, scaffolding, ge
 
 ### Steward boundary
 
-Steward owns generic repository/software housekeeping, deterministic maintenance findings, health reporting, and explicitly approved low-risk remediation. Forge may invoke it during preparation, implementation, or verification when repository health is relevant.
+Steward owns generic repository/software housekeeping, deterministic maintenance findings, health reporting, and explicitly approved low-risk remediation. The public package is now available as `@godtech/steward@0.1.0` with the standalone `steward` CLI and GitHub Action. Forge may invoke it during preparation, implementation, or verification when repository health is relevant.
 
 ### Non-duplication rule
 
@@ -157,3 +157,9 @@ Forge orchestrates the tools rather than copying their domain implementations. S
 ### Independence rule
 
 StackPilot and Steward remain independently usable. Neither should require Forge for its primary functionality. Forge integration is an optional orchestration path layered over stable public interfaces.
+
+### Public references
+
+- [gODtECH Steward](https://github.com/gODtECH-Ctl-Create/gODtECH-Steward)
+- [Steward npm package](https://www.npmjs.com/package/@godtech/steward)
+- [Steward v0.1.0 release](https://github.com/gODtECH-Ctl-Create/gODtECH-Steward/releases/tag/v0.1.0)
