@@ -24,6 +24,7 @@ This roadmap describes the intended build order. Contributors may pick work from
 - [x] Define provenance manifest schema
 - [x] Define capability and risk taxonomy
 - [x] Define installation and distribution model
+- [ ] Define cross-tool contracts for external deterministic capabilities
 
 ## Phase 2 · Orchestrator core
 
@@ -37,6 +38,9 @@ This roadmap describes the intended build order. Contributors may pick work from
 - [x] Implement human-approval checkpoints
 - [x] Build deterministic repository preflight and compact AI work packets
 - [x] Add task budgets and model-escalation hints for agent adapters
+- [ ] Orchestrate independent deterministic tools through stable contracts
+- [ ] Invoke StackPilot for scaffolding, generation, and supported project adoption
+- [ ] Invoke Steward for repository maintenance and safe remediation when applicable
 
 ## Phase 3 · Intelligence
 
@@ -62,6 +66,10 @@ This roadmap describes the intended build order. Contributors may pick work from
 - [x] Git state and branch checks
 - [x] Build/test command discovery
 - [ ] WebAssembly execution boundary where justified
+- [ ] Define deterministic tooling adapter contract
+- [ ] Integrate StackPilot as the scaffolding/golden-path tool
+- [ ] Integrate Steward as the repository-maintenance/housekeeping tool
+- [ ] Ensure generic maintenance rules have one canonical implementation in Steward rather than being duplicated in Forge or StackPilot
 
 ## Phase 5 · Verification
 
@@ -73,6 +81,8 @@ This roadmap describes the intended build order. Contributors may pick work from
 - [ ] Production-build verification
 - [ ] Deployment smoke tests
 - [ ] Verification evidence storage
+- [ ] Correlate external deterministic-tool results into Forge evidence
+- [ ] Feed Steward health/finding results into proportional Forge verification decisions
 
 ## Phase 6 · Memory and efficiency
 
@@ -84,6 +94,7 @@ This roadmap describes the intended build order. Contributors may pick work from
 - [ ] Usage/cost telemetry
 - [ ] Efficiency metrics
 - [ ] Baseline-versus-assisted credit measurement
+- [ ] Cache and reuse validated external deterministic-tool results where safe
 
 ## Phase 7 · Agent ecosystem
 
@@ -111,3 +122,38 @@ This roadmap describes the intended build order. Contributors may pick work from
 - [ ] Public contribution model
 - [x] Remove or relocate internal planning material
 - [ ] Stable versioning and release process
+
+## Cross-product architecture
+
+FORGE, StackPilot, and Steward are complementary gODtECH systems with different canonical responsibilities:
+
+```text
+                    gODtECH FORGE
+          orchestration / policy / workflow
+                         |
+             +-----------+-----------+
+             |                       |
+             v                       v
+        StackPilot                Steward
+        "BUILD IT"            "KEEP IT HEALTHY"
+             |                       |
+             +-----------+-----------+
+                         v
+                   TARGET PROJECT
+```
+
+### StackPilot boundary
+
+StackPilot owns stack selection, golden paths, recipe rendering, scaffolding, generated-project validation, and stack-aware adoption/remediation. Forge may invoke it when a workflow needs a supported project shape or generation step.
+
+### Steward boundary
+
+Steward owns generic repository/software housekeeping, deterministic maintenance findings, health reporting, and explicitly approved low-risk remediation. Forge may invoke it during preparation, implementation, or verification when repository health is relevant.
+
+### Non-duplication rule
+
+Forge orchestrates the tools rather than copying their domain implementations. StackPilot must not reproduce Steward's generic housekeeping rules, and Steward must not reproduce StackPilot's golden-path assumptions. Shared facts should cross boundaries through stable machine-readable contracts.
+
+### Independence rule
+
+StackPilot and Steward remain independently usable. Neither should require Forge for its primary functionality. Forge integration is an optional orchestration path layered over stable public interfaces.
