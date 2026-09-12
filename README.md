@@ -23,6 +23,7 @@
   <a href="#-how-forge-works">How it works</a> ·
   <a href="#-what-you-get">What you get</a> ·
   <a href="#-ai-coding-integration">AI integration</a> ·
+  <a href="#-ecosystem">Ecosystem</a> ·
   <a href="#-architecture">Architecture</a> ·
   <a href="#-roadmap">Roadmap</a>
 </p>
@@ -251,6 +252,8 @@ Events are Git-ignored under `.forge/metrics/`. They contain counts and categori
 
 > FORGE is open source under the Apache License 2.0. Commercial use, modification, distribution, and private use are permitted subject to the license terms.
 
+> **Ecosystem note:** gODtECH Steward is now publicly released as `@godtech/steward@0.1.0`. It remains an independent repository-health engine that FORGE may call through stable public contracts when maintenance or health evidence is relevant.
+
 ---
 
 ## 🔌 AI coding integration
@@ -294,6 +297,41 @@ Start a new Codex thread after installation.
 | `forge_metrics` | Local cache reuse, latency, deterministic-work, and context-reduction aggregates |
 
 These tools do not call a model, approve human gates, or silently execute arbitrary project commands. The MCP layer exposes FORGE's preparation and workflow engine; the coding client remains responsible for model execution.
+
+---
+
+## 🧩 Ecosystem
+
+FORGE, StackPilot, and Steward are complementary systems with intentionally separate ownership:
+
+```text
+                        FORGE
+              orchestrate / govern / verify
+                         |
+             +-----------+-----------+
+             |                       |
+             v                       v
+        StackPilot                Steward
+        BUILD IT             KEEP IT HEALTHY
+             |                       |
+             +-----------+-----------+
+                         v
+                   TARGET PROJECT
+```
+
+**StackPilot** generates production-minded project foundations and owns stack selection, golden paths, recipes, scaffolding, and stack-aware readiness.
+
+**Steward** inspects existing repositories and owns deterministic housekeeping, health findings, stable scan contracts, and conservative remediation.
+
+**FORGE** may eventually orchestrate both through public interfaces, but neither StackPilot nor Steward is required for FORGE itself to operate.
+
+The non-duplication rule is important: generic housekeeping belongs in Steward, golden-path semantics belong in StackPilot, and cross-product workflow belongs in FORGE.
+
+- [gODtECH Steward](https://github.com/gODtECH-Ctl-Create/gODtECH-Steward)
+- [Steward npm package](https://www.npmjs.com/package/@godtech/steward)
+- [Steward v0.1.0](https://github.com/gODtECH-Ctl-Create/gODtECH-Steward/releases/tag/v0.1.0)
+- [StackPilot](https://github.com/gODtECH-Ctl-Create/StackPilot)
+- [StackPilot Steward integration](https://github.com/gODtECH-Ctl-Create/StackPilot/blob/main/docs/steward-integration.md)
 
 ---
 
@@ -452,6 +490,8 @@ FORGE is designed to increase agent capability without quietly removing human co
 - [ ] Plugin installation and update automation
 - [ ] OpenTelemetry cost and quality traces
 - [ ] Durable remote orchestration where justified
+- [ ] Orchestrate StackPilot and Steward through stable public contracts
+- [ ] Correlate Steward health evidence into appropriate FORGE verification flows
 
 ---
 

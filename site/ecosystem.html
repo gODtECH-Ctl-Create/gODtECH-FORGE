@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="How gODtECH FORGE, StackPilot, and Steward fit together without becoming one coupled system." />
+  <meta name="theme-color" content="#08090d" />
+  <title>FORGE Ecosystem — gODtECH</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="nav-shell">
+    <nav class="nav container" aria-label="Primary navigation">
+      <a class="brand" href="index.html" aria-label="FORGE home"><span class="brand-mark">FG</span><span>FORGE</span></a>
+      <div class="nav-links">
+        <a href="index.html#why">Why FORGE</a>
+        <a href="index.html#install">Install</a>
+        <a href="index.html#workflow">Workflow</a>
+        <a href="index.html#evidence">Evidence</a>
+        <a href="ecosystem.html" aria-current="page">Ecosystem</a>
+        <a href="https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE" rel="noreferrer">GitHub</a>
+      </div>
+      <a class="button button-small" href="index.html#install">Install v0.6.0</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="section container" style="padding-top:120px">
+      <div class="section-heading">
+        <span class="kicker">GODTECH ECOSYSTEM</span>
+        <h1>Build it. Keep it healthy. Govern the work around it.</h1>
+        <p>FORGE, StackPilot, and Steward are separate tools with different jobs. The ecosystem becomes more useful precisely because they do not duplicate each other.</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span class="feature-index">01</span>
+          <h2>FORGE</h2>
+          <p><strong>Orchestrate.</strong> Prepare repository context, classify risk, plan work, manage approvals, persist runs, and collect evidence around AI-assisted engineering.</p>
+          <a class="text-link" href="index.html">Explore FORGE →</a>
+        </article>
+        <article class="feature-card">
+          <span class="feature-index">02</span>
+          <h2>StackPilot</h2>
+          <p><strong>Scaffold.</strong> Choose supported project shapes, generate production-minded foundations, and keep golden-path assumptions under one dedicated tool.</p>
+          <a class="text-link" href="https://github.com/gODtECH-Ctl-Create/StackPilot" rel="noreferrer">Explore StackPilot →</a>
+        </article>
+        <article class="feature-card">
+          <span class="feature-index">03</span>
+          <h2>Steward</h2>
+          <p><strong>Maintain.</strong> Scan repositories deterministically, explain health findings, report stable evidence, and apply only explicit safe fixes.</p>
+          <a class="text-link" href="https://www.npmjs.com/package/@godtech/steward" rel="noreferrer">Install Steward →</a>
+        </article>
+      </div>
+
+      <div class="section-heading" style="margin-top:84px">
+        <span class="kicker">BOUNDARIES</span>
+        <h2>One project. Different responsibilities.</h2>
+      </div>
+
+      <div class="workflow" style="grid-template-columns:repeat(3,1fr)">
+        <div class="workflow-step"><span>01</span><h3>Before building</h3><p>FORGE can inspect the project and prepare bounded context. StackPilot can generate or adopt a supported project foundation.</p></div>
+        <div class="workflow-step"><span>02</span><h3>While building</h3><p>FORGE governs task flow, approvals, runs, and evidence. The coding client remains responsible for model execution.</p></div>
+        <div class="workflow-step"><span>03</span><h3>After changes</h3><p>Steward can independently scan repository health and produce findings that can optionally feed a FORGE verification workflow.</p></div>
+      </div>
+
+      <div class="evidence-note" style="margin-top:36px">
+        <strong>Integration rule:</strong> FORGE may call Steward through public CLI and machine-readable contracts when repository health is relevant. StackPilot may consume Steward's versioned scan report observationally. Neither integration changes the owning product's core responsibility, and neither makes Steward or StackPilot a runtime prerequisite for FORGE.
+      </div>
+
+      <div class="section-heading" style="margin-top:84px">
+        <span class="kicker">START HERE</span>
+        <h2>Use the smallest tool that solves the problem.</h2>
+        <p>Need a project foundation? Start with StackPilot. Need a governed AI engineering workflow? Start with FORGE. Need repository health or housekeeping? Start with Steward.</p>
+        <div class="hero-actions">
+          <a class="button" href="https://github.com/gODtECH-Ctl-Create/gODtECH-Steward" rel="noreferrer">Steward</a>
+          <a class="button button-secondary" href="https://github.com/gODtECH-Ctl-Create/StackPilot" rel="noreferrer">StackPilot</a>
+          <a class="button button-secondary" href="index.html">FORGE</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row"><div><strong>gODtECH</strong><p>FORGE · StackPilot · Steward</p></div><div><a href="index.html">FORGE</a><a href="https://github.com/gODtECH-Ctl-Create/StackPilot" rel="noreferrer">StackPilot</a><a href="https://www.npmjs.com/package/@godtech/steward" rel="noreferrer">Steward</a></div></div>
+  </footer>
+</body>
+</html>
