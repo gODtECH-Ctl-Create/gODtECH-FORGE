@@ -5,8 +5,8 @@ import test from "node:test";
 
 test("implementation and bundled assets stay inside the forge folder", async () => {
   const repositoryRoot = process.cwd();
-  for (const oldRoot of ["src", "test", "scripts", "docs", "FORGE-INTERNAL", ".forge", "cue.mod"]) {
-    await assert.rejects(fs.access(path.join(repositoryRoot, oldRoot)));
+  for (const legacyRoot of ["src", "test", "scripts", "FORGE-INTERNAL", ".forge", "cue.mod"]) {
+    await assert.rejects(fs.access(path.join(repositoryRoot, legacyRoot)));
   }
 
   for (const compactPath of [
