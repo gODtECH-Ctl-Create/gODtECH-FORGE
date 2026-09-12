@@ -43,6 +43,30 @@ SECURITY CONSIDERATIONS
 
 Modules should depend on stable contracts rather than reaching directly into unrelated modules. The orchestrator selects and composes capabilities; it should not become a dumping ground for domain logic.
 
+## External deterministic tool boundaries
+
+FORGE may integrate independently usable gODtECH tools through stable contracts. These integrations must preserve one canonical implementation for each capability.
+
+### StackPilot
+
+**Canonical responsibility:** project scaffolding, stack selection, golden paths, recipe rendering, generated-project validation, and stack-aware adoption/remediation.
+
+FORGE may invoke StackPilot when a workflow needs a supported project shape or deterministic project generation. FORGE should consume StackPilot's public command or machine-readable contract and must not copy StackPilot's recipe or scaffolding logic.
+
+### gODtECH Steward
+
+**Canonical responsibility:** generic repository/software housekeeping, deterministic maintenance findings, repository-health reporting, and explicitly approved low-risk remediation.
+
+FORGE may invoke Steward when repository maintenance or health evidence is relevant. FORGE should consume Steward's public command or machine-readable contract and must not reproduce Steward's generic maintenance rules inside the orchestration layer.
+
+### Independence
+
+StackPilot and Steward remain independently usable without FORGE. A FORGE integration is an adapter/orchestration path, not a runtime dependency for their primary functionality.
+
+### Shared evidence
+
+Where useful, external tool results may be normalized into FORGE verification/evidence contracts. Normalization must preserve the source tool's authority and schema/version information so that evidence remains attributable and auditable.
+
 ## Integration of existing design intelligence
 
 The existing `frontend-design-workflow` work is a reference and candidate source for FORGE's design intelligence. It should be integrated by contract rather than copied blindly, preserving the strongest research, design-system, accessibility, responsive, motion, and visual-verification practices.
