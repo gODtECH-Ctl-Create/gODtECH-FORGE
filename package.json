@@ -28,7 +28,7 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "@godtech/cli-identity": "git+https://github.com/gODtECH-Ctl-Create/gODtECH-CLI-Identity.git#d32077ac4c9531d8971759e59c103445c2190306",
+    "@godtech/cli-identity": "git+https://github.com/gODtECH-Ctl-Create/gODtECH-CLI-Identity.git#711f86d53aaaeb62e9f3d14904f117f16c4b5b09",
     "@modelcontextprotocol/server": "^2.0.0",
     "yaml": "^2.9.0",
     "zod": "^4.6.1"
