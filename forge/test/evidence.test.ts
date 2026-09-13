@@ -26,7 +26,11 @@ assert.deepEqual(taskFiles, [
 
 for (const file of taskFiles) {
   const content = readFileSync(join(tasksDir, file), 'utf8');
-  assert.match(content, /Status: planned/);
+  if (file === 'deployguard-dg-bm-002.md') {
+    assert.match(content, /Status: exploratory complete/);
+  } else {
+    assert.match(content, /Status: planned/);
+  }
   assert.ok(content.includes('## Acceptance criteria'), `${file} must name acceptance criteria`);
 }
 
@@ -40,4 +44,15 @@ assert.equal(pilot.runs.control.provider_billing, null);
 assert.ok(
   pilot.claim_boundaries.some((boundary: string) => boundary.includes('not a provider-token or credit-savings claim')),
   'Pilot result must preserve the credit-savings boundary'
+);
+
+const dgBm002 = JSON.parse(readFileSync(join(evidenceRoot, 'results', 'dg-bm-002.json'), 'utf8'));
+assert.equal(dgBm002.benchmark_id, 'DG-BM-002');
+assert.equal(dgBm002.status, 'exploratory');
+assert.equal(dgBm002.controlled, false);
+assert.equal(dgBm002.runs.forge_assisted.commit, 'e552e0e');
+assert.equal(dgBm002.runs.control.verification[0].outcome, 'not_run');
+assert.ok(
+  dgBm002.claim_boundaries.some((boundary: string) => boundary.includes('No provider-token or credit-savings claim')),
+  'DG-BM-002 result must preserve the credit-savings boundary'
 );
