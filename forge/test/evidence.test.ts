@@ -26,7 +26,7 @@ assert.deepEqual(taskFiles, [
 
 for (const file of taskFiles) {
   const content = readFileSync(join(tasksDir, file), 'utf8');
-  if (file === 'deployguard-dg-bm-002.md') {
+  if (file === 'deployguard-dg-bm-002.md' || file === 'deployguard-dg-bm-003.md') {
     assert.match(content, /Status: exploratory complete/);
   } else {
     assert.match(content, /Status: planned/);
@@ -55,4 +55,17 @@ assert.equal(dgBm002.runs.control.verification[0].outcome, 'not_run');
 assert.ok(
   dgBm002.claim_boundaries.some((boundary: string) => boundary.includes('No provider-token or credit-savings claim')),
   'DG-BM-002 result must preserve the credit-savings boundary'
+);
+
+const dgBm003 = JSON.parse(readFileSync(join(evidenceRoot, 'results', 'dg-bm-003.json'), 'utf8'));
+assert.equal(dgBm003.benchmark_id, 'DG-BM-003');
+assert.equal(dgBm003.status, 'exploratory');
+assert.equal(dgBm003.controlled, false);
+assert.equal(dgBm003.base_commit, 'e552e0e');
+assert.equal(dgBm003.runs.forge_assisted.commit, 'd40758b');
+assert.equal(dgBm003.runs.forge_assisted.failed_commands, 0);
+assert.equal(dgBm003.runs.control.verification[0].outcome, 'not_run');
+assert.ok(
+  dgBm003.claim_boundaries.some((boundary: string) => boundary.includes('No provider-token or credit-savings claim')),
+  'DG-BM-003 result must preserve the credit-savings boundary'
 );
