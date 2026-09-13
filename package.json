@@ -3,31 +3,19 @@
   "version": "0.6.0",
   "description": "A reusable operating framework for deliberate, verified AI-assisted product engineering.",
   "type": "module",
-  "bin": {
-    "forge": "dist/src/cli.js"
-  },
-  "files": [
-    "dist/src",
-    "dist/framework"
-  ],
-  "engines": {
-    "node": ">=20"
-  },
+  "bin": { "forge": "dist/src/cli.js" },
+  "files": ["dist/src", "dist/framework"],
+  "engines": { "node": ">=20" },
   "scripts": {
     "build": "tsc && node forge/scripts/copy-framework.mjs",
     "check": "tsc --noEmit",
     "test": "npm run build && node forge/scripts/run-tests.mjs",
     "prepack": "npm run build"
   },
-  "keywords": [
-    "ai",
-    "coding-agent",
-    "mcp",
-    "developer-tools",
-    "verification"
-  ],
+  "keywords": ["ai", "coding-agent", "mcp", "developer-tools", "verification"],
   "license": "Apache-2.0",
   "dependencies": {
+    "@godtech/cli-identity": "git+https://github.com/gODtECH-Ctl-Create/gODtECH-CLI-Identity.git#6f866a5bf023a59a0b357af28fcab9cb6d68efec",
     "@modelcontextprotocol/server": "^2.0.0",
     "yaml": "^2.9.0",
     "zod": "^4.6.1"
