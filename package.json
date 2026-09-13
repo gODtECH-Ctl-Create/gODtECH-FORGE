@@ -15,7 +15,7 @@
   "keywords": ["ai", "coding-agent", "mcp", "developer-tools", "verification"],
   "license": "Apache-2.0",
   "dependencies": {
-    "@godtech/cli-identity": "git+https://github.com/gODtECH-Ctl-Create/gODtECH-CLI-Identity.git#849d7cd453f8ad9e1faec26b10a8458dc6b66ef0",
+    "@godtech/cli-identity": "git+https://github.com/gODtECH-Ctl-Create/gODtECH-CLI-Identity.git#b5aaee6902bcaff80b26fe63290f0cae07fd5ff3",
     "@modelcontextprotocol/server": "^2.0.0",
     "yaml": "^2.9.0",
     "zod": "^4.6.1"
