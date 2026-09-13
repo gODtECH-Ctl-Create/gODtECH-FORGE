@@ -1,6 +1,6 @@
 # DG-BM-002: Authentication / Security
 
-Status: planned
+Status: exploratory complete
 
 Repository: https://github.com/gODtECH-Ctl-Create/deployguard
 
@@ -24,3 +24,9 @@ Protect mutating incident endpoints with an API key while keeping read-only heal
 ## Benchmark notes
 
 This task is security-sensitive, so FORGE should classify it at a higher risk level than basic feature work and surface appropriate verification requirements.
+
+## Result
+
+DG-BM-002 shipped to DeployGuard `main` at merge commit `e552e0e`. The implementation protects mutating incident endpoints with `DEPLOYGUARD_API_KEY`, keeps health and read endpoints public, documents local usage, and adds API tests for missing, invalid and valid credentials.
+
+This run is published as exploratory rather than controlled because no plain-AI control branch was executed from the same base commit.

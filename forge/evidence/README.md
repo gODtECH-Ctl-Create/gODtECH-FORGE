@@ -29,7 +29,7 @@ Each controlled benchmark must:
 
 | ID | Area | Repository | Status | Goal |
 | --- | --- | --- | --- | --- |
-| DG-BM-002 | Authentication / security | DeployGuard | Planned | Add API key protection or session-based admin access with tests. |
+| DG-BM-002 | Authentication / security | DeployGuard | Exploratory complete | Add API key protection or session-based admin access with tests. |
 | DG-BM-003 | Database migration | DeployGuard | Planned | Add incident assignment or audit events with schema changes and migration verification. |
 | DG-BM-004 | GitHub Actions CI/CD | DeployGuard | Planned | Add a CI workflow that runs install, type-check, test and build. |
 | DG-BM-005 | Kubernetes / runtime probes | DeployGuard | Planned | Add manifests or Helm-style deployment assets with health/readiness checks. |

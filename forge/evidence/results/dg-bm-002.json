@@ -1,0 +1,108 @@
+{
+  "benchmark_id": "DG-BM-002",
+  "status": "exploratory",
+  "repository": {
+    "name": "DeployGuard",
+    "url": "https://github.com/gODtECH-Ctl-Create/deployguard"
+  },
+  "base_commit": "2154aca",
+  "task_area": "Authentication / security",
+  "task_summary": "Protect mutating incident endpoints with an API key while keeping health and read endpoints public.",
+  "controlled": false,
+  "runs": {
+    "control": {
+      "branch": "not-run",
+      "commit": null,
+      "unique_files_inspected": 0,
+      "inspected_files": [],
+      "files_edited": [],
+      "failed_commands": 0,
+      "implementation_retries": 0,
+      "human_interventions": 0,
+      "verification": [
+        {
+          "command": "control run",
+          "outcome": "not_run",
+          "notes": "A plain-AI control branch was not executed before the FORGE-assisted implementation was merged."
+        }
+      ],
+      "forge_metrics": null,
+      "provider_billing": null
+    },
+    "forge_assisted": {
+      "branch": "security/dg-bm-002-incident-api-key-fix",
+      "commit": "e552e0e",
+      "unique_files_inspected": 10,
+      "inspected_files": [
+        "AGENTS.md",
+        ".forge/workflows/GIT.md",
+        ".forge/policies/AI-EFFICIENCY.md",
+        "package.json",
+        "apps/api/package.json",
+        "apps/api/src/app.ts",
+        "apps/api/src/incidents.ts",
+        "apps/api/src/server.ts",
+        "apps/api/tests/incidents.test.ts",
+        "docker-compose.yml"
+      ],
+      "files_edited": [
+        "README.md",
+        "apps/api/dist/server.js",
+        "apps/api/src/app.ts",
+        "apps/api/src/server.ts",
+        "apps/api/tests/incidents.test.ts",
+        "docker-compose.yml"
+      ],
+      "failed_commands": 2,
+      "implementation_retries": 1,
+      "human_interventions": 1,
+      "verification": [
+        {
+          "command": "npm run test --workspace=@deployguard/api",
+          "outcome": "passed",
+          "notes": "4/4 API tests passed locally after adding API-key coverage."
+        },
+        {
+          "command": "npm run typecheck --workspace=@deployguard/api",
+          "outcome": "passed",
+          "notes": "Initial run failed on Express route parameter typing; route parameter normalization fixed it."
+        },
+        {
+          "command": "npm run build --workspace=@deployguard/api",
+          "outcome": "passed"
+        },
+        {
+          "command": "npm run typecheck",
+          "outcome": "passed"
+        },
+        {
+          "command": "npm run build",
+          "outcome": "passed"
+        },
+        {
+          "command": "git push -u origin security/dg-bm-002-incident-api-key",
+          "outcome": "failed",
+          "notes": "Local HTTPS Git credentials were unavailable, so the GitHub connector published the branch."
+        }
+      ],
+      "forge_metrics": null,
+      "provider_billing": null
+    }
+  },
+  "comparisons": {
+    "unique_files_inspected_reduction_percent": null,
+    "estimated_context_reduction_percent": null,
+    "provider_credit_savings": null
+  },
+  "limitations": [
+    "This result is exploratory because a plain-AI control run was not executed from the same base commit.",
+    "Provider token, credit and exact tool-call telemetry were unavailable.",
+    "The first merge did not preserve the intended API-key protection; a recovery branch and PR restored the verified implementation.",
+    "FORGE metrics were not captured through a local forge prepare event for this run."
+  ],
+  "claim_boundaries": [
+    "DG-BM-002 is not a controlled benchmark result.",
+    "This result proves the security change was implemented and verified, not that FORGE reduced provider tokens or credits.",
+    "No provider-token or credit-savings claim is made for this run."
+  ]
+}
