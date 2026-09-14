@@ -16,7 +16,8 @@ const KIND_RULES: Array<{ kind: TaskKind; pattern: RegExp }> = [
   { kind: "documentation", pattern: /\b(readme|documentation|docs|copy|wording|typo|comment)\b/i },
   { kind: "research", pattern: /\b(research|investigate|compare|market|competitor|feasibility)\b/i },
   { kind: "infrastructure", pattern: /\b(terraform|kubernetes|docker|pipeline|ci\/?cd|deploy|infrastructure|cloud|database migration)\b/i },
-  { kind: "bug", pattern: /\b(bug|fix|broken|failure|failing|error|regression|incident)\b/i },
+  { kind: "feature", pattern: /\b(add|build|create|implement|introduce|ship)\b[\s\S]{0,80}\b(feature|workflow|endpoint|crud|dashboard|screen|view|api|capability|audit|incident)\b/i },
+  { kind: "bug", pattern: /\b(bug|fix|broken|failure|failing|error|regression|outage|crash|incident failure|incident outage)\b/i },
   { kind: "refactor", pattern: /\b(refactor|performance|optimi[sz]e|cleanup|restructure)\b/i },
 ];
 

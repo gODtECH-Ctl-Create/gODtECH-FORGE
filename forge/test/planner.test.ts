@@ -37,6 +37,26 @@ test("planner escalates identity and payment work", async (context) => {
   assert.ok(plan.approvals.some((item) => item.id === "approve-risk-plan"));
 });
 
+test("planner treats new incident product work as feature work", async (context) => {
+  const cwd = await initializedProject();
+  context.after(() => fs.rm(cwd, { recursive: true, force: true }));
+
+  const plan = await createPlan(cwd, "Add incident CRUD endpoints and dashboard workflow");
+  assert.equal(plan.taskKind, "feature");
+  assert.equal(plan.risk, "medium");
+  assert.ok(plan.capabilities.some((item) => item.capability === "product"));
+});
+
+test("planner still treats incident outages as bug work", async (context) => {
+  const cwd = await initializedProject();
+  context.after(() => fs.rm(cwd, { recursive: true, force: true }));
+
+  const plan = await createPlan(cwd, "Fix incident outage caused by failing status updates");
+  assert.equal(plan.taskKind, "bug");
+  assert.equal(plan.risk, "medium");
+  assert.ok(plan.capabilities.some((item) => item.capability === "quality"));
+});
+
 test("planner requires explicit approval for destructive production work", async (context) => {
   const cwd = await initializedProject();
   context.after(() => fs.rm(cwd, { recursive: true, force: true }));
