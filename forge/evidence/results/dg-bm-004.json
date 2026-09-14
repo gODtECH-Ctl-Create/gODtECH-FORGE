@@ -1,0 +1,96 @@
+{
+  "benchmark_id": "DG-BM-004",
+  "status": "exploratory",
+  "repository": {
+    "name": "DeployGuard",
+    "url": "https://github.com/gODtECH-Ctl-Create/deployguard"
+  },
+  "base_commit": "d40758b",
+  "task_area": "GitHub Actions CI/CD",
+  "task_summary": "Add GitHub Actions verification for install, type-check, API tests and workspace build.",
+  "controlled": false,
+  "runs": {
+    "control": {
+      "branch": "not-run",
+      "commit": null,
+      "unique_files_inspected": 0,
+      "inspected_files": [],
+      "files_edited": [],
+      "failed_commands": 0,
+      "implementation_retries": 0,
+      "human_interventions": 0,
+      "verification": [
+        {
+          "command": "control run",
+          "outcome": "not_run",
+          "notes": "A plain-AI control branch was not executed before the FORGE-assisted implementation was merged."
+        }
+      ],
+      "forge_metrics": null,
+      "provider_billing": null
+    },
+    "forge_assisted": {
+      "branch": "ci/dg-bm-004-github-actions",
+      "commit": "d4af54d",
+      "unique_files_inspected": 7,
+      "inspected_files": [
+        "README.md",
+        "package.json",
+        "package-lock.json",
+        "apps/api/package.json",
+        "apps/web/package.json",
+        ".gitignore",
+        "forge/evidence/tasks/deployguard-dg-bm-004.md"
+      ],
+      "files_edited": [
+        ".github/workflows/ci.yml",
+        "README.md"
+      ],
+      "failed_commands": 0,
+      "implementation_retries": 0,
+      "human_interventions": 1,
+      "verification": [
+        {
+          "command": "npm ci",
+          "outcome": "passed"
+        },
+        {
+          "command": "npm run typecheck",
+          "outcome": "passed"
+        },
+        {
+          "command": "npm run test --workspace=@deployguard/api",
+          "outcome": "passed",
+          "notes": "5/5 API tests passed locally."
+        },
+        {
+          "command": "npm run build",
+          "outcome": "passed"
+        },
+        {
+          "command": "DeployGuard CI",
+          "outcome": "passed",
+          "notes": "GitHub Actions workflow passed on PR #9 before merge."
+        }
+      ],
+      "forge_metrics": null,
+      "provider_billing": null
+    }
+  },
+  "comparisons": {
+    "unique_files_inspected_reduction_percent": null,
+    "estimated_context_reduction_percent": null,
+    "provider_credit_savings": null
+  },
+  "limitations": [
+    "This result is exploratory because a plain-AI control run was not executed from the same base commit.",
+    "Provider token, credit and exact tool-call telemetry were unavailable.",
+    "FORGE metrics were not captured through a local forge prepare event for this run.",
+    "The workflow validates application build and tests, but it does not deploy artifacts or exercise runtime infrastructure."
+  ],
+  "claim_boundaries": [
+    "DG-BM-004 is not a controlled benchmark result.",
+    "This result proves the CI workflow was implemented and passed, not that FORGE reduced provider tokens or credits.",
+    "No provider-token or credit-savings claim is made for this run."
+  ]
+}

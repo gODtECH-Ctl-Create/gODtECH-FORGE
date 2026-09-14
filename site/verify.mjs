@@ -31,7 +31,7 @@ for (const text of requiredBenchmarkText) {
 
 const requiredControlledText = [
   'Controlled multi-task benchmarking', 'DG-BM-002', 'DG-BM-003', 'DG-BM-004', 'DG-BM-005',
-  'same base commit', 'not claim provider-token or credit savings', 'incident audit events'
+  'same base commit', 'not claim provider-token or credit savings', 'incident audit events', 'API tests and build'
 ];
 for (const text of requiredControlledText) {
   if (!controlled.includes(text)) throw new Error(`Controlled benchmark page is missing required protocol copy: ${text}`);
