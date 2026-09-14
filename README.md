@@ -465,6 +465,8 @@ FORGE is designed to increase agent capability without quietly removing human co
 - [x] Privacy-preserving local cache, latency, and context-reduction metrics
 - [x] Choose an open-source license
 - [x] Publish signed package and release artifacts
+- [x] Complete external DeployGuard exploratory benchmark phase
+- [x] Feed benchmark learning back into task classification
 - [ ] Accept opt-in provider usage and retry outcomes for assisted-versus-baseline studies
 
 ### Phase II · Intelligence

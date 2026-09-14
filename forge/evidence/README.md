@@ -12,6 +12,8 @@ The first external benchmark, DG-BM-001, proved FORGE can prepare and measure wo
 
 Milestone 2 moves from pilot evidence to controlled multi-task benchmarking.
 
+The completed exploratory DeployGuard benchmark phase is summarized in [`benchmark-phase-summary.md`](benchmark-phase-summary.md).
+
 ## Controlled benchmark rules
 
 Each controlled benchmark must:
