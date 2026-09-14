@@ -1,0 +1,92 @@
+{
+  "benchmark_id": "DG-BM-005",
+  "status": "exploratory",
+  "repository": {
+    "name": "DeployGuard",
+    "url": "https://github.com/gODtECH-Ctl-Create/deployguard"
+  },
+  "base_commit": "d4af54d",
+  "task_area": "Kubernetes / runtime probes",
+  "task_summary": "Add baseline Kubernetes manifests for API, web, PostgreSQL services and runtime probes.",
+  "controlled": false,
+  "runs": {
+    "control": {
+      "branch": "not-run",
+      "commit": null,
+      "unique_files_inspected": 0,
+      "inspected_files": [],
+      "files_edited": [],
+      "failed_commands": 0,
+      "implementation_retries": 0,
+      "human_interventions": 0,
+      "verification": [
+        {
+          "command": "control run",
+          "outcome": "not_run",
+          "notes": "A plain-AI control branch was not executed before the FORGE-assisted implementation was merged."
+        }
+      ],
+      "forge_metrics": null,
+      "provider_billing": null
+    },
+    "forge_assisted": {
+      "branch": "k8s/dg-bm-005-runtime-probes",
+      "commit": "3aafd3c",
+      "unique_files_inspected": 7,
+      "inspected_files": [
+        "README.md",
+        "docker-compose.yml",
+        "apps/api/Dockerfile",
+        "apps/web/Dockerfile",
+        "apps/api/src/server.ts",
+        "apps/api/src/app.ts",
+        "forge/evidence/tasks/deployguard-dg-bm-005.md"
+      ],
+      "files_edited": [
+        "README.md",
+        "docs/KUBERNETES.md",
+        "k8s/base/namespace.yaml",
+        "k8s/base/configmap.yaml",
+        "k8s/base/secret.example.yaml",
+        "k8s/base/postgres.yaml",
+        "k8s/base/api.yaml",
+        "k8s/base/web.yaml",
+        "k8s/base/kustomization.yaml"
+      ],
+      "failed_commands": 0,
+      "implementation_retries": 0,
+      "human_interventions": 1,
+      "verification": [
+        {
+          "command": "DeployGuard CI",
+          "outcome": "passed",
+          "notes": "GitHub Actions workflow passed on PR #11 before merge."
+        },
+        {
+          "command": "kubectl apply -k k8s/base",
+          "outcome": "not_run",
+          "notes": "No live Kubernetes cluster apply was performed in this environment."
+        }
+      ],
+      "forge_metrics": null,
+      "provider_billing": null
+    }
+  },
+  "comparisons": {
+    "unique_files_inspected_reduction_percent": null,
+    "estimated_context_reduction_percent": null,
+    "provider_credit_savings": null
+  },
+  "limitations": [
+    "This result is exploratory because a plain-AI control run was not executed from the same base commit.",
+    "Provider token, credit and exact tool-call telemetry were unavailable.",
+    "FORGE metrics were not captured through a local forge prepare event for this run.",
+    "The Kubernetes manifests were not applied to a live cluster in this environment.",
+    "The manifests are baseline runtime artifacts and do not claim production availability, SLOs or hardened security."
+  ],
+  "claim_boundaries": [
+    "DG-BM-005 is not a controlled benchmark result.",
+    "This result proves baseline Kubernetes manifests and probes were added and CI passed, not that FORGE reduced provider tokens or credits.",
+    "No provider-token or credit-savings claim is made for this run."
+  ]
+}
