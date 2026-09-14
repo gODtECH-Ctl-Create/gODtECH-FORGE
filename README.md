@@ -6,7 +6,7 @@
 
 <p>
   <a href="https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/actions/workflows/cli.yml"><img src="https://img.shields.io/github/actions/workflow/status/gODtECH-Ctl-Create/gODtECH-FORGE/cli.yml?branch=main&style=for-the-badge&label=CLI" alt="CLI workflow status" /></a>
-  <a href="https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/tag/v0.6.0"><img src="https://img.shields.io/badge/release-v0.6.0-7c3aed?style=for-the-badge" alt="FORGE v0.6.0 release" /></a>
+  <a href="https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/tag/v0.7.0"><img src="https://img.shields.io/badge/release-v0.7.0-7c3aed?style=for-the-badge" alt="FORGE v0.7.0 release" /></a>
   <img src="https://img.shields.io/badge/Node.js-%E2%89%A520-111827?style=for-the-badge&logo=nodedotjs" alt="Node.js 20 or newer" />
   <img src="https://img.shields.io/badge/MCP-stdio-b7ff3c?style=for-the-badge&labelColor=11110f" alt="MCP stdio server" />
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-3da639?style=for-the-badge" alt="Apache License 2.0" /></a>
@@ -86,21 +86,21 @@ FORGE does **not** claim a universal fixed percentage of token or credit savings
 
 ### 1. Install the verified GitHub release
 
-FORGE `v0.6.0` is available from the signed GitHub Release. The installers verify the release checksum before performing the global package installation.
+FORGE `v0.7.0` is available from the signed GitHub Release. The installers verify the release checksum before performing the global package installation.
 
 Linux or macOS:
 
 ```bash
-curl -fsSLO https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/download/v0.6.0/install.sh
-sh install.sh 0.6.0
+curl -fsSLO https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/download/v0.7.0/install.sh
+sh install.sh 0.7.0
 forge --version
 ```
 
 Windows PowerShell:
 
 ```powershell
-Invoke-WebRequest https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/download/v0.6.0/install.ps1 -OutFile install.ps1
-.\install.ps1 -Version 0.6.0
+Invoke-WebRequest https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/download/v0.7.0/install.ps1 -OutFile install.ps1
+.\install.ps1 -Version 0.7.0
 forge --version
 ```
 
@@ -108,14 +108,14 @@ If Windows reports that running scripts is disabled, use a **process-scoped** by
 
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\install.ps1 -Version 0.6.0
+.\install.ps1 -Version 0.7.0
 forge --version
 ```
 
 Alternatively, invoke the installer in a one-off PowerShell process without changing the current session policy:
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -Version 0.6.0
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -Version 0.7.0
 forge --version
 ```
 
@@ -467,6 +467,7 @@ FORGE is designed to increase agent capability without quietly removing human co
 - [x] Publish signed package and release artifacts
 - [x] Complete external DeployGuard exploratory benchmark phase
 - [x] Feed benchmark learning back into task classification
+- [ ] Complete controlled plain-AI versus FORGE v0.7.0 comparisons ([tracking issue #49](https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/issues/49))
 - [ ] Accept opt-in provider usage and retry outcomes for assisted-versus-baseline studies
 
 ### Phase II · Intelligence

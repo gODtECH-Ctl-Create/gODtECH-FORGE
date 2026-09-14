@@ -13,9 +13,10 @@ const controlled = readFileSync(resolve(root, 'benchmarks/controlled-program.htm
 const css = readFileSync(resolve(root, 'styles.css'), 'utf8');
 
 const requiredHomeText = [
-  'FORGE', 'Install v0.6.0', 'Evidence Lab', '74.7%', 'not a claim of 74.7% credit savings',
+  'FORGE', 'Install v0.7.0', 'Evidence Lab', '74.7%', 'not a claim of 74.7% credit savings',
   'Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass', 'forge init --dry-run',
-  'Controlled multi-task benchmarks'
+  'Controlled multi-task benchmarks', 'Historical v0.6.0 installation evidence',
+  'releases/tag/v0.7.0', 'issues/49', 'DG-BM-005'
 ];
 for (const text of requiredHomeText) {
   if (!home.includes(text)) throw new Error(`Homepage is missing required copy: ${text}`);

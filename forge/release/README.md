@@ -4,7 +4,13 @@ This directory contains the machine-install and release-preflight boundary for F
 
 FORGE `v0.6.0` is the first publicly released Phase I version. It is licensed under Apache-2.0 and was published from a GitHub-verified signed annotated tag after the repository's release gates completed successfully.
 
-Public release:
+Current public release:
+
+- GitHub Release: https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/tag/v0.7.0
+- Verified release workflow: https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/actions/runs/34892742434
+- Release notes: [v0.7.0](notes/v0.7.0.md)
+
+Historical first release:
 
 - GitHub Release: https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/tag/v0.6.0
 - Build provenance: https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/attestations/46538361
@@ -55,21 +61,21 @@ git push origin vX.Y.Z
 
 Pushing a matching signed version tag is the explicit GitHub Release trigger. The workflow fails closed if curated metadata, license, versions, signature, `main` ancestry, tests, package smoke test, checksums, or provenance do not pass.
 
-## Install v0.6.0
+## Install v0.7.0
 
 Linux or macOS:
 
 ```bash
-curl -fsSLO https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/download/v0.6.0/install.sh
-sh install.sh 0.6.0
+curl -fsSLO https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/download/v0.7.0/install.sh
+sh install.sh 0.7.0
 forge --version
 ```
 
 Windows PowerShell:
 
 ```powershell
-Invoke-WebRequest https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/download/v0.6.0/install.ps1 -OutFile install.ps1
-.\install.ps1 -Version 0.6.0
+Invoke-WebRequest https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/releases/download/v0.7.0/install.ps1 -OutFile install.ps1
+.\install.ps1 -Version 0.7.0
 forge --version
 ```
 
@@ -77,14 +83,14 @@ If Windows reports that running scripts is disabled, use a process-scoped bypass
 
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\install.ps1 -Version 0.6.0
+.\install.ps1 -Version 0.7.0
 forge --version
 ```
 
 Or invoke the installer in a one-off PowerShell process:
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -Version 0.6.0
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -Version 0.7.0
 forge --version
 ```
 
@@ -97,9 +103,9 @@ Both installers download `forge-<version>.tgz` and `SHA256SUMS.txt` from the sam
 After downloading a release asset, GitHub CLI can verify the signed build provenance associated with the repository:
 
 ```bash
-gh attestation verify forge-0.6.0.tgz \
+gh attestation verify forge-0.7.0.tgz \
   --repo gODtECH-Ctl-Create/gODtECH-FORGE \
-  --source-ref refs/tags/v0.6.0
+  --source-ref refs/tags/v0.7.0
 ```
 
 You can also verify the published SHA-256 manifest directly:
