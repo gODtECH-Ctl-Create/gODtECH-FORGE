@@ -1,6 +1,6 @@
 # DG-BM-005: Kubernetes / Runtime Probes
 
-Status: planned
+Status: exploratory complete
 
 Repository: https://github.com/gODtECH-Ctl-Create/deployguard
 
