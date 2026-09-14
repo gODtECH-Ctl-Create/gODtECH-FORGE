@@ -1,6 +1,6 @@
 # DG-BM-004: GitHub Actions CI/CD
 
-Status: planned
+Status: exploratory complete
 
 Repository: https://github.com/gODtECH-Ctl-Create/deployguard
 
@@ -23,3 +23,7 @@ Add a GitHub Actions workflow for DeployGuard that installs dependencies and run
 ## Benchmark notes
 
 This task should expose whether FORGE correctly scopes CI/CD work and avoids unrelated application-file inspection.
+
+DG-BM-004 shipped to DeployGuard `main` at merge commit `d4af54d`. The implementation adds `.github/workflows/ci.yml`, runs `npm ci`, workspace type-check, focused API tests and workspace build, and documents the same commands in the README.
+
+The result is labeled exploratory because no plain-AI control branch was run from the same base commit. It verifies the shipped CI behavior, but it does not claim provider-token, credit or controlled-efficiency savings.
