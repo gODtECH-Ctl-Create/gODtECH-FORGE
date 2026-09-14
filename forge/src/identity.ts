@@ -1,10 +1,15 @@
 import { getProduct, renderIdentity } from "@godtech/cli-identity";
+import type { ProductIdentity } from "@godtech/cli-identity";
 
-const FORGE_IDENTITY = getProduct("forge");
-
-if (!FORGE_IDENTITY) {
-  throw new Error("FORGE identity profile is not registered in @godtech/cli-identity.");
+function requireForgeIdentity(): ProductIdentity {
+  const product = getProduct("forge");
+  if (!product) {
+    throw new Error("FORGE identity profile is not registered in @godtech/cli-identity.");
+  }
+  return product;
 }
+
+const FORGE_IDENTITY = requireForgeIdentity();
 
 export interface ForgeIdentityOptions {
   targetCols?: number;
