@@ -1,6 +1,6 @@
 {
   "name": "@godtech/forge",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "A reusable operating framework for deliberate, verified AI-assisted product engineering.",
   "type": "module",
   "bin": {
@@ -28,7 +28,7 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "@godtech/cli-identity": "git+https://github.com/gODtECH-Ctl-Create/gODtECH-CLI-Identity.git#4cc3bcfeb9090051b426a26c9e8c5d5aed401bd5",
+    "@godtech/cli-identity": "git+https://github.com/gODtECH-Ctl-Create/gODtECH-CLI-Identity.git#44130ba07b907be7c1ac39d9423fac56a8aa4ffa",
     "@modelcontextprotocol/server": "^2.0.0",
     "yaml": "^2.9.0",
     "zod": "^4.6.1"
