@@ -24,11 +24,11 @@ export function forgeIdentityBanner(
 
 export function shouldShowForgeIdentity(
   argv: string[],
-  isTTY = Boolean(process.stdout.isTTY)
+  isTTY = Boolean(process.stdout.isTTY),
+  noBanner = false
 ): boolean {
-  if (!isTTY) return false;
+  if (!isTTY || noBanner) return false;
   if (argv.includes("--json")) return false;
-  if (argv.includes("--no-banner")) return false;
   if (argv.includes("--version") || argv.includes("-v")) return false;
 
   const flagsWithValues = new Set([
