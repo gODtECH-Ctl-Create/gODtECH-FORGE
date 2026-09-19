@@ -6,15 +6,17 @@ import { showContext } from "./context.js";
 import { summarizeEfficiencyMetrics } from "./metrics.js";
 import { createPlan } from "./planner.js";
 import { prepareWorkPacket } from "./preflight.js";
-import { latestWorkflowRun, loadWorkflowRun } from "./workflow-run.js";
+import { completeWorkflowRun, latestWorkflowRun, loadWorkflowRun } from "./workflow-run.js";
 import { VERSION } from "./version.js";
 
-export const MCP_TOOL_NAMES = ["forge_prepare", "forge_metrics", "forge_plan", "forge_context", "forge_run_status"] as const;
+export const MCP_TOOL_NAMES = ["forge_prepare", "forge_metrics", "forge_plan", "forge_context", "forge_run_status", "forge_run_complete"] as const;
 export type ForgeMcpTool = (typeof MCP_TOOL_NAMES)[number];
 
 const cwdSchema = z.string().min(1).max(500).optional().describe("Absolute or current-working-directory-relative path to the target repository.");
 const taskSchema = z.string().min(1).max(4_000).describe("The outcome the coding agent should achieve.");
 const idSchema = z.string().min(1).max(200).optional().describe("Optional workflow run ID.");
+const requiredIdSchema = z.string().min(1).max(200).describe("Workflow run ID.");
+const evidenceSchema = z.record(z.string().min(1).max(200), z.string().min(1).max(8_000)).describe("Evidence keyed by workflow step ID.");
 
 function targetDirectory(cwd?: string): string {
   return path.resolve(process.cwd(), cwd ?? ".");
@@ -24,12 +26,13 @@ function result(value: unknown) {
   return { content: [{ type: "text" as const, text: JSON.stringify(value) }] };
 }
 
-export async function executeForgeTool(name: ForgeMcpTool, args: { cwd?: string; task?: string; id?: string }): Promise<unknown> {
+export async function executeForgeTool(name: ForgeMcpTool, args: { cwd?: string; task?: string; id?: string; evidence?: Record<string, string> }): Promise<unknown> {
   const cwd = targetDirectory(args.cwd);
   if (name === "forge_prepare") return prepareWorkPacket(cwd, args.task ?? "");
   if (name === "forge_plan") return createPlan(cwd, args.task ?? "");
   if (name === "forge_context") return showContext(cwd);
   if (name === "forge_run_status") return args.id ? loadWorkflowRun(cwd, args.id) : latestWorkflowRun(cwd);
+  if (name === "forge_run_complete") return completeWorkflowRun(cwd, args.id ?? "", args.evidence ?? {});
   return summarizeEfficiencyMetrics(cwd);
 }
 
@@ -92,6 +95,17 @@ export function createForgeMcpServer(): McpServer {
       annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true },
     },
     async (args) => result(await executeForgeTool("forge_run_status", args)),
+  );
+
+  server.registerTool(
+    "forge_run_complete",
+    {
+      title: "Complete remaining workflow stages",
+      description: "Atomically record stage-specific evidence for every remaining workflow step. Required human approvals must already be resolved.",
+      inputSchema: z.object({ id: requiredIdSchema, evidence: evidenceSchema, cwd: cwdSchema }).strict(),
+      annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: false },
+    },
+    async (args) => result(await executeForgeTool("forge_run_complete", args)),
   );
 
   return server;
