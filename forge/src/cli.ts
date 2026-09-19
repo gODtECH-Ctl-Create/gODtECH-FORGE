@@ -1,5 +1,7 @@
 #!/usr/bin/env node
+import { promises as fs } from "node:fs";
 import path from "node:path";
+import { parseDocument } from "yaml";
 import { showContext, updateContext } from "./context.js";
 import { doctorProject } from "./doctor.js";
 import { initProject } from "./init.js";
@@ -13,6 +15,7 @@ import { VERSION } from "./version.js";
 import {
   advanceWorkflowRun,
   approveWorkflowRun,
+  completeWorkflowRun,
   latestWorkflowRun,
   loadWorkflowRun,
   nextRunStep,
@@ -35,6 +38,7 @@ Usage:
   forge run status [--id <run-id>] [--cwd <directory>] [--json]
   forge run approve --id <run-id> --checkpoint <checkpoint-id> --by <identity> [--cwd <directory>] [--json]
   forge run advance --id <run-id> --evidence <text> [--cwd <directory>] [--json]
+  forge run complete --id <run-id> --evidence-file <path> [--cwd <directory>] [--json]
   forge --version
   forge --help
 
@@ -46,7 +50,7 @@ Commands:
   plan      Classify work and produce a risk-aware execution plan.
   prepare   Build or reuse a compact deterministic AI work packet.
   metrics   Summarize local preparation efficiency without source or task text.
-  run       Start, inspect, approve, and advance persistent workflow runs.
+  run       Start, inspect, approve, advance, or batch-complete persistent workflow runs.
 `;
 
 interface Arguments {
@@ -66,6 +70,7 @@ interface Arguments {
   checkpoint?: string;
   by?: string;
   evidence?: string;
+  evidenceFile?: string;
 }
 
 function requiredValue(argv: string[], index: number, flag: string): string {
@@ -112,6 +117,9 @@ function parse(argv: string[]): Arguments {
       index += 1;
     } else if (value === "--evidence") {
       parsed.evidence = requiredValue(argv, index, value);
+      index += 1;
+    } else if (value === "--evidence-file") {
+      parsed.evidenceFile = requiredValue(argv, index, value);
       index += 1;
     } else if (value === "--json") parsed.json = true;
     else if (value === "--dry-run") parsed.dryRun = true;
@@ -198,6 +206,28 @@ function printPacket(packet: WorkPacket): void {
   console.log(`Selected framework references: ${packet.frameworkReferences.length}`);
 }
 
+async function loadEvidenceFile(cwd: string, file: string): Promise<Record<string, string>> {
+  const absolute = path.resolve(cwd, file);
+  const source = await fs.readFile(absolute, "utf8");
+  const document = parseDocument(source);
+  if (document.errors.length > 0) {
+    throw new Error(`Evidence file is invalid YAML or JSON: ${document.errors[0]!.message}`);
+  }
+  const value: unknown = document.toJS();
+  if (typeof value !== "object" || value === null || Array.isArray(value)) {
+    throw new Error("Evidence file must contain a mapping of workflow step IDs to evidence text.");
+  }
+
+  const evidence: Record<string, string> = {};
+  for (const [stepId, item] of Object.entries(value)) {
+    if (typeof item !== "string" || !item.trim()) {
+      throw new Error(`Evidence for step ${stepId} must be a non-empty string.`);
+    }
+    evidence[stepId] = item.trim();
+  }
+  return evidence;
+}
+
 function printMetrics(report: EfficiencyMetricsReport): void {
   console.log(`Prepare events: ${report.events}`);
   console.log(`Cache hits: ${report.cacheHits} (${(report.cacheHitRate * 100).toFixed(1)}%)`);
@@ -270,8 +300,8 @@ async function main(): Promise<number> {
   }
 
   if (args.command === "run") {
-    if (!args.subcommand || !["start", "status", "approve", "advance"].includes(args.subcommand)) {
-      throw new Error("run requires one of: start, status, approve, advance.");
+    if (!args.subcommand || !["start", "status", "approve", "advance", "complete"].includes(args.subcommand)) {
+      throw new Error("run requires one of: start, status, approve, advance, complete.");
     }
 
     let run: WorkflowRun;
@@ -285,9 +315,13 @@ async function main(): Promise<number> {
         throw new Error("run approve requires --id, --checkpoint, and --by.");
       }
       run = await approveWorkflowRun(args.cwd, args.id, args.checkpoint, args.by);
-    } else {
+    } else if (args.subcommand === "advance") {
       if (!args.id || !args.evidence) throw new Error("run advance requires --id and --evidence.");
       run = await advanceWorkflowRun(args.cwd, args.id, args.evidence);
+    } else {
+      if (!args.id || !args.evidenceFile) throw new Error("run complete requires --id and --evidence-file.");
+      const evidence = await loadEvidenceFile(args.cwd, args.evidenceFile);
+      run = await completeWorkflowRun(args.cwd, args.id, evidence);
     }
 
     args.json ? console.log(JSON.stringify(run, null, 2)) : printRun(run);
