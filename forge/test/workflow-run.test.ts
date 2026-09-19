@@ -7,6 +7,7 @@ import { initProject } from "../src/init.js";
 import {
   advanceWorkflowRun,
   approveWorkflowRun,
+  completeWorkflowRun,
   latestWorkflowRun,
   loadWorkflowRun,
   startWorkflowRun,
@@ -66,6 +67,70 @@ test("a high-risk workflow waits for every human approval", async (context) => {
   );
   const advanced = await advanceWorkflowRun(cwd, run.id, "Repository and context inspected.");
   assert.equal(advanced.completedSteps.length, 1);
+});
+
+
+
+test("batch completion records evidence for every remaining step atomically", async (context) => {
+  const cwd = await initializedProject();
+  context.after(() => fs.rm(cwd, { recursive: true, force: true }));
+
+  let run = await startWorkflowRun(cwd, "Update README wording", {
+    id: "20260910T130000000Z-batch",
+    now: new Date("2026-09-10T13:00:00Z"),
+  });
+  run = await advanceWorkflowRun(cwd, run.id, "Repository inspected.", {
+    now: new Date("2026-09-10T13:01:00Z"),
+  });
+
+  const remaining = Object.fromEntries(
+    run.plan.steps.slice(run.completedSteps.length).map((step) => [step.id, `Evidence for ${step.id}`]),
+  );
+  run = await completeWorkflowRun(cwd, run.id, remaining, {
+    now: new Date("2026-09-10T13:02:00Z"),
+  });
+
+  assert.equal(run.status, "completed");
+  assert.deepEqual(run.completedSteps.map((item) => item.stepId), run.plan.steps.map((item) => item.id));
+  assert.equal(run.completedSteps[0]!.evidence, "Repository inspected.");
+});
+
+test("batch completion is blocked by approvals and rejects incomplete evidence without partial writes", async (context) => {
+  const cwd = await initializedProject();
+  context.after(() => fs.rm(cwd, { recursive: true, force: true }));
+
+  let run = await startWorkflowRun(cwd, "Implement authorization permissions", {
+    id: "20260910T140000000Z-secure-batch",
+    now: new Date("2026-09-10T14:00:00Z"),
+  });
+  assert.equal(run.status, "awaiting-approval");
+
+  const allEvidence = Object.fromEntries(run.plan.steps.map((step) => [step.id, `Evidence for ${step.id}`]));
+  await assert.rejects(
+    completeWorkflowRun(cwd, run.id, allEvidence),
+    /requires approval/,
+  );
+
+  for (const checkpoint of run.approvals) {
+    run = await approveWorkflowRun(cwd, run.id, checkpoint.id, "security-owner");
+  }
+
+  const missingOne = { ...allEvidence };
+  delete missingOne[run.plan.steps.at(-1)!.id];
+  await assert.rejects(
+    completeWorkflowRun(cwd, run.id, missingOne),
+    /Evidence is required for every remaining step/,
+  );
+  assert.equal((await loadWorkflowRun(cwd, run.id)).completedSteps.length, 0);
+
+  await assert.rejects(
+    completeWorkflowRun(cwd, run.id, { ...allEvidence, unknown: "not allowed" }),
+    /unknown or already-completed step IDs/,
+  );
+  assert.equal((await loadWorkflowRun(cwd, run.id)).completedSteps.length, 0);
+
+  run = await completeWorkflowRun(cwd, run.id, allEvidence);
+  assert.equal(run.status, "completed");
 });
 
 test("status without an ID selects the newest run by creation time", async (context) => {
