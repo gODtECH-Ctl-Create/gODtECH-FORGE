@@ -163,7 +163,37 @@ forge run start --task "Add passwordless sign-in"
 forge run status
 ```
 
-Higher-risk plans can stop at explicit human approval checkpoints. FORGE records workflow evidence; v0.6 does not silently execute arbitrary discovered project commands.
+Higher-risk plans can stop at explicit human approval checkpoints.
+
+FORGE supports two evidence-recording styles:
+
+**Granular mode** — advance one stage at a time:
+
+```bash
+forge run advance --id <run-id> --evidence "Repository and context inspected."
+```
+
+**Compact mode** — after the work is complete, record evidence for every remaining stage in one atomic transition:
+
+```bash
+forge run complete --id <run-id> --evidence-file .forge/evidence/run-evidence.yaml
+```
+
+Example evidence file:
+
+```yaml
+inspect-context: Repository state, constraints, and prior decisions were confirmed.
+review-architecture: Architecture decisions and trade-offs were recorded.
+review-security: Trust boundaries, threats, and required controls were reviewed.
+implement: Scoped implementation was completed.
+test: Applicable automated checks passed.
+verify: Objective completion evidence was collected.
+deliver: Issue, branch, review, and delivery state were recorded.
+```
+
+The stage history is still persisted separately inside the run. Compact mode removes repetitive manual `1/7 → 2/7 → ...` transitions; it does not collapse the audit trail or bypass required approvals.
+
+FORGE records workflow evidence and does not silently execute arbitrary discovered project commands.
 
 ---
 
@@ -294,6 +324,7 @@ Start a new Codex thread after installation.
 | `forge_plan` | Proportional capabilities, approvals, workflow, and ordered steps |
 | `forge_context` | Maintained product, technical, experience, security, and operations context |
 | `forge_run_status` | Current progress, next step, approvals, and evidence for a resumable run |
+| `forge_run_complete` | Atomically record evidence for all remaining stages after required approvals are resolved |
 | `forge_metrics` | Local cache reuse, latency, deterministic-work, and context-reduction aggregates |
 
 These tools do not call a model, approve human gates, or silently execute arbitrary project commands. The MCP layer exposes FORGE's preparation and workflow engine; the coding client remains responsible for model execution.
