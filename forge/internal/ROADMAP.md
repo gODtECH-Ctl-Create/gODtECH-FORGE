@@ -42,7 +42,9 @@ This roadmap describes the intended build order. Contributors may pick work from
 - [ ] Invoke StackPilot for scaffolding, generation, and supported project adoption
 - [ ] Invoke Steward for repository maintenance and safe remediation when applicable
 
-## Phase 3 · Intelligence
+## Phase 3 · Intelligence — ACTIVE
+
+Current priority: implement the modular intelligence layer without pulling later enforcement, memory, or ecosystem work forward. Controlled benchmark studies remain a separate evidence track and do not block this phase.
 
 - [ ] Product intelligence
 - [ ] Market intelligence
@@ -60,7 +62,7 @@ This roadmap describes the intended build order. Contributors may pick work from
 ## Phase 4 · Deterministic tooling
 
 - [ ] Tree-sitter repository analysis
-- [ ] CUE validation
+- [x] CUE validation
 - [ ] Open Policy Agent (OPA) / Rego evaluation
 - [x] Dependency and manifest inspection
 - [x] Git state and branch checks
@@ -92,14 +94,14 @@ This roadmap describes the intended build order. Contributors may pick work from
 - [x] Deterministic-first routing
 - [x] Model escalation policy
 - [ ] Usage/cost telemetry
-- [ ] Efficiency metrics
+- [x] Efficiency metrics
 - [ ] Baseline-versus-assisted credit measurement
 - [ ] Cache and reuse validated external deterministic-tool results where safe
 
 ## Phase 7 · Agent ecosystem
 
-- [ ] Model Context Protocol (MCP) server
-- [ ] Codex adapter
+- [x] Model Context Protocol (MCP) server
+- [x] Codex adapter
 - [ ] Claude adapter
 - [ ] Cursor adapter
 - [ ] GitHub Copilot adapter
@@ -108,10 +110,10 @@ This roadmap describes the intended build order. Contributors may pick work from
 ## Phase 8 · Operations and durability
 
 - [ ] OpenTelemetry instrumentation
-- [ ] Durable run history
-- [ ] Recovery/resume semantics
+- [x] Durable run history
+- [x] Recovery/resume semantics
 - [ ] Temporal integration where justified
-- [ ] Release management
+- [x] Release management
 - [ ] Upgrade/migration strategy for FORGE-enabled repositories
 
 ## Phase 9 · Template productization
@@ -121,7 +123,7 @@ This roadmap describes the intended build order. Contributors may pick work from
 - [ ] Documentation for adopters
 - [ ] Public contribution model
 - [x] Remove or relocate internal planning material
-- [ ] Stable versioning and release process
+- [x] Stable versioning and release process
 
 ## Cross-product architecture
 

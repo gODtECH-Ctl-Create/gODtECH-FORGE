@@ -440,6 +440,7 @@ forge/
 | `forge run status [--id …]` | Read the latest or a named run |
 | `forge run approve --id … --checkpoint … --by …` | Record a required human approval |
 | `forge run advance --id … --evidence …` | Complete the next step with evidence |
+| `forge run complete --id … --evidence-file …` | Atomically record evidence for all remaining stages after approvals are resolved |
 | `forge mcp serve` | Serve provider-neutral tools over stdio |
 
 Project-aware commands accept `--cwd <directory>`. Structured consumers can use `--json` where supported.
@@ -484,7 +485,7 @@ FORGE is designed to increase agent capability without quietly removing human co
 
 ## 🗺️ Roadmap
 
-### Phase I · Executable foundation
+### Phase I · Executable foundation — COMPLETE
 
 - [x] Portable project contracts and CUE validation
 - [x] Cross-platform CLI and safe initialization
@@ -494,14 +495,20 @@ FORGE is designed to increase agent capability without quietly removing human co
 - [x] Provider-neutral MCP server
 - [x] Repository-bundled Codex plugin
 - [x] Privacy-preserving local cache, latency, and context-reduction metrics
+- [x] Compact governed workflow completion
 - [x] Choose an open-source license
 - [x] Publish signed package and release artifacts
 - [x] Complete external DeployGuard exploratory benchmark phase
 - [x] Feed benchmark learning back into task classification
-- [ ] Complete controlled plain-AI versus FORGE v0.7.0 comparisons ([tracking issue #49](https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/issues/49))
-- [ ] Accept opt-in provider usage and retry outcomes for assisted-versus-baseline studies
 
-### Phase II · Intelligence
+#### Deferred evidence track
+
+These studies remain useful for measuring FORGE, but they are not prerequisites for Phase II:
+
+- [ ] Controlled plain-AI versus FORGE comparisons ([tracking issue #49](https://github.com/gODtECH-Ctl-Create/gODtECH-FORGE/issues/49))
+- [ ] Opt-in provider usage, retry, cost, and outcome measurements where direct telemetry is available
+
+### Phase II · Intelligence — ACTIVE
 
 - [ ] Product and market intelligence
 - [ ] Research workflow and evidence quality
