@@ -56,7 +56,7 @@ SHIP
 
 FORGE is **not a model**, **not a fixed application stack**, and **not one giant prompt**. It is a local CLI, a portable `.forge/` project layer, a deterministic planning engine, and a provider-neutral MCP server.
 
-> **v0.6 focus:** the CLI, deterministic planner, cached AI work packets, privacy-preserving efficiency metrics, resumable runs, CUE contracts, MCP server, Codex plugin, and verified GitHub release distribution are implemented. Public registry packages, native binaries, automatic trusted execution, and dedicated provider adapters remain roadmap work.
+> **Current focus:** the Phase I execution/governance foundation is complete and Phase II Intelligence is active. Product, Market, and Research Intelligence are the first selectively loaded reasoning modules; architecture, design, engineering, security, quality, and operations intelligence follow.
 
 <a href="#readme-top">↑ back to top</a>
 
@@ -236,6 +236,18 @@ A preparation pass can:
 - suggest an `economy`, `standard`, or `advanced` model tier;
 - cache the resulting work packet by a SHA-256 fingerprint for reuse.
 
+### Selective Intelligence
+
+FORGE now includes task-selective reasoning guidance under `.forge/intelligence/`.
+
+The first implemented modules are:
+
+- **Product Intelligence** — clarifies the problem, users, value, workflows, MVP boundaries, non-goals, assumptions, and success criteria.
+- **Market Intelligence** — evaluates target geography/segment, alternatives, expectations, differentiation, and adoption constraints using evidence rather than guesses.
+- **Research Intelligence** — defines research questions, source-quality/freshness rules, fact-vs-inference boundaries, limitations, and stop conditions.
+
+A narrow feature can load Product Intelligence without automatically paying the cost of market research. Product-creation or early product-definition tasks can activate Product + Market + Research together. `forge prepare` includes only the intelligence files activated by the plan.
+
 ### Measure the preparation layer
 
 Every prepare call records a privacy-preserving local event. View aggregate cache reuse, preparation latency, deterministic steps, model-tier routing, and estimated context reduction with:
@@ -256,6 +268,7 @@ Events are Git-ignored under `.forge/metrics/`. They contain counts and categori
 | **Repository intelligence** | Deterministic inspection of project facts, Git state, manifests, context, and verification commands |
 | **AI efficiency** | Bounded work packets, cache reuse, task-relevant context, and proportional model-tier suggestions |
 | **Planning** | Task classification, risk-aware capabilities, ordered steps, workflows, and approval checkpoints |
+| **Product intelligence** | Selective Product, Market, and Research guidance for product definition and evidence-aware decisions |
 | **Governance** | Human gates for sensitive work and explicit separation of instructions, policies, evidence, and execution |
 | **Memory** | Maintained project context, decisions, resumable runs, progress, approvals, and evidence under `.forge/` |
 | **Agent integration** | Provider-neutral local MCP server plus a repository-bundled Codex plugin |
@@ -510,8 +523,8 @@ These studies remain useful for measuring FORGE, but they are not prerequisites 
 
 ### Phase II · Intelligence — ACTIVE
 
-- [ ] Product and market intelligence
-- [ ] Research workflow and evidence quality
+- [x] Product and market intelligence
+- [x] Research workflow and evidence quality
 - [ ] Architecture and design intelligence
 - [ ] Engineering, security, quality, and operations intelligence
 - [ ] Adaptive packet selection informed by measured outcomes
