@@ -21,7 +21,7 @@ Never modify FORGE's core rules simply to make a task easier. Project context ma
 ## Before implementation
 
 1. Read the relevant `.forge/workflows/` procedure.
-2. Read only the `.forge/intelligence/` modules needed for the task.
+2. Read only the `.forge/intelligence/` modules needed for the task. Follow their evidence rules and do not leave a material module until its exit conditions are met or the unresolved limitation is recorded.
 3. Read applicable `.forge/policies/`, especially Git/delivery, AI efficiency, and provenance rules.
 4. Inspect existing project structure, dependencies, configuration, and conventions.
 5. Determine the required product, market, architecture, design, security, quality, deployment, and documentation context.
