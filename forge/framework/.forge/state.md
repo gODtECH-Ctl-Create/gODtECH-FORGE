@@ -20,12 +20,15 @@ Phase II Intelligence active. Phase I executable foundation is complete.
 - Signed GitHub releases published through v0.7.0 with packaged CLI, installers, checksums, and provenance.
 - DeployGuard exploratory benchmark phase completed and benchmark learning fed back into task classification.
 - Compact governed workflow completion merged through PR #53.
+- Intelligence module contract defined with explicit triggers, inputs, procedure, evidence rules, outputs, exit conditions, failure modes, efficiency notes, and security considerations.
+- Product, Market, and Research Intelligence implemented as selectively activated bundled modules.
+- Product-creation tasks now activate Product + Market + Research, while narrow feature tasks avoid unnecessary market/research loading.
 
 ## Active work
 
-- Build Phase II Intelligence, beginning with product, market, and research intelligence.
-- Define mature intelligence-module contracts, activation criteria, outputs, evidence requirements, and exit conditions.
-- Expand next into architecture/design intelligence, followed by engineering/security/quality/operations intelligence.
+- Build Architecture and Design Intelligence on the same module contract.
+- Expand next into Engineering, Security, Quality, and Operations Intelligence.
+- Evolve adaptive module selection using measured outcomes without loading every module for every task.
 
 ## Deferred / non-blocking
 
@@ -36,7 +39,7 @@ Phase II Intelligence active. Phase I executable foundation is complete.
 
 ## Open questions
 
-- What is the minimum shared contract every intelligence module must implement?
+- Which additional module outputs need machine-readable schemas beyond the shared Markdown contract?
 - Which product and market decisions require external research versus stored project context?
 - How should evidence quality and source freshness affect intelligence outputs?
 - Which intelligence outputs should become durable project context, decisions, or run evidence?

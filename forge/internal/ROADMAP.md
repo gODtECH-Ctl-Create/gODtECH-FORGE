@@ -46,9 +46,9 @@ This roadmap describes the intended build order. Contributors may pick work from
 
 Current priority: implement the modular intelligence layer without pulling later enforcement, memory, or ecosystem work forward. Controlled benchmark studies remain a separate evidence track and do not block this phase.
 
-- [ ] Product intelligence
-- [ ] Market intelligence
-- [ ] Research intelligence
+- [x] Product intelligence
+- [x] Market intelligence
+- [x] Research intelligence
 - [ ] Architecture intelligence
 - [ ] Design intelligence integration
 - [ ] Engineering intelligence

@@ -45,6 +45,25 @@ test("planner treats new incident product work as feature work", async (context)
   assert.equal(plan.taskKind, "feature");
   assert.equal(plan.risk, "medium");
   assert.ok(plan.capabilities.some((item) => item.capability === "product"));
+  assert.equal(plan.capabilities.some((item) => item.capability === "market"), false);
+  assert.equal(plan.capabilities.some((item) => item.capability === "research"), false);
+});
+
+test("planner activates product market and research intelligence for new product creation", async (context) => {
+  const cwd = await initializedProject();
+  context.after(() => fs.rm(cwd, { recursive: true, force: true }));
+
+  const plan = await createPlan(cwd, "Build a healthcare management platform for small clinics in Nigeria");
+  const capabilities = new Set(plan.capabilities.map((item) => item.capability));
+
+  assert.equal(plan.taskKind, "feature");
+  assert.ok(capabilities.has("product"));
+  assert.ok(capabilities.has("market"));
+  assert.ok(capabilities.has("research"));
+  assert.ok(plan.signals.some((signal) => signal.includes("Product-creation")));
+  assert.ok(plan.steps.some((step) => step.id === "define-outcome" && step.capability === "product"));
+  assert.ok(plan.steps.some((step) => step.id === "gather-evidence" && step.capability === "research"));
+  assert.ok(plan.steps.some((step) => step.id === "evaluate-market" && step.capability === "market"));
 });
 
 test("planner still treats incident outages as bug work", async (context) => {

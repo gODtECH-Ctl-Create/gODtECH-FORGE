@@ -273,8 +273,9 @@ function selectContext(context: Record<string, unknown>, plan: OrchestrationPlan
   const paths = new Set(["project.name", "project.status", "product.problem", "security.risk_level"]);
   const capabilities = new Set(plan.capabilities.map((item) => item.capability));
   const byCapability: Partial<Record<Capability, string[]>> = {
-    product: ["product.value_proposition", "product.goals", "product.non_goals"],
-    market: ["market.geography", "market.segment", "market.differentiation"],
+    product: ["product.users", "product.value_proposition", "product.goals", "product.non_goals"],
+    market: ["market.geography", "market.segment", "market.competitors", "market.differentiation", "market.evidence"],
+    research: ["market.evidence", "forge.open_questions", "forge.material_risks"],
     architecture: ["technical.architecture", "technical.stack", "technical.constraints"],
     engineering: ["technical.stack", "technical.integrations", "technical.constraints"],
     design: ["experience.platforms", "experience.ux_priorities", "experience.accessibility_requirements"],
@@ -309,6 +310,15 @@ async function existingFrameworkReferences(cwd: string, plan: OrchestrationPlan)
   if (capabilities.has("documentation")) candidates.push(".forge/workflows/README-GENERATION.md");
   if (["product", "market", "research", "architecture", "design", "engineering", "security", "quality", "operations"].some((item) => capabilities.has(item as Capability))) {
     candidates.push(".forge/intelligence/README.md");
+  }
+  const intelligenceByCapability: Partial<Record<Capability, string>> = {
+    product: ".forge/intelligence/PRODUCT.md",
+    market: ".forge/intelligence/MARKET.md",
+    research: ".forge/intelligence/RESEARCH.md",
+  };
+  for (const capability of capabilities) {
+    const reference = intelligenceByCapability[capability];
+    if (reference) candidates.push(reference);
   }
   const results = await Promise.all(candidates.map(async (file) => ({ file, present: await exists(path.join(cwd, file)) })));
   return results.filter((item) => item.present).map((item) => item.file).sort().slice(0, MAX_CONTEXT_FILES);

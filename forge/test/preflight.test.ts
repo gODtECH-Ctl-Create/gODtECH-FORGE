@@ -77,6 +77,24 @@ test("prepare excludes secret content and fingerprints material manifest changes
   assert.ok(changed.commands.some((item) => item.command === "npm run lint"));
 });
 
+test("prepare selects only task-relevant intelligence modules", async (context) => {
+  const cwd = await preparedProject();
+  context.after(() => fs.rm(cwd, { recursive: true, force: true }));
+
+  const narrow = await prepareWorkPacket(cwd, "Add incident CRUD endpoints and dashboard workflow");
+  assert.ok(narrow.frameworkReferences.includes(".forge/intelligence/README.md"));
+  assert.ok(narrow.frameworkReferences.includes(".forge/intelligence/PRODUCT.md"));
+  assert.equal(narrow.frameworkReferences.includes(".forge/intelligence/MARKET.md"), false);
+  assert.equal(narrow.frameworkReferences.includes(".forge/intelligence/RESEARCH.md"), false);
+
+  const product = await prepareWorkPacket(cwd, "Build a healthcare management platform for small clinics in Nigeria");
+  assert.ok(product.frameworkReferences.includes(".forge/intelligence/PRODUCT.md"));
+  assert.ok(product.frameworkReferences.includes(".forge/intelligence/MARKET.md"));
+  assert.ok(product.frameworkReferences.includes(".forge/intelligence/RESEARCH.md"));
+  assert.ok(Object.hasOwn(product.projectContext, "product.users"));
+  assert.ok(Object.hasOwn(product.projectContext, "market.evidence"));
+});
+
 test("prepare fingerprints material project-context changes", async (context) => {
   const cwd = await preparedProject();
   context.after(() => fs.rm(cwd, { recursive: true, force: true }));

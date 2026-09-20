@@ -73,6 +73,16 @@ export async function createPlan(cwd: string, taskInput: string): Promise<Orches
   const sensitive = /\b(auth|authentication|authorization|oauth|password|secret|credential|payment|billing|personal data|pii|encrypt|permission)\b/i.test(task);
   const production = /\b(prod|production|live environment|release|customer data)\b/i.test(task);
   const destructive = /\b(drop table|delete (all|database|records|data)|truncate|destroy|purge|reset database|force push)\b/i.test(task);
+  const productDiscovery =
+    /\b(build|create|design|define|launch|plan|start)\b[\s\S]{0,100}\b(product|platform|application|app|saas|mvp|service|system)\b/i.test(task) ||
+    /\bnew\s+(product|platform|application|app|saas|mvp|service|system)\b/i.test(task);
+
+  if (productDiscovery) {
+    signals.push("Product-creation or early product-definition intent detected.");
+    addCapability(capabilities, "product", "Product creation requires explicit users, value, scope, and non-goals.");
+    addCapability(capabilities, "market", "Product creation requires market context and alternatives when material.");
+    addCapability(capabilities, "research", "Product and market decisions may require current external evidence.");
+  }
 
   if (sensitive) {
     risk = maximum(risk, "high");
@@ -118,8 +128,9 @@ export async function createPlan(cwd: string, taskInput: string): Promise<Orches
   const steps: PlanStep[] = [
     step("inspect-context", "define", "Confirm repository state, intended outcome, constraints, and existing decisions.", "efficiency"),
   ];
-  if (capabilities.has("product")) steps.push(step("define-outcome", "define", "Confirm users, value, scope, and non-goals.", "product"));
-  if (capabilities.has("market")) steps.push(step("gather-evidence", "research", "Gather and record only evidence material to the decision.", "research"));
+  if (capabilities.has("product")) steps.push(step("define-outcome", "define", "Confirm users, value, scope, workflows, success criteria, and non-goals.", "product"));
+  if (capabilities.has("research")) steps.push(step("gather-evidence", "research", "Gather only external evidence material to unresolved decisions and record source quality, freshness, and limitations.", "research"));
+  if (capabilities.has("market")) steps.push(step("evaluate-market", "research", "Evaluate the target market, alternatives, expectations, constraints, and evidence-backed differentiation.", "market"));
   if (capabilities.has("architecture")) steps.push(step("review-architecture", "architect", "Select the smallest robust design and record trade-offs.", "architecture"));
   if (capabilities.has("security")) steps.push(step("review-security", "secure", "Identify trust boundaries, threats, and required controls.", "security"));
   if (capabilities.has("engineering")) steps.push(step("implement", "build", "Implement the scoped change while preserving unrelated behavior.", "engineering"));
