@@ -213,6 +213,51 @@ export async function advanceWorkflowRun(
   return run;
 }
 
+export async function completeWorkflowRun(
+  cwd: string,
+  id: string,
+  evidenceByStep: Record<string, string>,
+  options: TransitionOptions = {},
+): Promise<WorkflowRun> {
+  const run = await loadWorkflowRun(cwd, id);
+  if (run.status === "completed") throw new Error("Workflow run is already complete.");
+
+  const unresolved = unresolvedApprovals(run);
+  if (unresolved.length > 0) {
+    throw new Error(`Workflow run requires approval: ${unresolved.map((item) => item.id).join(", ")}`);
+  }
+
+  const remaining = run.plan.steps.slice(run.completedSteps.length);
+  if (remaining.length === 0) throw new Error("Workflow run has no remaining steps.");
+
+  const remainingIds = new Set(remaining.map((item) => item.id));
+  const suppliedIds = Object.keys(evidenceByStep);
+  const unexpected = suppliedIds.filter((stepId) => !remainingIds.has(stepId));
+  if (unexpected.length > 0) {
+    throw new Error(`Evidence contains unknown or already-completed step IDs: ${unexpected.join(", ")}`);
+  }
+
+  const missing = remaining
+    .filter((step) => typeof evidenceByStep[step.id] !== "string" || !evidenceByStep[step.id]!.trim())
+    .map((step) => step.id);
+  if (missing.length > 0) {
+    throw new Error(`Evidence is required for every remaining step: ${missing.join(", ")}`);
+  }
+
+  const at = timestamp(options.now);
+  const completions: CompletedRunStep[] = remaining.map((step) => ({
+    stepId: step.id,
+    evidence: evidenceByStep[step.id]!.trim(),
+    completedAt: at,
+  }));
+
+  run.completedSteps.push(...completions);
+  run.updatedAt = at;
+  run.status = expectedStatus(run);
+  await writeRun(cwd, run);
+  return run;
+}
+
 export function nextRunStep(run: WorkflowRun): OrchestrationPlan["steps"][number] | undefined {
   return run.plan.steps[run.completedSteps.length];
 }

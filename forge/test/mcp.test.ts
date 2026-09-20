@@ -6,9 +6,10 @@ import path from "node:path";
 import test from "node:test";
 import { initProject } from "../src/init.js";
 import { executeForgeTool, MCP_TOOL_NAMES } from "../src/mcp.js";
+import { startWorkflowRun } from "../src/workflow-run.js";
 
 test("MCP exposes a small bounded tool surface", () => {
-  assert.deepEqual(MCP_TOOL_NAMES, ["forge_prepare", "forge_metrics", "forge_plan", "forge_context", "forge_run_status"]);
+  assert.deepEqual(MCP_TOOL_NAMES, ["forge_prepare", "forge_metrics", "forge_plan", "forge_context", "forge_run_status", "forge_run_complete"]);
 });
 
 test("MCP tools reuse the deterministic planner", async () => {
@@ -18,6 +19,26 @@ test("MCP tools reuse the deterministic planner", async () => {
     const plan = await executeForgeTool("forge_plan", { cwd, task: "Update README wording" }) as { taskKind: string; risk: string };
     assert.equal(plan.taskKind, "documentation");
     assert.equal(plan.risk, "low");
+  } finally {
+    await fs.rm(cwd, { recursive: true, force: true });
+  }
+});
+
+test("MCP can atomically complete remaining workflow stages", async () => {
+  const cwd = await fs.mkdtemp(path.join(os.tmpdir(), "forge-mcp-complete-"));
+  try {
+    await initProject({ cwd });
+    const run = await startWorkflowRun(cwd, "Update README wording", { id: "mcp-batch" });
+    const evidence = Object.fromEntries(
+      run.plan.steps.map((step) => [step.id, `Evidence for ${step.id}`]),
+    );
+    const completed = await executeForgeTool("forge_run_complete", {
+      cwd,
+      id: run.id,
+      evidence,
+    }) as { status: string; completedSteps: unknown[] };
+    assert.equal(completed.status, "completed");
+    assert.equal(completed.completedSteps.length, run.plan.steps.length);
   } finally {
     await fs.rm(cwd, { recursive: true, force: true });
   }
