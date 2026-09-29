@@ -40,11 +40,14 @@ Phase II Intelligence active. Phase I executable foundation is complete.
 - Git / Delivery Intelligence implemented with tracked-intent reasoning, branch/scope discipline, commit and PR structure, merge readiness, semantic conflict handling, hotfix delivery, and post-merge synchronization guidance.
 - The planner reuses the existing cross-cutting `git-delivery` capability, adds a dedicated `review-delivery` reasoning step before verification, and preserves the final `deliver` step plus `.forge/workflows/GIT.md` as the procedural delivery path.
 - `forge prepare` loads Git / Delivery Intelligence through the existing `git-delivery` capability without adding project-context fields or duplicating Git workflow/provenance responsibilities.
+- Provenance Intelligence implemented with framework/artifact origin, attribution, claim/source traceability, evidence lineage, provenance-drift detection, sensitive-data exclusions, and downstream provenance handoff guidance.
+- The planner selectively activates Provenance Intelligence for provenance, attribution, generated-by/source-traceability, evidence-origin, release-metadata, attestation/SBOM-style origin, and `.forge/manifest.yaml` work, adds a dedicated `review-provenance` step before delivery review, and keeps `.forge/policies/PROVENANCE.md` normative.
+- `forge prepare` loads Provenance Intelligence only when `provenance` is active and reuses bounded `branding.forge_provenance` context without exposing project-owned manifest contents.
 - Master implementation roadmap tracking is centralized in issue #76, and the delivery workflow requires roadmap items to be ticked only after verified merge.
 
 ## Active work
 
-- Build Provenance Intelligence with a boundary that complements rather than duplicates provenance policy.
+- Close the static Intelligence-module milestone cleanly after Provenance Intelligence is verified and merged.
 - Evolve adaptive module selection using measured outcomes without loading every module for every task.
 
 ## Deferred / non-blocking

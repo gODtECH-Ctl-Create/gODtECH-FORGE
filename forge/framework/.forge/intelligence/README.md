@@ -35,10 +35,7 @@ This contract keeps intelligence composable. The orchestrator selects modules; t
 - [Operations Intelligence](./OPERATIONS.md) — deployment/runtime targets, rollout and rollback, observability, health, capacity, failure recovery, migrations, runbooks, operational ownership, and production evidence.
 - [Documentation Intelligence](./DOCUMENTATION.md) — audience and reader outcomes, source-of-truth selection, factual accuracy, information architecture, examples/commands, status accuracy, stale-content detection, and verification-ready documentation evidence.
 - [Git / Delivery Intelligence](./GIT_DELIVERY.md) — tracked intent, branch/scope discipline, commit and PR structure, merge readiness, conflict handling, hotfix delivery, and post-merge synchronization.
-
-## Planned modules
-
-- provenance
+- [Provenance Intelligence](./PROVENANCE.md) — framework/artifact origin, attribution, evidence lineage, source/claim traceability, provenance drift, safe metadata, and downstream provenance handoff.
 
 ## Activation rules
 
@@ -52,6 +49,7 @@ This contract keeps intelligence composable. The orchestrator selects modules; t
 - Infrastructure, production-impact, deployment, observability, health, rollback, runbook, capacity, backup/restore, and other material runtime work activates Operations Intelligence through the existing `operations` capability.
 - Documentation and research/report work activates Documentation Intelligence through the existing `documentation` capability; ordinary implementation work does not pay that documentation-context cost unless the planner explicitly activates documentation.
 - Git / Delivery Intelligence follows the existing cross-cutting `git-delivery` capability. It provides delivery judgment, while `.forge/workflows/GIT.md` remains the procedural source of truth for issue, branch, PR, merge, and cleanup actions.
+- Provenance Intelligence activates only for provenance, attribution, generated-by/source traceability, evidence-origin, release-metadata, attestation/SBOM-style origin, or `.forge/manifest.yaml` work. `.forge/policies/PROVENANCE.md` remains the normative provenance policy.
 - Security, infrastructure, and material refactor work may activate Architecture directly without Product Intelligence.
 - A module may request another module when a material decision depends on evidence or another domain.
 - Do not use module activation as permission to broaden scope beyond the user's outcome.
