@@ -56,7 +56,7 @@ SHIP
 
 FORGE is **not a model**, **not a fixed application stack**, and **not one giant prompt**. It is a local CLI, a portable `.forge/` project layer, a deterministic planning engine, and a provider-neutral MCP server.
 
-> **Current focus:** the Phase I execution/governance foundation is complete and Phase II Intelligence is active. Product, Market, Research, Architecture, Design, Engineering, Security, Quality, Operations, Documentation, and Git/Delivery Intelligence are implemented reasoning modules; Provenance Intelligence and adaptive selection follow.
+> **Current focus:** the Phase I execution/governance foundation is complete and Phase II Intelligence is active. Product, Market, Research, Architecture, Design, Engineering, Security, Quality, Operations, Documentation, Git/Delivery, and Provenance Intelligence are implemented reasoning modules; adaptive selection informed by measured outcomes follows.
 
 <a href="#readme-top">↑ back to top</a>
 
@@ -187,6 +187,7 @@ review-architecture: Architecture decisions and trade-offs were recorded.
 review-security: Trust boundaries, threats, and required controls were reviewed.
 review-operations: Rollout, observability, recovery, and runtime evidence were reviewed when applicable.
 review-documentation: Documentation claims, examples, and status were checked against project sources when applicable.
+review-provenance: Source, attribution, version, and evidence lineage were checked when provenance-sensitive work was present.
 review-delivery: Tracked intent, branch scope, merge readiness, and post-merge synchronization requirements were reviewed.
 implement: Scoped implementation was completed.
 test: Applicable automated checks passed.
@@ -256,8 +257,9 @@ The implemented modules are:
 - **Operations Intelligence** — defines runtime targets, rollout and rollback behavior, configuration and secret delivery, observability, health, capacity, failure recovery, migration operations, runbooks, ownership, and post-release evidence.
 - **Documentation Intelligence** — defines audience and reader outcomes, source-of-truth selection, factual accuracy, information architecture, command/example verification, status accuracy, stale-content detection, and documentation verification handoffs.
 - **Git / Delivery Intelligence** — reasons about tracked intent, branch and scope discipline, commit/PR structure, merge readiness, conflict handling, hotfix delivery, and post-merge synchronization while leaving procedural Git actions to `.forge/workflows/GIT.md`.
+- **Provenance Intelligence** — reasons about framework/artifact origin, attribution, source/claim traceability, evidence lineage, release provenance, provenance drift, and safe metadata while leaving normative requirements to `.forge/policies/PROVENANCE.md`.
 
-A normal feature can load Product + Architecture + Engineering without automatically paying the cost of market research. Material UI/UX work adds Design Intelligence before Engineering, while backend-only features do not pay that design-context cost. Product-creation or early product-definition tasks can activate Product + Market + Research, with Architecture joining when structural technical decisions are required, Design joining only when a material user-facing surface is in scope, and Engineering joining when implementation is requested. Sensitive identity, permission, secret, payment, personal-data, production, destructive, and high-risk work adds Security Intelligence through the planner's existing security capability and approval model. Feature, bug, refactor, security, and infrastructure work adds Quality Intelligence through the existing quality capability. Infrastructure, production-impact, deployment, observability, health, rollback, runbook, capacity, backup/restore, and other material runtime work adds Operations Intelligence through the existing operations capability. Documentation and research/report work adds Documentation Intelligence through the existing documentation capability, while unrelated implementation work avoids that context cost. Git / Delivery Intelligence follows the existing cross-cutting `git-delivery` capability for governed repository work and does not add project-context fields. `forge prepare` includes the intelligence files activated by the plan.
+A normal feature can load Product + Architecture + Engineering without automatically paying the cost of market research. Material UI/UX work adds Design Intelligence before Engineering, while backend-only features do not pay that design-context cost. Product-creation or early product-definition tasks can activate Product + Market + Research, with Architecture joining when structural technical decisions are required, Design joining only when a material user-facing surface is in scope, and Engineering joining when implementation is requested. Sensitive identity, permission, secret, payment, personal-data, production, destructive, and high-risk work adds Security Intelligence through the planner's existing security capability and approval model. Feature, bug, refactor, security, and infrastructure work adds Quality Intelligence through the existing quality capability. Infrastructure, production-impact, deployment, observability, health, rollback, runbook, capacity, backup/restore, and other material runtime work adds Operations Intelligence through the existing operations capability. Documentation and research/report work adds Documentation Intelligence through the existing documentation capability, while unrelated implementation work avoids that context cost. Git / Delivery Intelligence follows the existing cross-cutting `git-delivery` capability for governed repository work and does not add project-context fields. Provenance Intelligence activates only when origin, attribution, generated-by/source traceability, evidence origin, release provenance/metadata, attestation/SBOM-style lineage, or `.forge/manifest.yaml` is materially in scope. `forge prepare` includes only the intelligence files activated by the plan.
 
 ### Measure the preparation layer
 
@@ -279,7 +281,7 @@ Events are Git-ignored under `.forge/metrics/`. They contain counts and categori
 | **Repository intelligence** | Deterministic inspection of project facts, Git state, manifests, context, and verification commands |
 | **AI efficiency** | Bounded work packets, cache reuse, task-relevant context, and proportional model-tier suggestions |
 | **Planning** | Task classification, risk-aware capabilities, ordered steps, workflows, and approval checkpoints |
-| **Intelligence** | Product, Market, Research, Architecture, Design, Engineering, Security, Quality, Operations, Documentation, and Git/Delivery guidance for product definition, evidence-aware decisions, proportional system design, implementation-ready user experience, repository-aligned code changes, security controls, risk-based quality strategy, operable runtime delivery, source-grounded documentation, and reviewable change delivery |
+| **Intelligence** | Product, Market, Research, Architecture, Design, Engineering, Security, Quality, Operations, Documentation, Git/Delivery, and Provenance guidance for product definition, evidence-aware decisions, proportional system design, implementation-ready user experience, repository-aligned code changes, security controls, risk-based quality strategy, operable runtime delivery, source-grounded documentation, reviewable change delivery, and trustworthy origin/evidence lineage |
 | **Governance** | Human gates for sensitive work and explicit separation of instructions, policies, evidence, and execution |
 | **Memory** | Maintained project context, decisions, resumable runs, progress, approvals, and evidence under `.forge/` |
 | **Agent integration** | Provider-neutral local MCP server plus a repository-bundled Codex plugin |
@@ -544,7 +546,7 @@ These studies remain useful for measuring FORGE, but they are not prerequisites 
 - [x] Operations intelligence
 - [x] Documentation intelligence
 - [x] Git/delivery intelligence
-- [ ] Provenance intelligence
+- [x] Provenance intelligence
 - [ ] Adaptive packet selection informed by measured outcomes
 
 ### Phase III · Enforcement
