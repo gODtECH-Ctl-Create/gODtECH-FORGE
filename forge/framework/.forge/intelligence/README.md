@@ -18,6 +18,8 @@ Every mature intelligence module defines:
 - COST / EFFICIENCY NOTES
 - SECURITY CONSIDERATIONS
 
+Modules may add domain-specific acceptance criteria when a precise handoff boundary is useful.
+
 This contract keeps intelligence composable. The orchestrator selects modules; the modules provide domain reasoning guidance; deterministic tooling provides facts and verification where possible.
 
 ## Available modules
@@ -25,10 +27,10 @@ This contract keeps intelligence composable. The orchestrator selects modules; t
 - [Product Intelligence](./PRODUCT.md) — problem, users, value, scope, workflows, MVP boundaries, and success criteria.
 - [Market Intelligence](./MARKET.md) — geography, segments, alternatives, positioning, adoption constraints, and evidence-backed differentiation.
 - [Research Intelligence](./RESEARCH.md) — bounded evidence gathering, source quality, freshness, uncertainty, and stop conditions.
+- [Architecture Intelligence](./ARCHITECTURE.md) — system boundaries, responsibilities, dependency direction, data/integration flows, topology, failure implications, and proportional architecture decisions.
 
 ## Planned modules
 
-- architecture
 - design
 - engineering
 - security
@@ -41,8 +43,9 @@ This contract keeps intelligence composable. The orchestrator selects modules; t
 ## Activation rules
 
 - Load only modules activated by the plan.
-- A normal narrow feature may need Product Intelligence without needing Market or Research Intelligence.
-- New-product, product-definition, market, competitor, pricing, feasibility, and explicit research work may activate Product + Market + Research together.
+- A normal feature may activate Product + Architecture without automatically requiring Market or Research Intelligence.
+- New-product, product-definition, market, competitor, pricing, feasibility, and explicit research work may activate Product + Market + Research together; Architecture joins when the plan reaches structural technical decisions.
+- Security, infrastructure, and material refactor work may activate Architecture directly without Product Intelligence.
 - A module may request another module when a material decision depends on evidence or another domain.
 - Do not use module activation as permission to broaden scope beyond the user's outcome.
 

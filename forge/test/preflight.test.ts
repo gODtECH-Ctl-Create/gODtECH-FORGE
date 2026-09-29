@@ -84,6 +84,7 @@ test("prepare selects only task-relevant intelligence modules", async (context) 
   const narrow = await prepareWorkPacket(cwd, "Add incident CRUD endpoints and dashboard workflow");
   assert.ok(narrow.frameworkReferences.includes(".forge/intelligence/README.md"));
   assert.ok(narrow.frameworkReferences.includes(".forge/intelligence/PRODUCT.md"));
+  assert.ok(narrow.frameworkReferences.includes(".forge/intelligence/ARCHITECTURE.md"));
   assert.equal(narrow.frameworkReferences.includes(".forge/intelligence/MARKET.md"), false);
   assert.equal(narrow.frameworkReferences.includes(".forge/intelligence/RESEARCH.md"), false);
 
@@ -91,8 +92,40 @@ test("prepare selects only task-relevant intelligence modules", async (context) 
   assert.ok(product.frameworkReferences.includes(".forge/intelligence/PRODUCT.md"));
   assert.ok(product.frameworkReferences.includes(".forge/intelligence/MARKET.md"));
   assert.ok(product.frameworkReferences.includes(".forge/intelligence/RESEARCH.md"));
+  assert.ok(product.frameworkReferences.includes(".forge/intelligence/ARCHITECTURE.md"));
   assert.ok(Object.hasOwn(product.projectContext, "product.users"));
   assert.ok(Object.hasOwn(product.projectContext, "market.evidence"));
+});
+
+test("prepare selects architecture intelligence only for architecture-capable work", async (context) => {
+  const cwd = await preparedProject();
+  context.after(() => fs.rm(cwd, { recursive: true, force: true }));
+  const architectureReference = ".forge/intelligence/ARCHITECTURE.md";
+
+  const feature = await prepareWorkPacket(cwd, "Add account recovery workflow and API endpoint");
+  const security = await prepareWorkPacket(cwd, "Implement OAuth authentication for admin accounts");
+  const infrastructure = await prepareWorkPacket(cwd, "Update the Terraform network configuration");
+  const refactor = await prepareWorkPacket(cwd, "Refactor account module dependencies to remove circular imports");
+  const documentation = await prepareWorkPacket(cwd, "Update README wording");
+
+  for (const packet of [feature, security, infrastructure, refactor]) {
+    assert.ok(packet.plan.capabilities.some((item) => item.capability === "architecture"));
+    assert.ok(packet.frameworkReferences.includes(architectureReference));
+  }
+  assert.equal(documentation.plan.capabilities.some((item) => item.capability === "architecture"), false);
+  assert.equal(documentation.frameworkReferences.includes(architectureReference), false);
+});
+
+test("prepare includes bounded architecture context when architecture is active", async (context) => {
+  const cwd = await preparedProject();
+  context.after(() => fs.rm(cwd, { recursive: true, force: true }));
+  await updateContext(cwd, "technical.architecture", "Modular monolith with PostgreSQL and background workers");
+
+  const packet = await prepareWorkPacket(cwd, "Refactor account module dependencies");
+  assert.equal(packet.projectContext["technical.architecture"], "Modular monolith with PostgreSQL and background workers");
+  assert.ok(Object.hasOwn(packet.projectContext, "technical.stack"));
+  assert.ok(Object.hasOwn(packet.projectContext, "technical.constraints"));
+  assert.ok(packet.preparation.selectedContextCharacters <= packet.preparation.maxContextCharacters);
 });
 
 test("prepare fingerprints material project-context changes", async (context) => {
