@@ -23,10 +23,12 @@ Phase II Intelligence active. Phase I executable foundation is complete.
 - Intelligence module contract defined with explicit triggers, inputs, procedure, evidence rules, outputs, exit conditions, failure modes, efficiency notes, and security considerations.
 - Product, Market, and Research Intelligence implemented as selectively activated bundled modules.
 - Product-creation tasks now activate Product + Market + Research, while narrow feature tasks avoid unnecessary market/research loading.
+- Architecture Intelligence implemented with proportional system-boundary, responsibility, dependency, data-flow, integration, failure-model, and handoff guidance.
+- `forge prepare` selectively loads Architecture Intelligence only when the planner activates the existing `architecture` capability and reuses bounded `technical.*` architecture context.
 
 ## Active work
 
-- Build Architecture and Design Intelligence on the same module contract.
+- Build Design Intelligence on the shared intelligence-module contract.
 - Expand next into Engineering, Security, Quality, and Operations Intelligence.
 - Evolve adaptive module selection using measured outcomes without loading every module for every task.
 
