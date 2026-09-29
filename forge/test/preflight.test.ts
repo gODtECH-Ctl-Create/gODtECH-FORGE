@@ -85,6 +85,7 @@ test("prepare selects only task-relevant intelligence modules", async (context) 
   assert.ok(narrow.frameworkReferences.includes(".forge/intelligence/README.md"));
   assert.ok(narrow.frameworkReferences.includes(".forge/intelligence/PRODUCT.md"));
   assert.ok(narrow.frameworkReferences.includes(".forge/intelligence/ARCHITECTURE.md"));
+  assert.ok(narrow.frameworkReferences.includes(".forge/intelligence/DESIGN.md"));
   assert.equal(narrow.frameworkReferences.includes(".forge/intelligence/MARKET.md"), false);
   assert.equal(narrow.frameworkReferences.includes(".forge/intelligence/RESEARCH.md"), false);
 
@@ -93,6 +94,7 @@ test("prepare selects only task-relevant intelligence modules", async (context) 
   assert.ok(product.frameworkReferences.includes(".forge/intelligence/MARKET.md"));
   assert.ok(product.frameworkReferences.includes(".forge/intelligence/RESEARCH.md"));
   assert.ok(product.frameworkReferences.includes(".forge/intelligence/ARCHITECTURE.md"));
+  assert.equal(product.frameworkReferences.includes(".forge/intelligence/DESIGN.md"), false);
   assert.ok(Object.hasOwn(product.projectContext, "product.users"));
   assert.ok(Object.hasOwn(product.projectContext, "market.evidence"));
 });
@@ -125,6 +127,37 @@ test("prepare includes bounded architecture context when architecture is active"
   assert.equal(packet.projectContext["technical.architecture"], "Modular monolith with PostgreSQL and background workers");
   assert.ok(Object.hasOwn(packet.projectContext, "technical.stack"));
   assert.ok(Object.hasOwn(packet.projectContext, "technical.constraints"));
+  assert.ok(packet.preparation.selectedContextCharacters <= packet.preparation.maxContextCharacters);
+});
+
+test("prepare selects Design Intelligence only for material experience work", async (context) => {
+  const cwd = await preparedProject();
+  context.after(() => fs.rm(cwd, { recursive: true, force: true }));
+  const designReference = ".forge/intelligence/DESIGN.md";
+
+  const ui = await prepareWorkPacket(cwd, "Redesign the onboarding screen with responsive navigation and error states");
+  const backend = await prepareWorkPacket(cwd, "Add audit API endpoint for incident history");
+  const infrastructure = await prepareWorkPacket(cwd, "Update the Terraform network configuration");
+  const documentation = await prepareWorkPacket(cwd, "Update README wording about the dashboard");
+
+  assert.ok(ui.plan.capabilities.some((item) => item.capability === "design"));
+  assert.ok(ui.frameworkReferences.includes(designReference));
+  for (const packet of [backend, infrastructure, documentation]) {
+    assert.equal(packet.plan.capabilities.some((item) => item.capability === "design"), false);
+    assert.equal(packet.frameworkReferences.includes(designReference), false);
+  }
+});
+
+test("prepare includes bounded experience context when Design Intelligence is active", async (context) => {
+  const cwd = await preparedProject();
+  context.after(() => fs.rm(cwd, { recursive: true, force: true }));
+  await updateContext(cwd, "experience.ui_direction", "CLI-first with accessible web administration surfaces");
+
+  const packet = await prepareWorkPacket(cwd, "Create an accessible admin dashboard screen with responsive navigation");
+  assert.ok(packet.frameworkReferences.includes(".forge/intelligence/DESIGN.md"));
+  assert.ok(Object.hasOwn(packet.projectContext, "experience.platforms"));
+  assert.ok(Object.hasOwn(packet.projectContext, "experience.ux_priorities"));
+  assert.ok(Object.hasOwn(packet.projectContext, "experience.accessibility_requirements"));
   assert.ok(packet.preparation.selectedContextCharacters <= packet.preparation.maxContextCharacters);
 });
 
