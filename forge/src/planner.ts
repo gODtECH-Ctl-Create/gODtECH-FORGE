@@ -76,12 +76,20 @@ export async function createPlan(cwd: string, taskInput: string): Promise<Orches
   const productDiscovery =
     /\b(build|create|design|define|launch|plan|start)\b[\s\S]{0,100}\b(product|platform|application|app|saas|mvp|service|system)\b/i.test(task) ||
     /\bnew\s+(product|platform|application|app|saas|mvp|service|system)\b/i.test(task);
+  const designSurface =
+    /\b(add|build|create|design|implement|introduce|redesign|improve|refine|update|change|ship)\b[\s\S]{0,120}\b(ui|user interface|user experience|ux|screen|page|dashboard|form|navigation|onboarding|checkout|wizard|modal|dialog|responsive|accessibility|a11y|interaction|empty state|loading state|error state|design system|component library)\b/i.test(task) ||
+    /\b(ui|user interface|user experience|ux|screen|page|dashboard|form|navigation|onboarding|checkout|wizard|modal|dialog|responsive|accessibility|a11y|interaction|empty state|loading state|error state|design system|component library)\b[\s\S]{0,80}\b(redesign|improve|refine|update|change|build|create|implement)\b/i.test(task);
 
   if (productDiscovery) {
     signals.push("Product-creation or early product-definition intent detected.");
     addCapability(capabilities, "product", "Product creation requires explicit users, value, scope, and non-goals.");
     addCapability(capabilities, "market", "Product creation requires market context and alternatives when material.");
     addCapability(capabilities, "research", "Product and market decisions may require current external evidence.");
+  }
+
+  if (designSurface && taskKind !== "documentation") {
+    signals.push("Material user-interface or user-experience surface detected.");
+    addCapability(capabilities, "design", "User-facing interaction requires explicit flow, state, accessibility, and responsive decisions.");
   }
 
   if (sensitive) {
@@ -131,7 +139,8 @@ export async function createPlan(cwd: string, taskInput: string): Promise<Orches
   if (capabilities.has("product")) steps.push(step("define-outcome", "define", "Confirm users, value, scope, workflows, success criteria, and non-goals.", "product"));
   if (capabilities.has("research")) steps.push(step("gather-evidence", "research", "Gather only external evidence material to unresolved decisions and record source quality, freshness, and limitations.", "research"));
   if (capabilities.has("market")) steps.push(step("evaluate-market", "research", "Evaluate the target market, alternatives, expectations, constraints, and evidence-backed differentiation.", "market"));
-  if (capabilities.has("architecture")) steps.push(step("review-architecture", "architect", "Select the smallest robust design and record trade-offs.", "architecture"));
+  if (capabilities.has("architecture")) steps.push(step("review-architecture", "architect", "Select the smallest robust architecture and record trade-offs.", "architecture"));
+  if (capabilities.has("design")) steps.push(step("review-design", "design", "Define the user flow, interaction states, accessibility, responsive behavior, and implementation handoff.", "design"));
   if (capabilities.has("security")) steps.push(step("review-security", "secure", "Identify trust boundaries, threats, and required controls.", "security"));
   if (capabilities.has("engineering")) steps.push(step("implement", "build", "Implement the scoped change while preserving unrelated behavior.", "engineering"));
   if (capabilities.has("quality")) steps.push(step("test", "test", "Run checks proportional to the affected surface and risk.", "quality"));
