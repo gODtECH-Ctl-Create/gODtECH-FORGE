@@ -53,7 +53,7 @@ Current priority: implement the modular intelligence layer without pulling later
 - [x] Design intelligence integration
 - [x] Engineering intelligence
 - [x] Security intelligence
-- [ ] Quality intelligence
+- [x] Quality intelligence
 - [ ] Operations intelligence
 - [ ] Documentation intelligence
 - [ ] Git/delivery intelligence
