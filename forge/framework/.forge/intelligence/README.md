@@ -33,10 +33,10 @@ This contract keeps intelligence composable. The orchestrator selects modules; t
 - [Security Intelligence](./SECURITY.md) — trust boundaries, identity, authorization, sensitive data, secrets, abuse cases, proportional controls, residual risk, and security verification handoff.
 - [Quality Intelligence](./QUALITY.md) — acceptance-to-test mapping, regression risk, positive/negative paths, proportional test layers, test gaps, release blockers, and verification-ready quality evidence.
 - [Operations Intelligence](./OPERATIONS.md) — deployment/runtime targets, rollout and rollback, observability, health, capacity, failure recovery, migrations, runbooks, operational ownership, and production evidence.
+- [Documentation Intelligence](./DOCUMENTATION.md) — audience and reader outcomes, source-of-truth selection, factual accuracy, information architecture, examples/commands, status accuracy, stale-content detection, and verification-ready documentation evidence.
 
 ## Planned modules
 
-- documentation
 - git/delivery
 - provenance
 
@@ -50,6 +50,7 @@ This contract keeps intelligence composable. The orchestrator selects modules; t
 - Sensitive identity, permission, secret, payment, personal-data, production, destructive, and high-risk work activates Security Intelligence according to the planner's existing risk/capability model.
 - Feature, bug, refactor, security, and infrastructure work activates Quality Intelligence through the planner's existing `quality` capability; lightweight documentation and research work do not pay that quality-context cost.
 - Infrastructure, production-impact, deployment, observability, health, rollback, runbook, capacity, backup/restore, and other material runtime work activates Operations Intelligence through the existing `operations` capability.
+- Documentation and research/report work activates Documentation Intelligence through the existing `documentation` capability; ordinary implementation work does not pay that documentation-context cost unless the planner explicitly activates documentation.
 - Security, infrastructure, and material refactor work may activate Architecture directly without Product Intelligence.
 - A module may request another module when a material decision depends on evidence or another domain.
 - Do not use module activation as permission to broaden scope beyond the user's outcome.
