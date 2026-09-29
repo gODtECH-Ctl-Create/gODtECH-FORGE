@@ -12,7 +12,7 @@ import type {
 const RISK_RANK: Record<RiskLevel, number> = { low: 0, medium: 1, high: 2, critical: 3 };
 
 const KIND_RULES: Array<{ kind: TaskKind; pattern: RegExp }> = [
-  { kind: "security", pattern: /\b(auth|authentication|authorization|oauth|password|secret|credential|encrypt|security|permission)\b/i },
+  { kind: "security", pattern: /\b(auth|authentication|authorization|oauth|password|secret|credentials?|encrypt|security|permission)\b/i },
   { kind: "documentation", pattern: /\b(readme|documentation|docs|copy|wording|typo|comment)\b/i },
   { kind: "research", pattern: /\b(research|investigate|compare|market|competitor|feasibility)\b/i },
   { kind: "infrastructure", pattern: /\b(terraform|kubernetes|docker|pipeline|ci\/?cd|deploy|infrastructure|cloud|database migration)\b/i },
@@ -70,7 +70,7 @@ export async function createPlan(cwd: string, taskInput: string): Promise<Orches
   addCapability(capabilities, "efficiency", "Prefer deterministic checks and reuse existing context.");
   addCapability(capabilities, "git-delivery", "Material changes require reviewable delivery.");
 
-  const sensitive = /\b(auth|authentication|authorization|oauth|password|secret|credential|payment|billing|personal data|pii|encrypt|permission)\b/i.test(task);
+  const sensitive = /\b(auth|authentication|authorization|oauth|password|secret|credentials?|payment|billing|personal data|pii|encrypt|permission)\b/i.test(task);
   const production = /\b(prod|production|live environment|release|customer data)\b/i.test(task);
   const destructive = /\b(drop table|delete (all|database|records|data)|truncate|destroy|purge|reset database|force push)\b/i.test(task);
   const productDiscovery =
