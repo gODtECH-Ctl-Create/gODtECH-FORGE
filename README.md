@@ -56,7 +56,7 @@ SHIP
 
 FORGE is **not a model**, **not a fixed application stack**, and **not one giant prompt**. It is a local CLI, a portable `.forge/` project layer, a deterministic planning engine, and a provider-neutral MCP server.
 
-> **Current focus:** the Phase I execution/governance foundation is complete and Phase II Intelligence is active. Product, Market, and Research Intelligence are the first selectively loaded reasoning modules; architecture, design, engineering, security, quality, and operations intelligence follow.
+> **Current focus:** the Phase I execution/governance foundation is complete and Phase II Intelligence is active. Product, Market, Research, and Architecture Intelligence are selectively loaded reasoning modules; Design, Engineering, Security, Quality, and Operations Intelligence follow.
 
 <a href="#readme-top">↑ back to top</a>
 
@@ -240,13 +240,14 @@ A preparation pass can:
 
 FORGE now includes task-selective reasoning guidance under `.forge/intelligence/`.
 
-The first implemented modules are:
+The implemented modules are:
 
 - **Product Intelligence** — clarifies the problem, users, value, workflows, MVP boundaries, non-goals, assumptions, and success criteria.
 - **Market Intelligence** — evaluates target geography/segment, alternatives, expectations, differentiation, and adoption constraints using evidence rather than guesses.
 - **Research Intelligence** — defines research questions, source-quality/freshness rules, fact-vs-inference boundaries, limitations, and stop conditions.
+- **Architecture Intelligence** — defines system boundaries, responsibilities, dependency direction, data and integration flows, topology, failure implications, trade-offs, and the smallest robust architecture needed for implementation.
 
-A narrow feature can load Product Intelligence without automatically paying the cost of market research. Product-creation or early product-definition tasks can activate Product + Market + Research together. `forge prepare` includes only the intelligence files activated by the plan.
+A normal feature can load Product + Architecture without automatically paying the cost of market research. Product-creation or early product-definition tasks can activate Product + Market + Research, with Architecture joining when structural technical decisions are required. Security, infrastructure, and material refactor work can activate Architecture directly. `forge prepare` includes only the intelligence files activated by the plan.
 
 ### Measure the preparation layer
 
@@ -268,7 +269,7 @@ Events are Git-ignored under `.forge/metrics/`. They contain counts and categori
 | **Repository intelligence** | Deterministic inspection of project facts, Git state, manifests, context, and verification commands |
 | **AI efficiency** | Bounded work packets, cache reuse, task-relevant context, and proportional model-tier suggestions |
 | **Planning** | Task classification, risk-aware capabilities, ordered steps, workflows, and approval checkpoints |
-| **Product intelligence** | Selective Product, Market, and Research guidance for product definition and evidence-aware decisions |
+| **Intelligence** | Selective Product, Market, Research, and Architecture guidance for product definition, evidence-aware decisions, and proportional system design |
 | **Governance** | Human gates for sensitive work and explicit separation of instructions, policies, evidence, and execution |
 | **Memory** | Maintained project context, decisions, resumable runs, progress, approvals, and evidence under `.forge/` |
 | **Agent integration** | Provider-neutral local MCP server plus a repository-bundled Codex plugin |
@@ -525,7 +526,8 @@ These studies remain useful for measuring FORGE, but they are not prerequisites 
 
 - [x] Product and market intelligence
 - [x] Research workflow and evidence quality
-- [ ] Architecture and design intelligence
+- [x] Architecture intelligence
+- [ ] Design intelligence
 - [ ] Engineering, security, quality, and operations intelligence
 - [ ] Adaptive packet selection informed by measured outcomes
 
