@@ -29,7 +29,7 @@ CI / REVIEW
   ↓
 MERGE
   ↓
-CLEAN UP + UPDATE STATE
+CLEAN UP + UPDATE STATE / TRACKERS
 ```
 
 ## Branch protection
@@ -53,6 +53,19 @@ An issue should normally exist for:
 - investigation that produces an implementation decision.
 
 A trivial typo, formatting-only change, or similarly tiny correction may use a branch without a separate issue when repository policy permits it.
+
+## Roadmap and tracker synchronization
+
+When work implements an item from a master roadmap, milestone, or tracking issue:
+
+1. Reference the tracker from the implementation issue.
+2. Reference both the implementation issue and the relevant tracker in the pull request when practical.
+3. Keep the tracker item unchecked while work is only planned, in progress, or awaiting verification.
+4. Tick the exact tracker checklist item only after the implementation is merged and required verification has passed.
+5. Update the implementation issue and tracker together when completion changes documented project reality.
+6. If the implementation scope changes, update the tracker rather than silently completing a different outcome.
+
+The tracker is a status record, not a planning shortcut. A checked item must correspond to merged, verified repository state.
 
 ## Branch naming
 
@@ -87,6 +100,7 @@ A pull request should make the work auditable. Include:
 - what changed;
 - why it changed;
 - linked issue when applicable;
+- linked roadmap/tracker item when the work advances one;
 - architecture or data impact;
 - security impact;
 - verification performed;
@@ -121,7 +135,8 @@ After approval and passing required checks:
 2. Verify the target branch after merge when the workflow calls for it.
 3. Delete the completed feature branch when safe.
 4. Close or update the linked issue.
-5. Update `.forge/state.md`, decisions, project context, and README when the product's documented reality changed.
+5. If the work completed a roadmap/tracker item, tick that exact item only now, after merge and verification.
+6. Update `.forge/state.md`, decisions, project context, and README when the product's documented reality changed.
 
 ## Production hotfixes
 
