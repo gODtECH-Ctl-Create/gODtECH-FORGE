@@ -27,11 +27,13 @@ Phase II Intelligence active. Phase I executable foundation is complete.
 - `forge prepare` selectively loads Architecture Intelligence only when the planner activates the existing `architecture` capability and reuses bounded `technical.*` architecture context.
 - Design Intelligence implemented for material user-facing work with explicit user-flow, interaction-state, accessibility, responsive, design-system, and implementation-handoff guidance.
 - The planner activates Design Intelligence only for material UI/UX intent, inserts a dedicated design-review step, and `forge prepare` reuses bounded `experience.*` context without loading Design for backend-only or lightweight work.
+- Engineering Intelligence implemented with repository-aligned implementation planning, explicit contracts and migrations, failure behavior, compatibility, maintainability, and downstream verification handoffs.
+- `forge prepare` selectively loads Engineering Intelligence through the planner's existing `engineering` capability and reuses bounded `technical.stack`, `technical.integrations`, and `technical.constraints` context.
 
 ## Active work
 
-- Build Engineering Intelligence on the shared intelligence-module contract.
-- Expand next into Security, Quality, and Operations Intelligence.
+- Build Security Intelligence on the shared intelligence-module contract.
+- Expand next into Quality and Operations Intelligence.
 - Evolve adaptive module selection using measured outcomes without loading every module for every task.
 
 ## Deferred / non-blocking
