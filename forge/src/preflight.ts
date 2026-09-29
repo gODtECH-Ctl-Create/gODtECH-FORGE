@@ -308,7 +308,7 @@ async function existingFrameworkReferences(cwd: string, plan: OrchestrationPlan)
   if (capabilities.has("security")) candidates.push(".forge/policies/PROVENANCE.md");
   if (capabilities.has("verification") || capabilities.has("quality")) candidates.push(".forge/verification/README.md");
   if (capabilities.has("documentation")) candidates.push(".forge/workflows/README-GENERATION.md");
-  if (["product", "market", "research", "architecture", "design", "engineering", "security", "quality", "operations"].some((item) => capabilities.has(item as Capability))) {
+  if (["product", "market", "research", "architecture", "design", "engineering", "security", "quality", "operations", "documentation"].some((item) => capabilities.has(item as Capability))) {
     candidates.push(".forge/intelligence/README.md");
   }
   const intelligenceByCapability: Partial<Record<Capability, string>> = {
@@ -321,6 +321,7 @@ async function existingFrameworkReferences(cwd: string, plan: OrchestrationPlan)
     security: ".forge/intelligence/SECURITY.md",
     quality: ".forge/intelligence/QUALITY.md",
     operations: ".forge/intelligence/OPERATIONS.md",
+    documentation: ".forge/intelligence/DOCUMENTATION.md",
   };
   for (const capability of capabilities) {
     const reference = intelligenceByCapability[capability];
