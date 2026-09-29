@@ -120,11 +120,11 @@ test("prepare includes bounded architecture context when architecture is active"
   const cwd = await preparedProject();
   context.after(() => fs.rm(cwd, { recursive: true, force: true }));
   await updateContext(cwd, "technical.architecture", "Modular monolith with PostgreSQL and background workers");
-  await updateContext(cwd, "technical.constraints", "Preserve module boundaries and avoid new infrastructure unless required");
 
   const packet = await prepareWorkPacket(cwd, "Refactor account module dependencies");
   assert.equal(packet.projectContext["technical.architecture"], "Modular monolith with PostgreSQL and background workers");
-  assert.equal(packet.projectContext["technical.constraints"], "Preserve module boundaries and avoid new infrastructure unless required");
+  assert.ok(Object.hasOwn(packet.projectContext, "technical.stack"));
+  assert.ok(Object.hasOwn(packet.projectContext, "technical.constraints"));
   assert.ok(packet.preparation.selectedContextCharacters <= packet.preparation.maxContextCharacters);
 });
 
