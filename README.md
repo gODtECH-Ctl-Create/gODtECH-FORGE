@@ -56,7 +56,7 @@ SHIP
 
 FORGE is **not a model**, **not a fixed application stack**, and **not one giant prompt**. It is a local CLI, a portable `.forge/` project layer, a deterministic planning engine, and a provider-neutral MCP server.
 
-> **Current focus:** the Phase I execution/governance foundation is complete and Phase II Intelligence is active. Product, Market, Research, and Architecture Intelligence are selectively loaded reasoning modules; Design, Engineering, Security, Quality, and Operations Intelligence follow.
+> **Current focus:** the Phase I execution/governance foundation is complete and Phase II Intelligence is active. Product, Market, Research, Architecture, and Design Intelligence are selectively loaded reasoning modules; Engineering, Security, Quality, and Operations Intelligence follow.
 
 <a href="#readme-top">↑ back to top</a>
 
@@ -246,8 +246,9 @@ The implemented modules are:
 - **Market Intelligence** — evaluates target geography/segment, alternatives, expectations, differentiation, and adoption constraints using evidence rather than guesses.
 - **Research Intelligence** — defines research questions, source-quality/freshness rules, fact-vs-inference boundaries, limitations, and stop conditions.
 - **Architecture Intelligence** — defines system boundaries, responsibilities, dependency direction, data and integration flows, topology, failure implications, trade-offs, and the smallest robust architecture needed for implementation.
+- **Design Intelligence** — defines user flows, information hierarchy, interaction states, accessibility, responsive behavior, design-system reuse, and an implementation-ready experience handoff.
 
-A normal feature can load Product + Architecture without automatically paying the cost of market research. Product-creation or early product-definition tasks can activate Product + Market + Research, with Architecture joining when structural technical decisions are required. Security, infrastructure, and material refactor work can activate Architecture directly. `forge prepare` includes only the intelligence files activated by the plan.
+A normal feature can load Product + Architecture without automatically paying the cost of market research. Material UI/UX work adds Design Intelligence, while backend-only features do not pay that context cost. Product-creation or early product-definition tasks can activate Product + Market + Research, with Architecture joining when structural technical decisions are required and Design joining only when a material user-facing surface is in scope. Security, infrastructure, and material refactor work can activate Architecture directly. `forge prepare` includes only the intelligence files activated by the plan.
 
 ### Measure the preparation layer
 
@@ -269,7 +270,7 @@ Events are Git-ignored under `.forge/metrics/`. They contain counts and categori
 | **Repository intelligence** | Deterministic inspection of project facts, Git state, manifests, context, and verification commands |
 | **AI efficiency** | Bounded work packets, cache reuse, task-relevant context, and proportional model-tier suggestions |
 | **Planning** | Task classification, risk-aware capabilities, ordered steps, workflows, and approval checkpoints |
-| **Intelligence** | Selective Product, Market, Research, and Architecture guidance for product definition, evidence-aware decisions, and proportional system design |
+| **Intelligence** | Selective Product, Market, Research, Architecture, and Design guidance for product definition, evidence-aware decisions, proportional system design, and implementation-ready user experience |
 | **Governance** | Human gates for sensitive work and explicit separation of instructions, policies, evidence, and execution |
 | **Memory** | Maintained project context, decisions, resumable runs, progress, approvals, and evidence under `.forge/` |
 | **Agent integration** | Provider-neutral local MCP server plus a repository-bundled Codex plugin |
@@ -527,7 +528,7 @@ These studies remain useful for measuring FORGE, but they are not prerequisites 
 - [x] Product and market intelligence
 - [x] Research workflow and evidence quality
 - [x] Architecture intelligence
-- [ ] Design intelligence
+- [x] Design intelligence
 - [ ] Engineering, security, quality, and operations intelligence
 - [ ] Adaptive packet selection informed by measured outcomes
 
