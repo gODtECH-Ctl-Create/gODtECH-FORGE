@@ -29,7 +29,9 @@ test("init creates a usable framework and is idempotent", async (context) => {
   assert.ok(first.created.includes(".forge/cache/.gitignore"));
   assert.ok(first.created.includes(".forge/metrics/.gitignore"));
   assert.ok(first.created.includes(".forge/intelligence/ARCHITECTURE.md"));
+  assert.ok(first.created.includes(".forge/intelligence/DESIGN.md"));
   await fs.access(path.join(cwd, ".forge", "intelligence", "ARCHITECTURE.md"));
+  await fs.access(path.join(cwd, ".forge", "intelligence", "DESIGN.md"));
 
   const second = await initProject({ cwd, now: new Date("2026-09-11T00:00:00Z") });
   assert.equal(second.ok, true);
@@ -37,6 +39,7 @@ test("init creates a usable framework and is idempotent", async (context) => {
   assert.ok(second.preserved.includes(".forge/manifest.yaml"));
   assert.ok(second.unchanged.includes("AGENTS.md"));
   assert.ok(second.unchanged.includes(".forge/intelligence/ARCHITECTURE.md"));
+  assert.ok(second.unchanged.includes(".forge/intelligence/DESIGN.md"));
 });
 
 test("init aborts atomically on a framework-file conflict", async (context) => {
