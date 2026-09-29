@@ -56,7 +56,7 @@ SHIP
 
 FORGE is **not a model**, **not a fixed application stack**, and **not one giant prompt**. It is a local CLI, a portable `.forge/` project layer, a deterministic planning engine, and a provider-neutral MCP server.
 
-> **Current focus:** the Phase I execution/governance foundation is complete and Phase II Intelligence is active. Product, Market, Research, Architecture, Design, Engineering, Security, Quality, and Operations Intelligence are selectively loaded reasoning modules; adaptive selection and carefully separated intelligence extensions follow.
+> **Current focus:** the Phase I execution/governance foundation is complete and Phase II Intelligence is active. Product, Market, Research, Architecture, Design, Engineering, Security, Quality, Operations, and Documentation Intelligence are selectively loaded reasoning modules; Git/Delivery, Provenance, and adaptive selection follow.
 
 <a href="#readme-top">↑ back to top</a>
 
@@ -186,6 +186,7 @@ inspect-context: Repository state, constraints, and prior decisions were confirm
 review-architecture: Architecture decisions and trade-offs were recorded.
 review-security: Trust boundaries, threats, and required controls were reviewed.
 review-operations: Rollout, observability, recovery, and runtime evidence were reviewed when applicable.
+review-documentation: Documentation claims, examples, and status were checked against project sources when applicable.
 implement: Scoped implementation was completed.
 test: Applicable automated checks passed.
 verify: Objective completion evidence was collected.
@@ -252,8 +253,9 @@ The implemented modules are:
 - **Security Intelligence** — identifies trust boundaries, identity and authorization requirements, sensitive-data and secret-handling rules, realistic abuse cases, proportional controls, residual risk, and security verification handoffs.
 - **Quality Intelligence** — maps acceptance criteria to proportionate checks, identifies regression and failure-path risk, selects appropriate test layers, records test gaps and release blockers, and produces verification-ready quality evidence.
 - **Operations Intelligence** — defines runtime targets, rollout and rollback behavior, configuration and secret delivery, observability, health, capacity, failure recovery, migration operations, runbooks, ownership, and post-release evidence.
+- **Documentation Intelligence** — defines audience and reader outcomes, source-of-truth selection, factual accuracy, information architecture, command/example verification, status accuracy, stale-content detection, and documentation verification handoffs.
 
-A normal feature can load Product + Architecture + Engineering without automatically paying the cost of market research. Material UI/UX work adds Design Intelligence before Engineering, while backend-only features do not pay that design-context cost. Product-creation or early product-definition tasks can activate Product + Market + Research, with Architecture joining when structural technical decisions are required, Design joining only when a material user-facing surface is in scope, and Engineering joining when implementation is requested. Sensitive identity, permission, secret, payment, personal-data, production, destructive, and high-risk work adds Security Intelligence through the planner's existing security capability and approval model. Feature, bug, refactor, security, and infrastructure work adds Quality Intelligence through the existing quality capability, while lightweight documentation and research remain lightweight. Infrastructure, production-impact, deployment, observability, health, rollback, runbook, capacity, backup/restore, and other material runtime work adds Operations Intelligence through the existing operations capability. `forge prepare` includes only the intelligence files activated by the plan.
+A normal feature can load Product + Architecture + Engineering without automatically paying the cost of market research. Material UI/UX work adds Design Intelligence before Engineering, while backend-only features do not pay that design-context cost. Product-creation or early product-definition tasks can activate Product + Market + Research, with Architecture joining when structural technical decisions are required, Design joining only when a material user-facing surface is in scope, and Engineering joining when implementation is requested. Sensitive identity, permission, secret, payment, personal-data, production, destructive, and high-risk work adds Security Intelligence through the planner's existing security capability and approval model. Feature, bug, refactor, security, and infrastructure work adds Quality Intelligence through the existing quality capability. Infrastructure, production-impact, deployment, observability, health, rollback, runbook, capacity, backup/restore, and other material runtime work adds Operations Intelligence through the existing operations capability. Documentation and research/report work adds Documentation Intelligence through the existing documentation capability, while unrelated implementation work avoids that context cost. `forge prepare` includes only the intelligence files activated by the plan.
 
 ### Measure the preparation layer
 
@@ -275,7 +277,7 @@ Events are Git-ignored under `.forge/metrics/`. They contain counts and categori
 | **Repository intelligence** | Deterministic inspection of project facts, Git state, manifests, context, and verification commands |
 | **AI efficiency** | Bounded work packets, cache reuse, task-relevant context, and proportional model-tier suggestions |
 | **Planning** | Task classification, risk-aware capabilities, ordered steps, workflows, and approval checkpoints |
-| **Intelligence** | Selective Product, Market, Research, Architecture, Design, Engineering, Security, Quality, and Operations guidance for product definition, evidence-aware decisions, proportional system design, implementation-ready user experience, repository-aligned code changes, security controls, risk-based quality strategy, and operable runtime delivery |
+| **Intelligence** | Selective Product, Market, Research, Architecture, Design, Engineering, Security, Quality, Operations, and Documentation guidance for product definition, evidence-aware decisions, proportional system design, implementation-ready user experience, repository-aligned code changes, security controls, risk-based quality strategy, operable runtime delivery, and source-grounded project documentation |
 | **Governance** | Human gates for sensitive work and explicit separation of instructions, policies, evidence, and execution |
 | **Memory** | Maintained project context, decisions, resumable runs, progress, approvals, and evidence under `.forge/` |
 | **Agent integration** | Provider-neutral local MCP server plus a repository-bundled Codex plugin |
@@ -538,6 +540,9 @@ These studies remain useful for measuring FORGE, but they are not prerequisites 
 - [x] Security intelligence
 - [x] Quality intelligence
 - [x] Operations intelligence
+- [x] Documentation intelligence
+- [ ] Git/delivery intelligence
+- [ ] Provenance intelligence
 - [ ] Adaptive packet selection informed by measured outcomes
 
 ### Phase III · Enforcement
