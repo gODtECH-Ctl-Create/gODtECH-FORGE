@@ -33,11 +33,13 @@ Phase II Intelligence active. Phase I executable foundation is complete.
 - `forge prepare` selectively loads Security Intelligence through the planner's existing `security` capability while preserving the existing `review-security` stage and human approval model.
 - Quality Intelligence implemented with acceptance-to-test mapping, regression reasoning, proportional test-layer selection, failure-path coverage, test-gap reporting, release blockers, and verification handoff guidance.
 - `forge prepare` selectively loads Quality Intelligence through the planner's existing `quality` capability while preserving the distinct `test` and `verify` stages and reusing only context already selected by active capabilities.
+- Operations Intelligence implemented with deployment/runtime targeting, rollout and rollback planning, observability, health, capacity, failure recovery, migration operations, runbooks, ownership, and production-evidence guidance.
+- The planner activates Operations Intelligence for infrastructure, production-impact, observability, health, rollback, runbook, capacity, backup/restore, and other material runtime work, adds a dedicated `review-operations` step, and `forge prepare` reuses bounded `operations.*` context.
 
 ## Active work
 
-- Build Operations Intelligence on the shared intelligence-module contract.
 - Evolve adaptive module selection using measured outcomes without loading every module for every task.
+- Define the next intelligence extensions only where their responsibilities are distinct from existing documentation, Git/delivery, and provenance policies/workflows.
 
 ## Deferred / non-blocking
 
