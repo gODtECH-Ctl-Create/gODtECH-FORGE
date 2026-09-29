@@ -23,6 +23,7 @@ test("planner keeps documentation work lightweight", async (context) => {
   assert.equal(plan.workflow, "lightweight-delivery");
   assert.equal(plan.approvals.length, 0);
   assert.equal(plan.capabilities.some((item) => item.capability === "security"), false);
+  assert.equal(plan.capabilities.some((item) => item.capability === "design"), false);
 });
 
 test("planner escalates identity and payment work", async (context) => {
@@ -45,8 +46,27 @@ test("planner treats new incident product work as feature work", async (context)
   assert.equal(plan.taskKind, "feature");
   assert.equal(plan.risk, "medium");
   assert.ok(plan.capabilities.some((item) => item.capability === "product"));
+  assert.ok(plan.capabilities.some((item) => item.capability === "design"));
   assert.equal(plan.capabilities.some((item) => item.capability === "market"), false);
   assert.equal(plan.capabilities.some((item) => item.capability === "research"), false);
+});
+
+test("planner activates design only for material user-facing work", async (context) => {
+  const cwd = await initializedProject();
+  context.after(() => fs.rm(cwd, { recursive: true, force: true }));
+
+  const uiPlan = await createPlan(cwd, "Redesign the onboarding screen with responsive navigation and error states");
+  const backendPlan = await createPlan(cwd, "Add audit API endpoint for incident history");
+  const bugPlan = await createPlan(cwd, "Fix failing incident status update");
+  const securityUiPlan = await createPlan(cwd, "Design the authentication screen for admin accounts");
+
+  assert.ok(uiPlan.capabilities.some((item) => item.capability === "design"));
+  assert.ok(uiPlan.signals.some((signal) => signal.includes("user-interface")));
+  assert.ok(uiPlan.steps.some((step) => step.id === "review-design" && step.capability === "design"));
+  assert.equal(backendPlan.capabilities.some((item) => item.capability === "design"), false);
+  assert.equal(bugPlan.capabilities.some((item) => item.capability === "design"), false);
+  assert.ok(securityUiPlan.capabilities.some((item) => item.capability === "design"));
+  assert.ok(securityUiPlan.capabilities.some((item) => item.capability === "security"));
 });
 
 test("planner activates product market and research intelligence for new product creation", async (context) => {
