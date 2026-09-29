@@ -29,10 +29,10 @@ This contract keeps intelligence composable. The orchestrator selects modules; t
 - [Research Intelligence](./RESEARCH.md) — bounded evidence gathering, source quality, freshness, uncertainty, and stop conditions.
 - [Architecture Intelligence](./ARCHITECTURE.md) — system boundaries, responsibilities, dependency direction, data/integration flows, topology, failure implications, and proportional architecture decisions.
 - [Design Intelligence](./DESIGN.md) — user flows, information hierarchy, interaction states, accessibility, responsive behavior, design-system reuse, and implementation-ready experience handoff.
+- [Engineering Intelligence](./ENGINEERING.md) — repository-aligned implementation reasoning, contract and migration changes, failure behavior, compatibility, maintainability, and verification-ready code handoff.
 
 ## Planned modules
 
-- engineering
 - security
 - quality
 - operations
@@ -43,9 +43,10 @@ This contract keeps intelligence composable. The orchestrator selects modules; t
 ## Activation rules
 
 - Load only modules activated by the plan.
-- A normal feature may activate Product + Architecture without automatically requiring Market or Research Intelligence.
-- Material UI/UX work activates Design Intelligence; backend-only features and non-user-facing changes do not pay that context cost.
-- New-product, product-definition, market, competitor, pricing, feasibility, and explicit research work may activate Product + Market + Research together; Architecture joins when structural technical decisions are required, and Design joins only when a material user-facing surface is in scope.
+- A normal feature may activate Product + Architecture + Engineering without automatically requiring Market or Research Intelligence.
+- Material UI/UX work activates Design Intelligence before Engineering; backend-only features and non-user-facing changes do not pay that design-context cost.
+- New-product, product-definition, market, competitor, pricing, feasibility, and explicit research work may activate Product + Market + Research together; Architecture joins when structural technical decisions are required, Design joins only when a material user-facing surface is in scope, and Engineering joins when implementation is actually requested.
+- Feature, bug, refactor, security, and infrastructure implementation work can activate Engineering directly according to the planner's existing capability model.
 - Security, infrastructure, and material refactor work may activate Architecture directly without Product Intelligence.
 - A module may request another module when a material decision depends on evidence or another domain.
 - Do not use module activation as permission to broaden scope beyond the user's outcome.

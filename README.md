@@ -56,7 +56,7 @@ SHIP
 
 FORGE is **not a model**, **not a fixed application stack**, and **not one giant prompt**. It is a local CLI, a portable `.forge/` project layer, a deterministic planning engine, and a provider-neutral MCP server.
 
-> **Current focus:** the Phase I execution/governance foundation is complete and Phase II Intelligence is active. Product, Market, Research, Architecture, and Design Intelligence are selectively loaded reasoning modules; Engineering, Security, Quality, and Operations Intelligence follow.
+> **Current focus:** the Phase I execution/governance foundation is complete and Phase II Intelligence is active. Product, Market, Research, Architecture, Design, and Engineering Intelligence are selectively loaded reasoning modules; Security, Quality, and Operations Intelligence follow.
 
 <a href="#readme-top">↑ back to top</a>
 
@@ -247,8 +247,9 @@ The implemented modules are:
 - **Research Intelligence** — defines research questions, source-quality/freshness rules, fact-vs-inference boundaries, limitations, and stop conditions.
 - **Architecture Intelligence** — defines system boundaries, responsibilities, dependency direction, data and integration flows, topology, failure implications, trade-offs, and the smallest robust architecture needed for implementation.
 - **Design Intelligence** — defines user flows, information hierarchy, interaction states, accessibility, responsive behavior, design-system reuse, and an implementation-ready experience handoff.
+- **Engineering Intelligence** — guides repository-aligned implementation, explicit contract and migration changes, failure behavior, compatibility, maintainability, and verification-ready handoff.
 
-A normal feature can load Product + Architecture without automatically paying the cost of market research. Material UI/UX work adds Design Intelligence, while backend-only features do not pay that context cost. Product-creation or early product-definition tasks can activate Product + Market + Research, with Architecture joining when structural technical decisions are required and Design joining only when a material user-facing surface is in scope. Security, infrastructure, and material refactor work can activate Architecture directly. `forge prepare` includes only the intelligence files activated by the plan.
+A normal feature can load Product + Architecture + Engineering without automatically paying the cost of market research. Material UI/UX work adds Design Intelligence before Engineering, while backend-only features do not pay that design-context cost. Product-creation or early product-definition tasks can activate Product + Market + Research, with Architecture joining when structural technical decisions are required, Design joining only when a material user-facing surface is in scope, and Engineering joining when implementation is requested. Feature, bug, refactor, security, and infrastructure implementation work use the planner's existing Engineering capability. `forge prepare` includes only the intelligence files activated by the plan.
 
 ### Measure the preparation layer
 
@@ -270,7 +271,7 @@ Events are Git-ignored under `.forge/metrics/`. They contain counts and categori
 | **Repository intelligence** | Deterministic inspection of project facts, Git state, manifests, context, and verification commands |
 | **AI efficiency** | Bounded work packets, cache reuse, task-relevant context, and proportional model-tier suggestions |
 | **Planning** | Task classification, risk-aware capabilities, ordered steps, workflows, and approval checkpoints |
-| **Intelligence** | Selective Product, Market, Research, Architecture, and Design guidance for product definition, evidence-aware decisions, proportional system design, and implementation-ready user experience |
+| **Intelligence** | Selective Product, Market, Research, Architecture, Design, and Engineering guidance for product definition, evidence-aware decisions, proportional system design, implementation-ready user experience, and repository-aligned code changes |
 | **Governance** | Human gates for sensitive work and explicit separation of instructions, policies, evidence, and execution |
 | **Memory** | Maintained project context, decisions, resumable runs, progress, approvals, and evidence under `.forge/` |
 | **Agent integration** | Provider-neutral local MCP server plus a repository-bundled Codex plugin |
@@ -529,7 +530,8 @@ These studies remain useful for measuring FORGE, but they are not prerequisites 
 - [x] Research workflow and evidence quality
 - [x] Architecture intelligence
 - [x] Design intelligence
-- [ ] Engineering, security, quality, and operations intelligence
+- [x] Engineering intelligence
+- [ ] Security, quality, and operations intelligence
 - [ ] Adaptive packet selection informed by measured outcomes
 
 ### Phase III · Enforcement
