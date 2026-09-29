@@ -81,6 +81,9 @@ export async function createPlan(cwd: string, taskInput: string): Promise<Orches
     /\b(ui|user interface|user experience|ux|screen|page|dashboard|form|navigation|onboarding|checkout|wizard|modal|dialog|responsive|accessibility|a11y|interaction|empty state|loading state|error state|design system|component library)\b[\s\S]{0,80}\b(redesign|improve|refine|update|change|build|create|implement)\b/i.test(task);
   const operationsSurface =
     /\b(observability|monitoring|metrics?|alerts?|alerting|logging|tracing|health checks?|readiness|liveness|rollback|rollout|runbooks?|autoscal(?:e|ing)|capacity|backup|restore|disaster recovery|failover)\b/i.test(task);
+  const provenanceSurface =
+    /\b(provenance|attribution|generated[- ]by|source traceability|evidence origin|artifact origin|release provenance|release metadata|attestations?|sbom|software bill of materials)\b/i.test(task) ||
+    /\.forge\/manifest\.ya?ml\b/i.test(task);
 
   if (productDiscovery) {
     signals.push("Product-creation or early product-definition intent detected.");
@@ -97,6 +100,11 @@ export async function createPlan(cwd: string, taskInput: string): Promise<Orches
   if (operationsSurface && taskKind !== "documentation" && taskKind !== "research") {
     signals.push("Operational runtime, observability, or recovery surface detected.");
     addCapability(capabilities, "operations", "Runtime, rollout, observability, or recovery work requires operational review.");
+  }
+
+  if (provenanceSurface) {
+    signals.push("Provenance, attribution, or origin-traceability surface detected.");
+    addCapability(capabilities, "provenance", "Origin, attribution, version, or evidence lineage requires provenance review.");
   }
 
   if (sensitive) {
@@ -153,6 +161,7 @@ export async function createPlan(cwd: string, taskInput: string): Promise<Orches
   if (capabilities.has("engineering")) steps.push(step("implement", "build", "Implement the scoped change while preserving unrelated behavior.", "engineering"));
   if (capabilities.has("quality")) steps.push(step("test", "test", "Run checks proportional to the affected surface and risk.", "quality"));
   if (capabilities.has("documentation")) steps.push(step("review-documentation", "document", "Ensure documentation is audience-appropriate, source-grounded, current, and verification-ready.", "documentation"));
+  if (capabilities.has("provenance")) steps.push(step("review-provenance", "provenance", "Confirm source, attribution, version, and evidence lineage are sufficient, accurate, and safe to persist.", "provenance"));
   if (capabilities.has("git-delivery")) steps.push(step("review-delivery", "deliver", "Confirm tracked intent, branch scope, reviewability, merge readiness, and post-merge synchronization requirements.", "git-delivery"));
   steps.push(step("verify", "verify", "Collect objective evidence and determine whether exit conditions are met.", "verification"));
   steps.push(step("deliver", "deploy", "Use the repository issue, branch, review, and merge workflow.", "git-delivery"));
