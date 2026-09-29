@@ -42,9 +42,9 @@ This roadmap describes the intended build order. Contributors may pick work from
 - [ ] Invoke StackPilot for scaffolding, generation, and supported project adoption
 - [ ] Invoke Steward for repository maintenance and safe remediation when applicable
 
-## Phase 3 · Intelligence — ACTIVE
+## Phase 3 · Intelligence — STATIC SET COMPLETE
 
-Current priority: complete the static modular-intelligence layer, then move into adaptive selection without pulling later enforcement, memory, or ecosystem work forward. Controlled benchmark studies remain a separate evidence track and do not block this phase.
+The static modular-intelligence layer is complete. Current priority is adaptive module selection informed by measured outcomes, while controlled benchmark studies remain a separate evidence track and later enforcement, memory, and ecosystem work stay out of scope until their dependencies are ready.
 
 - [x] Product intelligence
 - [x] Market intelligence
