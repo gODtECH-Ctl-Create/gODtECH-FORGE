@@ -44,7 +44,7 @@ This roadmap describes the intended build order. Contributors may pick work from
 
 ## Phase 3 · Intelligence — ACTIVE
 
-Current priority: mature the modular intelligence layer without pulling later enforcement, memory, or ecosystem work forward. Controlled benchmark studies remain a separate evidence track and do not block this phase.
+Current priority: complete the static modular-intelligence layer, then move into adaptive selection without pulling later enforcement, memory, or ecosystem work forward. Controlled benchmark studies remain a separate evidence track and do not block this phase.
 
 - [x] Product intelligence
 - [x] Market intelligence
@@ -57,7 +57,7 @@ Current priority: mature the modular intelligence layer without pulling later en
 - [x] Operations intelligence
 - [x] Documentation intelligence
 - [x] Git/delivery intelligence
-- [ ] Provenance intelligence
+- [x] Provenance intelligence
 - [ ] Adaptive module selection informed by measured outcomes
 
 ## Phase 4 · Deterministic tooling
