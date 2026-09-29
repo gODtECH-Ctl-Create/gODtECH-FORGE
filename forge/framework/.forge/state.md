@@ -37,11 +37,13 @@ Phase II Intelligence active. Phase I executable foundation is complete.
 - The planner activates Operations Intelligence for infrastructure, production-impact, observability, health, rollback, runbook, capacity, backup/restore, and other material runtime work, adds a dedicated `review-operations` step, and `forge prepare` reuses bounded `operations.*` context.
 - Documentation Intelligence implemented with audience/reader-outcome reasoning, source-of-truth selection, factual accuracy, information architecture, command/example verification, status accuracy, stale-content detection, and documentation verification handoff guidance.
 - The planner reuses the existing `documentation` capability, adds a dedicated `review-documentation` step, and `forge prepare` selectively loads Documentation Intelligence with bounded project/documentation context.
+- Git / Delivery Intelligence implemented with tracked-intent reasoning, branch/scope discipline, commit and PR structure, merge readiness, semantic conflict handling, hotfix delivery, and post-merge synchronization guidance.
+- The planner reuses the existing cross-cutting `git-delivery` capability, adds a dedicated `review-delivery` reasoning step before verification, and preserves the final `deliver` step plus `.forge/workflows/GIT.md` as the procedural delivery path.
+- `forge prepare` loads Git / Delivery Intelligence through the existing `git-delivery` capability without adding project-context fields or duplicating Git workflow/provenance responsibilities.
 - Master implementation roadmap tracking is centralized in issue #76, and the delivery workflow requires roadmap items to be ticked only after verified merge.
 
 ## Active work
 
-- Build Git/Delivery Intelligence with a boundary that complements rather than duplicates the existing Git workflow.
 - Build Provenance Intelligence with a boundary that complements rather than duplicates provenance policy.
 - Evolve adaptive module selection using measured outcomes without loading every module for every task.
 
