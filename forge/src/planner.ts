@@ -152,6 +152,7 @@ export async function createPlan(cwd: string, taskInput: string): Promise<Orches
   if (capabilities.has("operations")) steps.push(step("review-operations", "operate", "Define rollout, observability, failure recovery, and runtime evidence requirements.", "operations"));
   if (capabilities.has("engineering")) steps.push(step("implement", "build", "Implement the scoped change while preserving unrelated behavior.", "engineering"));
   if (capabilities.has("quality")) steps.push(step("test", "test", "Run checks proportional to the affected surface and risk.", "quality"));
+  if (capabilities.has("documentation")) steps.push(step("review-documentation", "document", "Ensure documentation is audience-appropriate, source-grounded, current, and verification-ready.", "documentation"));
   steps.push(step("verify", "verify", "Collect objective evidence and determine whether exit conditions are met.", "verification"));
   steps.push(step("deliver", "deploy", "Use the repository issue, branch, review, and merge workflow.", "git-delivery"));
 
