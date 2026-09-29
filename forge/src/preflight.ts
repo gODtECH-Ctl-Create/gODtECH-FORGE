@@ -317,6 +317,7 @@ async function existingFrameworkReferences(cwd: string, plan: OrchestrationPlan)
     research: ".forge/intelligence/RESEARCH.md",
     architecture: ".forge/intelligence/ARCHITECTURE.md",
     design: ".forge/intelligence/DESIGN.md",
+    engineering: ".forge/intelligence/ENGINEERING.md",
   };
   for (const capability of capabilities) {
     const reference = intelligenceByCapability[capability];
