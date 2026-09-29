@@ -33,6 +33,9 @@ Never modify FORGE's core rules simply to make a task easier. Project context ma
 - Treat `main` and other protected branches as non-direct-write branches.
 - Meaningful work must follow `.forge/workflows/GIT.md`.
 - Create or link an issue when the work is material.
+- If the work corresponds to an item in a master roadmap or tracking issue, reference that tracker from the implementation issue and pull request.
+- Do not mark a roadmap/tracker item complete when implementation merely starts; tick it only after the change is merged and the required verification has passed.
+- After a tracked roadmap item is completed, update the implementation issue and the master tracker so the exact completed checklist item reflects repository reality.
 - Use a dedicated branch for implementation.
 - Do not force-push shared history or bypass repository safeguards.
 - Verify before opening a pull request and follow the repository's normal review and merge process.

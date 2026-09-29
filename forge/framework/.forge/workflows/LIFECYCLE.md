@@ -34,8 +34,10 @@ REVIEW + CI
     ↓
 MERGE
     ↓
-UPDATE CONTEXT / README / STATE
+UPDATE CONTEXT / README / STATE / ROADMAP TRACKERS
 ```
+
+When material work belongs to a master roadmap or tracking issue, keep the tracker item unchecked while work is in progress. After the implementation is merged and required verification passes, update the linked implementation issue and tick the exact completed tracker item. If scope changes, update the tracker rather than silently diverging from it.
 
 ## Reasoning economy
 
