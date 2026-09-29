@@ -50,7 +50,7 @@ Current priority: implement the modular intelligence layer without pulling later
 - [x] Market intelligence
 - [x] Research intelligence
 - [x] Architecture intelligence
-- [ ] Design intelligence integration
+- [x] Design intelligence integration
 - [ ] Engineering intelligence
 - [ ] Security intelligence
 - [ ] Quality intelligence
