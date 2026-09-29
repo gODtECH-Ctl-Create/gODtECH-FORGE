@@ -31,10 +31,10 @@ This contract keeps intelligence composable. The orchestrator selects modules; t
 - [Design Intelligence](./DESIGN.md) — user flows, information hierarchy, interaction states, accessibility, responsive behavior, design-system reuse, and implementation-ready experience handoff.
 - [Engineering Intelligence](./ENGINEERING.md) — repository-aligned implementation reasoning, contract and migration changes, failure behavior, compatibility, maintainability, and verification-ready code handoff.
 - [Security Intelligence](./SECURITY.md) — trust boundaries, identity, authorization, sensitive data, secrets, abuse cases, proportional controls, residual risk, and security verification handoff.
+- [Quality Intelligence](./QUALITY.md) — acceptance-to-test mapping, regression risk, positive/negative paths, proportional test layers, test gaps, release blockers, and verification-ready quality evidence.
 
 ## Planned modules
 
-- quality
 - operations
 - documentation
 - git/delivery
@@ -48,6 +48,7 @@ This contract keeps intelligence composable. The orchestrator selects modules; t
 - New-product, product-definition, market, competitor, pricing, feasibility, and explicit research work may activate Product + Market + Research together; Architecture joins when structural technical decisions are required, Design joins only when a material user-facing surface is in scope, and Engineering joins when implementation is actually requested.
 - Feature, bug, refactor, security, and infrastructure implementation work can activate Engineering directly according to the planner's existing capability model.
 - Sensitive identity, permission, secret, payment, personal-data, production, destructive, and high-risk work activates Security Intelligence according to the planner's existing risk/capability model.
+- Feature, bug, refactor, security, and infrastructure work activates Quality Intelligence through the planner's existing `quality` capability; lightweight documentation and research work do not pay that quality-context cost.
 - Security, infrastructure, and material refactor work may activate Architecture directly without Product Intelligence.
 - A module may request another module when a material decision depends on evidence or another domain.
 - Do not use module activation as permission to broaden scope beyond the user's outcome.
