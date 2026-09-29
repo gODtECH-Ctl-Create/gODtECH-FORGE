@@ -282,6 +282,7 @@ function selectContext(context: Record<string, unknown>, plan: OrchestrationPlan
     security: ["security.sensitive_data", "security.compliance_requirements"],
     operations: ["operations.deployment_target", "operations.environments", "operations.observability_requirements"],
     documentation: ["branding.product_identity"],
+    provenance: ["branding.forge_provenance"],
   };
   for (const capability of capabilities) for (const item of byCapability[capability] ?? []) paths.add(item);
 
@@ -305,10 +306,10 @@ async function existingFrameworkReferences(cwd: string, plan: OrchestrationPlan)
     ".forge/workflows/GIT.md",
   ];
   const capabilities = new Set(plan.capabilities.map((item) => item.capability));
-  if (capabilities.has("security")) candidates.push(".forge/policies/PROVENANCE.md");
+  if (capabilities.has("security") || capabilities.has("provenance")) candidates.push(".forge/policies/PROVENANCE.md");
   if (capabilities.has("verification") || capabilities.has("quality")) candidates.push(".forge/verification/README.md");
   if (capabilities.has("documentation")) candidates.push(".forge/workflows/README-GENERATION.md");
-  if (["product", "market", "research", "architecture", "design", "engineering", "security", "quality", "operations", "documentation", "git-delivery"].some((item) => capabilities.has(item as Capability))) {
+  if (["product", "market", "research", "architecture", "design", "engineering", "security", "quality", "operations", "documentation", "provenance", "git-delivery"].some((item) => capabilities.has(item as Capability))) {
     candidates.push(".forge/intelligence/README.md");
   }
   const intelligenceByCapability: Partial<Record<Capability, string>> = {
@@ -322,6 +323,7 @@ async function existingFrameworkReferences(cwd: string, plan: OrchestrationPlan)
     quality: ".forge/intelligence/QUALITY.md",
     operations: ".forge/intelligence/OPERATIONS.md",
     documentation: ".forge/intelligence/DOCUMENTATION.md",
+    provenance: ".forge/intelligence/PROVENANCE.md",
     "git-delivery": ".forge/intelligence/GIT_DELIVERY.md",
   };
   for (const capability of capabilities) {
