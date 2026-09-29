@@ -4,7 +4,7 @@
 
 ## Current stage
 
-Phase II Intelligence active. Phase I executable foundation is complete.
+Phase II static Intelligence complete. Adaptive module selection is the next Intelligence milestone. Phase I executable foundation is complete.
 
 ## Completed
 
@@ -43,11 +43,11 @@ Phase II Intelligence active. Phase I executable foundation is complete.
 - Provenance Intelligence implemented with framework/artifact origin, attribution, claim/source traceability, evidence lineage, provenance-drift detection, sensitive-data exclusions, and downstream provenance handoff guidance.
 - The planner selectively activates Provenance Intelligence for provenance, attribution, generated-by/source-traceability, evidence-origin, release-metadata, attestation/SBOM-style origin, and `.forge/manifest.yaml` work, adds a dedicated `review-provenance` step before delivery review, and keeps `.forge/policies/PROVENANCE.md` normative.
 - `forge prepare` loads Provenance Intelligence only when `provenance` is active and reuses bounded `branding.forge_provenance` context without exposing project-owned manifest contents.
+- The complete static Intelligence set is explicitly registered in `.forge/intelligence/README.md`, with regression coverage verifying clean-project installation, representative capability-to-module reachability, and preservation of selective loading.
 - Master implementation roadmap tracking is centralized in issue #76, and the delivery workflow requires roadmap items to be ticked only after verified merge.
 
 ## Active work
 
-- Close the static Intelligence-module milestone cleanly after Provenance Intelligence is verified and merged.
 - Evolve adaptive module selection using measured outcomes without loading every module for every task.
 
 ## Deferred / non-blocking

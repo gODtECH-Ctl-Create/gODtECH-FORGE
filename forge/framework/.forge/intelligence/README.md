@@ -2,6 +2,10 @@
 
 FORGE intelligence is modular domain guidance. Modules are activated by task and project context rather than loaded wholesale.
 
+## Static phase status
+
+The static Intelligence module set is complete. Product, Market, Research, Architecture, Design, Engineering, Security, Quality, Operations, Documentation, Git / Delivery, and Provenance Intelligence now form the shipped reasoning layer. The next Intelligence milestone is adaptive module selection informed by measured outcomes; that work must improve selection without making every task load every module.
+
 ## Module contract
 
 Every mature intelligence module defines:
@@ -21,6 +25,25 @@ Every mature intelligence module defines:
 Modules may add domain-specific acceptance criteria when a precise handoff boundary is useful.
 
 This contract keeps intelligence composable. The orchestrator selects modules; the modules provide domain reasoning guidance; deterministic tooling provides facts and verification where possible.
+
+## Static module registry
+
+| Capability | Portable module |
+| --- | --- |
+| `product` | `.forge/intelligence/PRODUCT.md` |
+| `market` | `.forge/intelligence/MARKET.md` |
+| `research` | `.forge/intelligence/RESEARCH.md` |
+| `architecture` | `.forge/intelligence/ARCHITECTURE.md` |
+| `design` | `.forge/intelligence/DESIGN.md` |
+| `engineering` | `.forge/intelligence/ENGINEERING.md` |
+| `security` | `.forge/intelligence/SECURITY.md` |
+| `quality` | `.forge/intelligence/QUALITY.md` |
+| `operations` | `.forge/intelligence/OPERATIONS.md` |
+| `documentation` | `.forge/intelligence/DOCUMENTATION.md` |
+| `git-delivery` | `.forge/intelligence/GIT_DELIVERY.md` |
+| `provenance` | `.forge/intelligence/PROVENANCE.md` |
+
+This registry is the completed static set. Regression coverage verifies that clean initialization ships every listed module and that representative prepared tasks can reach every capability-to-module mapping without broadening narrow work packets.
 
 ## Available modules
 
