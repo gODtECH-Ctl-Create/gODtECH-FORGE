@@ -56,7 +56,7 @@ Current priority: mature the modular intelligence layer without pulling later en
 - [x] Quality intelligence
 - [x] Operations intelligence
 - [x] Documentation intelligence
-- [ ] Git/delivery intelligence
+- [x] Git/delivery intelligence
 - [ ] Provenance intelligence
 - [ ] Adaptive module selection informed by measured outcomes
 
