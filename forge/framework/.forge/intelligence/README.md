@@ -28,10 +28,10 @@ This contract keeps intelligence composable. The orchestrator selects modules; t
 - [Market Intelligence](./MARKET.md) — geography, segments, alternatives, positioning, adoption constraints, and evidence-backed differentiation.
 - [Research Intelligence](./RESEARCH.md) — bounded evidence gathering, source quality, freshness, uncertainty, and stop conditions.
 - [Architecture Intelligence](./ARCHITECTURE.md) — system boundaries, responsibilities, dependency direction, data/integration flows, topology, failure implications, and proportional architecture decisions.
+- [Design Intelligence](./DESIGN.md) — user flows, information hierarchy, interaction states, accessibility, responsive behavior, design-system reuse, and implementation-ready experience handoff.
 
 ## Planned modules
 
-- design
 - engineering
 - security
 - quality
@@ -44,7 +44,8 @@ This contract keeps intelligence composable. The orchestrator selects modules; t
 
 - Load only modules activated by the plan.
 - A normal feature may activate Product + Architecture without automatically requiring Market or Research Intelligence.
-- New-product, product-definition, market, competitor, pricing, feasibility, and explicit research work may activate Product + Market + Research together; Architecture joins when the plan reaches structural technical decisions.
+- Material UI/UX work activates Design Intelligence; backend-only features and non-user-facing changes do not pay that context cost.
+- New-product, product-definition, market, competitor, pricing, feasibility, and explicit research work may activate Product + Market + Research together; Architecture joins when structural technical decisions are required, and Design joins only when a material user-facing surface is in scope.
 - Security, infrastructure, and material refactor work may activate Architecture directly without Product Intelligence.
 - A module may request another module when a material decision depends on evidence or another domain.
 - Do not use module activation as permission to broaden scope beyond the user's outcome.
