@@ -79,6 +79,8 @@ export async function createPlan(cwd: string, taskInput: string): Promise<Orches
   const designSurface =
     /\b(add|build|create|design|implement|introduce|redesign|improve|refine|update|change|ship)\b[\s\S]{0,120}\b(ui|user interface|user experience|ux|screen|page|dashboard|form|navigation|onboarding|checkout|wizard|modal|dialog|responsive|accessibility|a11y|interaction|empty state|loading state|error state|design system|component library)\b/i.test(task) ||
     /\b(ui|user interface|user experience|ux|screen|page|dashboard|form|navigation|onboarding|checkout|wizard|modal|dialog|responsive|accessibility|a11y|interaction|empty state|loading state|error state|design system|component library)\b[\s\S]{0,80}\b(redesign|improve|refine|update|change|build|create|implement)\b/i.test(task);
+  const operationsSurface =
+    /\b(observability|monitoring|metrics?|alerts?|alerting|logging|tracing|health checks?|readiness|liveness|rollback|rollout|runbooks?|autoscal(?:e|ing)|capacity|backup|restore|disaster recovery|failover)\b/i.test(task);
 
   if (productDiscovery) {
     signals.push("Product-creation or early product-definition intent detected.");
@@ -90,6 +92,11 @@ export async function createPlan(cwd: string, taskInput: string): Promise<Orches
   if (designSurface && taskKind !== "documentation") {
     signals.push("Material user-interface or user-experience surface detected.");
     addCapability(capabilities, "design", "User-facing interaction requires explicit flow, state, accessibility, and responsive decisions.");
+  }
+
+  if (operationsSurface && taskKind !== "documentation" && taskKind !== "research") {
+    signals.push("Operational runtime, observability, or recovery surface detected.");
+    addCapability(capabilities, "operations", "Runtime, rollout, observability, or recovery work requires operational review.");
   }
 
   if (sensitive) {
@@ -142,6 +149,7 @@ export async function createPlan(cwd: string, taskInput: string): Promise<Orches
   if (capabilities.has("architecture")) steps.push(step("review-architecture", "architect", "Select the smallest robust architecture and record trade-offs.", "architecture"));
   if (capabilities.has("design")) steps.push(step("review-design", "design", "Define the user flow, interaction states, accessibility, responsive behavior, and implementation handoff.", "design"));
   if (capabilities.has("security")) steps.push(step("review-security", "secure", "Identify trust boundaries, threats, and required controls.", "security"));
+  if (capabilities.has("operations")) steps.push(step("review-operations", "operate", "Define rollout, observability, failure recovery, and runtime evidence requirements.", "operations"));
   if (capabilities.has("engineering")) steps.push(step("implement", "build", "Implement the scoped change while preserving unrelated behavior.", "engineering"));
   if (capabilities.has("quality")) steps.push(step("test", "test", "Run checks proportional to the affected surface and risk.", "quality"));
   steps.push(step("verify", "verify", "Collect objective evidence and determine whether exit conditions are met.", "verification"));

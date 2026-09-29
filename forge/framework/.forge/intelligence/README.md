@@ -32,10 +32,10 @@ This contract keeps intelligence composable. The orchestrator selects modules; t
 - [Engineering Intelligence](./ENGINEERING.md) — repository-aligned implementation reasoning, contract and migration changes, failure behavior, compatibility, maintainability, and verification-ready code handoff.
 - [Security Intelligence](./SECURITY.md) — trust boundaries, identity, authorization, sensitive data, secrets, abuse cases, proportional controls, residual risk, and security verification handoff.
 - [Quality Intelligence](./QUALITY.md) — acceptance-to-test mapping, regression risk, positive/negative paths, proportional test layers, test gaps, release blockers, and verification-ready quality evidence.
+- [Operations Intelligence](./OPERATIONS.md) — deployment/runtime targets, rollout and rollback, observability, health, capacity, failure recovery, migrations, runbooks, operational ownership, and production evidence.
 
 ## Planned modules
 
-- operations
 - documentation
 - git/delivery
 - provenance
@@ -49,6 +49,7 @@ This contract keeps intelligence composable. The orchestrator selects modules; t
 - Feature, bug, refactor, security, and infrastructure implementation work can activate Engineering directly according to the planner's existing capability model.
 - Sensitive identity, permission, secret, payment, personal-data, production, destructive, and high-risk work activates Security Intelligence according to the planner's existing risk/capability model.
 - Feature, bug, refactor, security, and infrastructure work activates Quality Intelligence through the planner's existing `quality` capability; lightweight documentation and research work do not pay that quality-context cost.
+- Infrastructure, production-impact, deployment, observability, health, rollback, runbook, capacity, backup/restore, and other material runtime work activates Operations Intelligence through the existing `operations` capability.
 - Security, infrastructure, and material refactor work may activate Architecture directly without Product Intelligence.
 - A module may request another module when a material decision depends on evidence or another domain.
 - Do not use module activation as permission to broaden scope beyond the user's outcome.
