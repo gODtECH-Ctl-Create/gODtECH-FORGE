@@ -62,6 +62,112 @@ FORGE is **not a model**, **not a fixed application stack**, and **not one giant
 
 ---
 
+## 🤖 Build with AI without losing the engineering path
+
+You do not have to make your AI coding agent figure out your entire development process from scratch.
+
+**FORGE is the layer that gives the agent an engineering path to follow.**
+
+Instead of handing an AI a repository and hoping it asks the right questions, discovers the right files, chooses the right workflow, remembers previous decisions, and verifies the result correctly, FORGE prepares and governs that work.
+
+FORGE helps the agent:
+
+- understand the task before implementation;
+- inspect the repository and relevant project context;
+- ask for missing information when a decision cannot safely be inferred;
+- select the right product, research, architecture, design, engineering, security, quality, operations, documentation, delivery, and provenance guidance for the task;
+- keep the working context bounded instead of loading the whole repository unnecessarily;
+- follow risk-appropriate workflows and human approval checkpoints;
+- maintain decisions, progress, and evidence under `.forge/`;
+- verify what was actually completed instead of relying only on the model's claim;
+- continue from an existing run instead of starting the reasoning process over.
+
+### Your AI still builds. FORGE keeps it on the right path.
+
+FORGE does not replace your AI coding agent, your developers, or your product decisions.
+
+It gives them an operating layer.
+
+That means you can bring FORGE into an existing project, give your AI a task, and let FORGE handle the repeatable orchestration around that task:
+
+```text
+YOU
+ │
+ │  "Add payments"
+ ▼
+FORGE
+ │
+ ├── understand the repository
+ ├── identify relevant context
+ ├── classify risk and capabilities
+ ├── activate the right intelligence
+ ├── identify missing decisions
+ ├── prepare the work packet
+ ├── define verification expectations
+ └── gate sensitive decisions when required
+ │
+ ▼
+AI CODING AGENT
+ │
+ ├── reasons about the actual task
+ ├── implements within project conventions
+ ├── uses the prepared context
+ └── returns evidence for the work
+ │
+ ▼
+FORGE RUN + VERIFICATION
+ │
+ └── record what happened and what was proven
+```
+
+The result is not “AI does everything.”
+
+The result is **AI works inside a deliberate engineering system**.
+
+### Fork FORGE and make the process yours
+
+FORGE is reusable under the Apache License 2.0.
+
+You can fork the repository, adapt the workflows, policies, intelligence modules, templates, and project defaults, then use your distribution across your own repositories.
+
+A practical path looks like this:
+
+```text
+Fork FORGE
+   ↓
+Create your FORGE distribution
+   ↓
+Customize your rules and workflows
+   ↓
+Install / link FORGE
+   ↓
+forge init
+   ↓
+Your project gets .forge/ + AGENTS.md
+   ↓
+forge prepare --task "..."
+   ↓
+Connect your AI coding agent
+   ↓
+Build with governed context
+   ↓
+Verify + record evidence
+   ↓
+Ship
+```
+
+You do not need to redesign your AI development process for every new project.
+
+**Set the engineering operating layer once. Reuse it across the work.**
+
+> **Start with FORGE. Let the model focus on judgment and implementation while FORGE handles the preparation, orchestration, governance, and evidence around the work.**
+
+**Fork it. Adapt it. Put it in your projects. Build with AI on a clearer path.**
+
+<a href="#readme-top">↑ back to top</a>
+
+---
+
 ## 🎯 Why FORGE exists
 
 AI coding tools are powerful, but a surprising amount of model work is mechanical rather than intelligent: finding manifests, locating relevant files, guessing test commands, re-reading project rules, reconstructing previous decisions, or loading context that never mattered.
@@ -303,7 +409,7 @@ Events are Git-ignored under `.forge/metrics/`. They contain counts and categori
 | **Portable `.forge/` layer** | ✅ Available | Teams that want durable project context and governance inside the repository |
 | **Generic MCP server** | ✅ Available | MCP-compatible AI coding clients |
 | **Codex plugin** | ✅ Available in this repo | Codex users who want FORGE tools exposed directly |
-| **GitHub template / fork** | 🧪 Possible | Framework experimentation and contributors |
+| **GitHub template / fork** | ✅ Reusable | Build your own FORGE distribution or customize the framework |
 | **npm / Homebrew / Scoop / native binaries** | 🗺️ Planned | Additional distribution channels |
 
 > FORGE is open source under the Apache License 2.0. Commercial use, modification, distribution, and private use are permitted subject to the license terms.
