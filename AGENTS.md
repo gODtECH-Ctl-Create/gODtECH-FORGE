@@ -87,3 +87,12 @@ If a required check cannot run, state that explicitly and identify why.
 ## Communication
 
 Be direct. Report what changed, what was verified, what remains uncertain, material trade-offs, and any blocked checks. Do not hide failures behind confident wording.
+
+
+## gODtECH Cockpit State Synchronization
+
+This repository participates in the gODtECH Cockpit project graph.
+
+After meaningful development work, reconcile the repository with `.godtech/project.yml`. Update its state, priority, current focus, next step, blockers, status note, and last-worked date only when the evidence supports a change.
+
+Do not fabricate progress. Do not replace this repository's existing Forge/project state model; `.godtech/project.yml` is the compact Cockpit-facing snapshot.
